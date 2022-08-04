@@ -1,4 +1,4 @@
-name: Deploy to Netlify
+name: Deploy to Staging
 
 on:
   push:
@@ -11,7 +11,7 @@ on:
 
 jobs:
   deploy:
-    name: Build and Deploy to Netlify
+    name: Build and Deploy to Staging
     runs-on: ubuntu-18.04
     environment: staging
     steps:
