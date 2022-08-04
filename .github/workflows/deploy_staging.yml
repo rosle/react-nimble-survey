@@ -1,10 +1,17 @@
-name: Deploy Preview to Netlify
+name: Deploy to Netlify
 
-on: [pull_request, workflow_dispatch]
+on:
+  push:
+    branches: ['develop']
+  workflow_dispatch:
+    inputs:
+      deploy-msg:
+        description: 'Deploy Message (visible in Netlify)'
+        required: true
 
 jobs:
-  deploy-preview:
-    name: Build and Deploy preview on Netlify
+  deploy:
+    name: Build and Deploy to Netlify
     runs-on: ubuntu-18.04
     environment: staging
     steps:
@@ -25,7 +32,8 @@ jobs:
         uses: nwtgck/actions-netlify@v1.2
         with:
           publish-dir: './build'
-          deploy-message: '#${{ github.event.pull_request.number }} - ${{ github.event.pull_request.title }}'
+          deploy-message: "Deploy from GitHub Actions: ${{ github.event.inputs.deploy-msg }}"
+          production-deploy: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
