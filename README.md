@@ -2,7 +2,13 @@
 
 A Nimble Internal Certification project to learn and have fun with React 🚀
 
-📝 This project was bootstrapped with [Nimble React template](https://github.com/nimblehq/react-templates).
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/410ea63b-c0fc-4184-a49f-0aa4018d1181/deploy-status)](https://app.netlify.com/sites/react-nimble-survey-staging/deploys) Staging: https://react-nimble-survey-staging.netlify.app/
+
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/dc81fd86-3a45-4646-93cc-b1a3870433a0/deploy-status)](https://app.netlify.com/sites/react-nimble-survey/deploys) Production: https://react-nimble-survey.netlify.app/
+
+*📝 This project was bootstrapped with [Nimble React template](https://github.com/nimblehq/react-templates).*
 
 ## Usage
 
