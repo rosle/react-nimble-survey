@@ -1,12 +1,16 @@
 import { TFuncKey } from 'react-i18next';
 
-import defaultRes from '../../public/locales/en/translation.json';
+import common from '../../public/locales/en/common.json';
+import auth from '../../public/locales/en/auth.json';
 
-export type TranslationKey = TFuncKey<'translation', undefined, { translation: typeof defaultRes }>;
+export type TranslationKey<N> = TFuncKey<N>;
 
 declare module 'react-i18next' {
   interface CustomTypeOptions {
-    defaultNS: 'translation';
-    resources: { translation: typeof defaultRes };
+    defaultNS: 'common';
+    resources: {
+      common: typeof common,
+      auth: typeof auth
+    };
   }
 }
