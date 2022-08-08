@@ -1,10 +1,19 @@
 @font-face {
-  font-family: 'Neuzeit Grotesk';
+  font-family: 'Neuzeit S LT Std';
   font-style: normal;
-  font-weight: normal;
+  font-weight: $font-weight-normal;
   font-display: swap;
 
-  src: url('/assets/fonts/Neuzeit-Grotesk-Regular.otf') format('opentype');
+  src: url('/assets/fonts/Neuzeit-S-LT-Std.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Neuzeit S LT Std';
+  font-style: normal;
+  font-weight: $font-weight-bold;
+  font-display: swap;
+
+  src: url('/assets/fonts/Neuzeit-S-LT-Std-Bold.ttf') format('truetype');
 }
 
 html,
