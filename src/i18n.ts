@@ -25,8 +25,8 @@ const configureI18n = (): void => {
       fallbackLng: process.env.REACT_APP_DEFAULT_LANGUAGE ?? DEFAULT_FALLBACK_LANGUAGE,
       debug: false,
       supportedLngs: supportedLanguages,
-      ns: [`common`, `auth`],
-      defaultNS: `common`,
+      ns: [`shared`, `auth`],
+      defaultNS: `shared`,
 
       interpolation: {
         escapeValue: false, // not needed for react as it escapes by default
