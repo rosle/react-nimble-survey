@@ -12,13 +12,15 @@ const AuthLayout = ({ headerTitle, children }: AuthLayoutProps) => {
   return (
     <>
       <Helmet>
-        <body className="layout-auth"></body>
+        <html className="layout-auth"></html>
       </Helmet>
-      <header className="app-header">
-        <img src={logo} className="app-header__logo" alt="logo" />
-        <p className="app-header__title">{headerTitle}</p>
-      </header>
-      <main>{children}</main>
+      <main>
+        <header className="app-header">
+          <img src={logo} className="app-header__logo" alt="logo" />
+          <p className="app-header__title">{headerTitle}</p>
+        </header>
+        <div className="app-content">{children}</div>
+      </main>
     </>
   );
 };

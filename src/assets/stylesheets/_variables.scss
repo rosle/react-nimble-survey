@@ -1,3 +1,12 @@
-// dummy variables
-$bg-color: #282c34;
-$link-color: #61dafb;
+//////////////////////
+// Shared variables //
+//////////////////////
+
+// Colors
+$black: #000;
+
+$body-gradient: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, $black 100%);
+
+////////////////////////////////
+// Custom Bootstrap variables //
+////////////////////////////////

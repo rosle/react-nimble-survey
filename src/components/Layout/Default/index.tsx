@@ -9,7 +9,7 @@ const DefaultLayout = ({ children }: DefaultLayoutProps) => {
   return (
     <>
       <Helmet>
-        <body className="layout-default"></body>
+        <html className="layout-default"></html>
       </Helmet>
       <main>{children}</main>
     </>

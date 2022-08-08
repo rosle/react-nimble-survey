@@ -1,0 +1,40 @@
+.layout-auth {
+  &,
+  body,
+  .root-container {
+    height: 100%;
+  }
+
+  .root-container {
+    display: flex;
+  }
+
+  body {
+    backdrop-filter: blur(100px);
+
+    background: {
+      image:
+        $body-gradient,
+        url('/assets/images/background.png');
+      repeat: no-repeat;
+      size: cover;
+
+      position: center;
+    };
+  };
+
+  main {
+    width: 25%;
+    min-width: rem(340px);
+
+    margin: auto;
+
+    text-align: center;
+  }
+
+  .app-header__title {
+    margin-top: rem(24px);
+
+    opacity: 0.6;
+  }
+}
