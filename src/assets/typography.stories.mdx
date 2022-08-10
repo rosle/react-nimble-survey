@@ -1,0 +1,42 @@
+import { Meta, Story, Typeset, Source } from '@storybook/addon-docs/blocks';
+
+<Meta title="Typography" />
+
+export const typography = {
+  family: 'Neuzeit S LT Std',
+  weight: {
+    regular: '400',
+    bold: '800',
+  },
+  size: {
+    base: '17px'
+  },
+};
+
+export const fontSizes = [
+  typography.size.base
+]
+
+export const sampleText = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
+
+# Typography
+
+**Font:** Neuzeit S LT Std
+
+##### Regular 400
+
+<Typeset
+  fontSizes={fontSizes}
+  fontWeight={typography.weight.regular}
+  sampleText={sampleText}
+  fontFamily={typography.family}
+/>
+
+##### Bold 800
+
+<Typeset
+  fontSizes={fontSizes}
+  fontWeight={typography.weight.bold}
+  sampleText={sampleText}
+  fontFamily={typography.family}
+/>
