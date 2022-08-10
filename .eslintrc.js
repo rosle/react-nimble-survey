@@ -1,25 +1,19 @@
 module.exports = {
-  extends: [
-    "react-app",
-    "@nimblehq/eslint-config-nimble-react",
-    "plugin:storybook/recommended"
-  ],
-  ignorePatterns: ["src/stories"],
+  extends: ['react-app', '@nimblehq/eslint-config-nimble-react', 'plugin:storybook/recommended'],
+  ignorePatterns: ['src/stories'],
   overrides: [
     {
       // Layout components using Helmet to modify html class.
-      files: ["src/components/Layout/**/*"],
+      files: ['src/components/Layout/**/*'],
       rules: {
-        "jsx-a11y/html-has-lang": "off"
-      }
+        'jsx-a11y/html-has-lang': 'off',
+      },
     },
     {
-      files: [
-        "**/*.stories.*"
-      ],
+      files: ['**/*.stories.*'],
       rules: {
-        "import/no-anonymous-default-export": "off"
-      }
-    }
-  ]
+        'import/no-anonymous-default-export': 'off',
+      },
+    },
+  ],
 };
