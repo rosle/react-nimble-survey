@@ -9,7 +9,11 @@ export default {
   component: AuthLayout,
 } as Meta;
 
-const Template = (args: AuthLayoutProps) => <AuthLayout {...args} />;
+const Template = (args: AuthLayoutProps) => (
+  <AuthLayout {...args}>
+    <p>This is the page content</p>
+  </AuthLayout>
+);
 
 export const Auth: Story<AuthLayoutProps> = Template.bind({});
 
