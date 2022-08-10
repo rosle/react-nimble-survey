@@ -1,7 +1,7 @@
 import React from 'react';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 
-type DefaultLayoutProps = {
+export type DefaultLayoutProps = {
   onHelmetStateChange?: () => void;
   children?: React.ReactNode;
 };

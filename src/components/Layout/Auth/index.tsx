@@ -8,7 +8,7 @@ export const authLayoutTestIds = {
   headerTitle: 'app-header__title',
 };
 
-type AuthLayoutProps = {
+export type AuthLayoutProps = {
   headerTitle: string;
   onHelmetStateChange?: () => void;
   children?: React.ReactNode;
