@@ -1,5 +1,5 @@
 import React from 'react';
-import Helmet from 'react-helmet';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 type DefaultLayoutProps = {
   children?: React.ReactNode;
@@ -7,12 +7,12 @@ type DefaultLayoutProps = {
 
 const DefaultLayout = ({ children }: DefaultLayoutProps) => {
   return (
-    <>
+    <HelmetProvider>
       <Helmet>
         <html className="layout-default"></html>
       </Helmet>
       <main>{children}</main>
-    </>
+    </HelmetProvider>
   );
 };
 

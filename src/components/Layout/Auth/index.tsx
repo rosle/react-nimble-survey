@@ -1,5 +1,5 @@
 import React from 'react';
-import Helmet from 'react-helmet';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 
 import logo from 'assets/images/logo.svg';
 
@@ -10,7 +10,7 @@ type AuthLayoutProps = {
 
 const AuthLayout = ({ headerTitle, children }: AuthLayoutProps) => {
   return (
-    <>
+    <HelmetProvider>
       <Helmet>
         <html className="layout-auth"></html>
       </Helmet>
@@ -21,7 +21,7 @@ const AuthLayout = ({ headerTitle, children }: AuthLayoutProps) => {
         </header>
         <div className="app-content">{children}</div>
       </main>
-    </>
+    </HelmetProvider>
   );
 };
 
