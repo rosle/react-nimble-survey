@@ -5,7 +5,7 @@ import { Meta, Story } from '@storybook/react';
 import AuthLayout, { AuthLayoutProps } from './';
 
 export default {
-  title: 'Layouts',
+  title: 'Components/Layouts',
   component: AuthLayout,
 } as Meta;
 
