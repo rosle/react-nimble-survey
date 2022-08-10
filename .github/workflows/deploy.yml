@@ -2,7 +2,7 @@ name: Deploy to Netlify
 
 on:
   push:
-    branches: ['main', 'master']
+    branches: ['main']
   workflow_dispatch:
     inputs:
       deploy-msg:
@@ -19,7 +19,8 @@ jobs:
         with:
           access_token: ${{ github.token }}
 
-      - uses: actions/checkout@v2
+      - name: Checkout
+        uses: actions/checkout@v2
 
       - name: Install modules
         run: npm ci
