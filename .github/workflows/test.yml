@@ -30,8 +30,11 @@ jobs:
       - name: Run unit tests
         run: npm test -- --coverage
 
-      - name: Run integration tests
-        run: npm run cypress
+      - name: Run component tests
+        run: npx start-server-and-test start 3000 cypress:component
+
+      - name: Run e2e tests
+        run: npx start-server-and-test start 3000 cypress:e2e
 
       - name: Merge code coverage reports
         run: npm run test:merge-coverage

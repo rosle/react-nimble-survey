@@ -59,9 +59,9 @@
     "stylelint:fix": "stylelint '**/*.scss' --fix",
     "codebase:lint": "npm run lint && npm run stylelint",
     "codebase:fix": "npm run lint:fix && npm run stylelint:fix",
-    "cypress": "start-server-and-test start 3000 cypress:run",
-    "cypress:run": "cypress run",
-    "cypress:component:run": "cypress run --component",
+    "cypress:all": "npm run cypress:component && npm run cypress:e2e",
+    "cypress:component": "cypress run --component",
+    "cypress:e2e": "cypress run",
     "cypress:open": "cypress open"
   },
   "eslintConfig": {
@@ -82,7 +82,8 @@
   "jest": {
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,ts,tsx}",
-      "!src/**/*.d.ts"
+      "!src/**/*.d.ts",
+      "!src/**/*.cy.{js,jsx,ts,tsx}"
     ],
     "coverageReporters": [
       "json"
