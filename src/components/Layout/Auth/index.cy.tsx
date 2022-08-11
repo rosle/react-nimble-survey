@@ -22,4 +22,16 @@ describe('AuthLayout', () => {
 
     cy.findByTestId(AuthLayoutTestIds.headerTitle).should('be.visible').and('have.text', headerTitle);
   });
+
+  it('renders the children', () => {
+    const childrenContent = 'This is component children';
+
+    cy.mount(
+      <AuthLayout headerTitle="Sign in">
+        <p>{childrenContent}</p>
+      </AuthLayout>
+    );
+
+    cy.contains(childrenContent).should('be.visible');
+  });
 });
