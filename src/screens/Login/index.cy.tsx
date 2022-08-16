@@ -9,6 +9,6 @@ describe('LoginScreen', () => {
     cy.mount(<LoginScreen />);
 
     cy.get('html').should('have.class', 'layout-auth');
-    cy.findByTestId(AuthLayoutTestIds.headerTitle).should('contain.text', 'sign_in');
+    cy.findByTestId(AuthLayoutTestIds.headerTitle).should('have.text', 'auth:sign_in');
   });
 });
