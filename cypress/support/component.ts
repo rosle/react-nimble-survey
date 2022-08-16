@@ -5,6 +5,6 @@ import './commands';
 import './configure-testing-library';
 import './component-selector';
 
-import { mount } from 'cypress/react';
+import { mount } from 'cypress/react18';
 
 Cypress.Commands.add('mount', mount);
