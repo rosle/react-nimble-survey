@@ -3,8 +3,8 @@ name: Test
 on: pull_request
 
 jobs:
-  test:
-    name: Run linters and tests
+  lints:
+    name: Run linters
     runs-on: ubuntu-latest
     steps:
       - name: Cancel Previous Runs
@@ -27,14 +27,102 @@ jobs:
       - name: Run linter
         run: npm run codebase:lint
 
-      - name: Run unit tests
+  jest_tests:
+    name: Run Jest tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.9.1
+        with:
+          access_token: ${{ github.token }}
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup node and restore cached dependencies
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Jest tests
         run: npm test -- --coverage
 
-      - name: Run component tests
-        run: npx start-server-and-test start 3000 cypress:component
+      - name: Archive code coverage results
+        uses: actions/upload-artifact@v3
+        with:
+          name: jest-code-coverage
+          path: coverage/coverage-final.json
 
-      - name: Run e2e tests
+  cypress_tests:
+    name: Run Cypress tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.9.1
+        with:
+          access_token: ${{ github.token }}
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup node and restore cached dependencies
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run Cypress component tests
+        run: npm run cypress:component
+
+      - name: Run Cypress e2e tests
         run: npx start-server-and-test start 3000 cypress:e2e
+
+      - name: Archive code coverage results
+        uses: actions/upload-artifact@v3
+        with:
+          name: cypress-code-coverage
+          path: coverage/cypress/coverage-final.json
+
+  coverage:
+    name: Report coverage
+    needs: [jest_tests, cypress_tests]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.9.1
+        with:
+          access_token: ${{ github.token }}
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup node and restore cached dependencies
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Download Jest artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: jest-code-coverage
+          path: coverage
+
+      - name: Download Cypress artifacts
+        uses: actions/download-artifact@v3
+        with:
+          name: cypress-code-coverage
+          path: coverage/cypress
 
       - name: Merge code coverage reports
         run: npm run test:merge-coverage
