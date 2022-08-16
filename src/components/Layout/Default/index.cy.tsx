@@ -2,7 +2,7 @@ import React from 'react';
 
 import DefaultLayout from '.';
 
-describe('AuthLayout', () => {
+describe('DefaultLayout', () => {
   it('adds the html class', () => {
     cy.mount(<DefaultLayout></DefaultLayout>);
 

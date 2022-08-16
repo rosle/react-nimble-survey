@@ -10,13 +10,14 @@ export const AuthLayoutTestIds = {
 
 type AuthLayoutProps = {
   headerTitle: string;
+  onHelmetStateChange?: () => void;
   children?: React.ReactNode;
 };
 
-const AuthLayout = ({ headerTitle, children }: AuthLayoutProps) => {
+const AuthLayout = ({ headerTitle, onHelmetStateChange, children }: AuthLayoutProps) => {
   return (
     <HelmetProvider>
-      <Helmet>
+      <Helmet onChangeClientState={onHelmetStateChange}>
         <html className="layout-auth"></html>
       </Helmet>
       <main>
