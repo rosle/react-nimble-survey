@@ -8,6 +8,11 @@ $white: #fff;
 
 $body-gradient: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, $black 100%);
 
+$font-sizes: (
+  sm: 0.9375rem, // 15px
+  md: 1.0625rem, // 17px
+);
+
 ////////////////////////////////
 // Custom Bootstrap variables //
 ////////////////////////////////
@@ -16,4 +21,19 @@ $body-color: $white;
 
 $font-family-sans-serif: 'Neuzeit S LT Std';
 
-$font-size-base: 1.0625rem; // 17px
+$font-size-base: map-get($font-sizes, md);
+
+// Input
+$input-bg:  rgba(255, 255, 255, 0.18);
+$input-padding-y: 1rem;
+$input-padding-x: 0.75rem;
+
+$input-border-radius: 0.75rem;
+$input-border-width: 0;
+
+$input-focus-border-color: $white;
+$input-focus-box-shadow: 0;
+
+// Label
+$form-label-font-size: map-get($font-sizes, sm);
+$form-label-font-weight: bold;
