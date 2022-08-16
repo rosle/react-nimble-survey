@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import logo from 'assets/images/logo.svg';
 import DefaultLayout from 'components/Layout/Default';
 
-const HomeScreen = (): JSX.Element => {
+const HomeScreen = () => {
   const { t } = useTranslation();
 
   return (
