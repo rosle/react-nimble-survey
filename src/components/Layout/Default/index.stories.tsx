@@ -5,7 +5,6 @@ import { Meta, Story } from '@storybook/react';
 import DefaultLayout, { DefaultLayoutProps } from './';
 
 export default {
-  title: 'Components/Layouts',
   component: DefaultLayout,
 } as Meta;
 
