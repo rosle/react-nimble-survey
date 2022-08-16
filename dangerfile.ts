@@ -4,10 +4,10 @@ import { istanbulCoverage } from 'danger-plugin-istanbul-coverage';
 schedule(
   istanbulCoverage({
     // Set a custom success message
-    customSuccessMessage: 'Congrats, coverage is good',
+    customSuccessMessage: '✅ Congrats, coverage is good',
 
     // Set a custom failure message
-    customFailureMessage: 'Coverage is a little low, take a look',
+    customFailureMessage: '⚠️ Coverage is a little low, take a look',
 
     // How to sort the entries in the table
     entrySortMethod: 'least-coverage', // || 'alphabetically' || 'most-coverage' || 'largest-file-size' ||'smallest-file-size' || 'uncovered-lines'
