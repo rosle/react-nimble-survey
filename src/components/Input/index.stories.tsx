@@ -12,13 +12,14 @@ export const TextInput: Story = Template.bind({});
 TextInput.args = {
   label: 'First name',
   name: 'first_name',
-  type: 'text'
-}
+  type: 'text',
+};
 
 export const PasswordInput: Story = Template.bind({});
 PasswordInput.args = {
+  label: 'Password',
   name: 'password',
-  type: 'password'
-}
+  type: 'password',
+};
 
-export const InputWithoutLabel: Story = Template.bind({});
+export const WithoutLabel: Story = Template.bind({});
