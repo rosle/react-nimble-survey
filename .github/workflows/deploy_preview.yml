@@ -7,6 +7,8 @@ jobs:
     name: Build and Deploy Preview on Netlify
     runs-on: ubuntu-18.04
     environment: staging
+    outputs:
+      deploy-url: ${{ steps.deploy.outputs.deploy-url }}
     steps:
       - name: Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.9.1
@@ -24,10 +26,13 @@ jobs:
 
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.2
+        id: deploy
         with:
           publish-dir: './build'
+          alias: ${{ github.event.number }}
           deploy-message: '#${{ github.event.pull_request.number }} - ${{ github.event.pull_request.title }}'
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          enable-pull-request-comment: false
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
@@ -37,6 +42,8 @@ jobs:
     name: Build and Deploy Storybook Preview on Netlify
     runs-on: ubuntu-18.04
     environment: staging
+    outputs:
+      deploy-url: ${{ steps.deploy.outputs.deploy-url }}
     steps:
       - name: Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.9.1
@@ -54,12 +61,38 @@ jobs:
 
       - name: Deploy to Netlify
         uses: nwtgck/actions-netlify@v1.2
+        id: deploy
         with:
           publish-dir: './storybook-static'
           alias: storybook-${{ github.event.number }}
           deploy-message: '[Storybook] #${{ github.event.pull_request.number }} - ${{ github.event.pull_request.title }}'
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          enable-pull-request-comment: false
         env:
           NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
           NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
         timeout-minutes: 1
+
+  create-deploy-comment:
+    name: Create deploy comment on the PR
+    runs-on: ubuntu-18.04
+    needs: [deploy-preview, deploy-storybook-preview]
+    steps:
+      - name: Find Comment
+        uses: peter-evans/find-comment@v2
+        id: find-comment
+        with:
+          issue-number: ${{ github.event.pull_request.number }}
+          comment-author: 'github-actions[bot]'
+          body-includes: Preview deployed successfully
+
+      - name: Create comment
+        uses: peter-evans/create-or-update-comment@v2
+        with:
+          comment-id: ${{ steps.find-comment.outputs.comment-id }}
+          issue-number: ${{ github.event.pull_request.number }}
+          edit-mode: replace
+          body: |
+            Preview deployed successfully:
+            - 👾 Site: ${{needs.deploy-preview.outputs.deploy-url}}
+            - 📕 Storybook: ${{needs.deploy-storybook-preview.outputs.deploy-url}}
