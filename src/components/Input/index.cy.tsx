@@ -21,6 +21,6 @@ describe('Input', () => {
   it('does NOT render label if label attribute is NOT set', () => {
     cy.mount(<Input name="first_name" type="text" />);
 
-    cy.get("[data-test='#{InputTestIds.label}']", { timeout: 0 }).should('not.exist');
+    cy.get(`[data-test-id="${InputTestIds.label}"]`, { timeout: 0 }).should('not.exist');
   });
 });
