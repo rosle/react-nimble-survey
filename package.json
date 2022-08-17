@@ -99,7 +99,8 @@
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,ts,tsx}",
       "!src/**/*.d.ts",
-      "!src/**/*.cy.{js,jsx,ts,tsx}"
+      "!src/**/*.cy.{js,jsx,ts,tsx}",
+      "!src/**/*.stories.{js,jsx,ts,tsx}"
     ],
     "coverageReporters": [
       "json"
