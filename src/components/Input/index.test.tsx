@@ -15,7 +15,7 @@ describe('Input', () => {
     expect(input).toHaveAttribute('type', 'text');
   });
 
-  it('renders label if label attribute is set', () => {
+  it('renders the label if label attribute is set', () => {
     render(<Input name="first_name" type="text" label="First name" />);
 
     const inputLabel = screen.getByTestId(inputTestIds.label);
@@ -25,7 +25,7 @@ describe('Input', () => {
     expect(inputLabel).toHaveAttribute('for', 'firstName');
   });
 
-  it('does NOT render label if label attribute is NOT set', () => {
+  it('does NOT render the label if label attribute is NOT set', () => {
     render(<Input name="first_name" type="text" />);
 
     const inputLabel = screen.queryByTestId(inputTestIds.label);

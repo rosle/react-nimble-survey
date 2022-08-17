@@ -12,7 +12,7 @@ describe('Textarea', () => {
       .and('have.attr', 'rows', '5');
   });
 
-  it('renders label if label attribute is set', () => {
+  it('renders the label if label attribute is set', () => {
     cy.mount(<Textarea name="item_description" label="Description" />);
 
     cy.findByTestId(textareaTestIds.label)
@@ -21,7 +21,7 @@ describe('Textarea', () => {
       .and('have.attr', 'for', 'itemDescription');
   });
 
-  it('does NOT render label if label attribute is NOT set', () => {
+  it('does NOT render the label if label attribute is NOT set', () => {
     cy.mount(<Textarea name="first_name" />);
 
     cy.get(`[data-test-id="${textareaTestIds.label}"]`, { timeout: 0 }).should('not.exist');
