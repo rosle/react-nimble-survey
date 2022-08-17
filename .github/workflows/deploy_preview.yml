@@ -5,7 +5,7 @@ on: [pull_request, workflow_dispatch]
 jobs:
   deploy-preview:
     name: Build and Deploy Preview on Netlify
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     environment: staging
     outputs:
       deploy-url: ${{ steps.deploy.outputs.deploy-url }}
@@ -40,7 +40,7 @@ jobs:
 
   deploy-storybook-preview:
     name: Build and Deploy Storybook Preview on Netlify
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     environment: staging
     outputs:
       deploy-url: ${{ steps.deploy.outputs.deploy-url }}
@@ -75,7 +75,7 @@ jobs:
 
   create-deploy-comment:
     name: Create deploy comment on the PR
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     needs: [deploy-preview, deploy-storybook-preview]
     steps:
       - name: Find Comment
