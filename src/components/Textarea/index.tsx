@@ -2,7 +2,7 @@ import React from 'react';
 
 import { resolveInputIdFromName } from 'helpers/formControl';
 
-export const TextareaTestIds = {
+export const textareaTestIds = {
   label: 'textarea-label',
   textarea: 'textarea-control',
 };
@@ -17,11 +17,11 @@ const Textarea = ({ label, ...textareaAttributes }: TextareaProps) => {
   return (
     <>
       {label && (
-        <label htmlFor={inputId} className="form-label" data-test-id={TextareaTestIds.label}>
+        <label htmlFor={inputId} className="form-label" data-test-id={textareaTestIds.label}>
           {label}
         </label>
       )}
-      <textarea id={inputId} className="form-control" data-test-id={TextareaTestIds.textarea} {...textareaAttributes} />
+      <textarea id={inputId} className="form-control" data-test-id={textareaTestIds.textarea} {...textareaAttributes} />
     </>
   );
 };

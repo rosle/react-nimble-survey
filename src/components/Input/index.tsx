@@ -2,7 +2,7 @@ import React from 'react';
 
 import { resolveInputIdFromName } from 'helpers/formControl';
 
-export const InputTestIds = {
+export const inputTestIds = {
   label: 'input-label',
   input: 'input-control',
 };
@@ -17,11 +17,11 @@ const Input = ({ label, ...inputAttributes }: InputProps) => {
   return (
     <>
       {label && (
-        <label htmlFor={inputId} className="form-label" data-test-id={InputTestIds.label}>
+        <label htmlFor={inputId} className="form-label" data-test-id={inputTestIds.label}>
           {label}
         </label>
       )}
-      <input id={inputId} className="form-control" data-test-id={InputTestIds.input} {...inputAttributes} />
+      <input id={inputId} className="form-control" data-test-id={inputTestIds.input} {...inputAttributes} />
     </>
   );
 };
