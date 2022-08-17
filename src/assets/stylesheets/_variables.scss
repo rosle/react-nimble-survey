@@ -1,3 +1,19 @@
-// dummy variables
-$bg-color: #282c34;
-$link-color: #61dafb;
+//////////////////////
+// Shared variables //
+//////////////////////
+
+// Colors
+$black: #000;
+$white: #fff;
+
+$body-gradient: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, $black 100%);
+
+////////////////////////////////
+// Custom Bootstrap variables //
+////////////////////////////////
+
+$body-color: $white;
+
+$font-family-sans-serif: 'Neuzeit S LT Std';
+
+$font-size-base: 1.0625rem; // 17px
