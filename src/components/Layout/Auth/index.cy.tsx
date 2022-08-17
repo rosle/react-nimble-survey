@@ -1,6 +1,6 @@
 import React from 'react';
 
-import AuthLayout, { AuthLayoutTestIds } from '.';
+import AuthLayout, { authLayoutTestIds } from '.';
 
 describe('AuthLayout', () => {
   it('adds the html class', () => {
@@ -12,7 +12,7 @@ describe('AuthLayout', () => {
   it('renders the app logo', () => {
     cy.mount(<AuthLayout headerTitle="Sign in"></AuthLayout>);
 
-    cy.findByTestId(AuthLayoutTestIds.headerLogo).should('be.visible');
+    cy.findByTestId(authLayoutTestIds.headerLogo).should('be.visible');
   });
 
   it('renders the header title', () => {
@@ -20,7 +20,7 @@ describe('AuthLayout', () => {
 
     cy.mount(<AuthLayout headerTitle={headerTitle}></AuthLayout>);
 
-    cy.findByTestId(AuthLayoutTestIds.headerTitle).should('be.visible').and('have.text', headerTitle);
+    cy.findByTestId(authLayoutTestIds.headerTitle).should('be.visible').and('have.text', headerTitle);
   });
 
   it('renders the children', () => {

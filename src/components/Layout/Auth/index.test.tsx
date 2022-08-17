@@ -2,7 +2,7 @@ import React from 'react';
 
 import { render, screen, waitFor } from '@testing-library/react';
 
-import AuthLayout, { AuthLayoutTestIds } from '.';
+import AuthLayout, { authLayoutTestIds } from '.';
 
 describe('AuthLayout', () => {
   it('adds the html class', async () => {
@@ -22,7 +22,7 @@ describe('AuthLayout', () => {
   it('renders the app logo', () => {
     render(<AuthLayout headerTitle="Sign in"></AuthLayout>);
 
-    const headerLogo = screen.getByTestId(AuthLayoutTestIds.headerLogo);
+    const headerLogo = screen.getByTestId(authLayoutTestIds.headerLogo);
 
     expect(headerLogo).toBeVisible();
   });
@@ -32,7 +32,7 @@ describe('AuthLayout', () => {
 
     render(<AuthLayout headerTitle={headerTitleText}></AuthLayout>);
 
-    const headerTitle = screen.getByTestId(AuthLayoutTestIds.headerTitle);
+    const headerTitle = screen.getByTestId(authLayoutTestIds.headerTitle);
 
     expect(headerTitle).toBeVisible();
     expect(headerTitle).toHaveTextContent(headerTitleText);
