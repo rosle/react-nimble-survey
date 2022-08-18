@@ -7,17 +7,17 @@ export const buttonTestIds = {
 };
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  label: string;
   buttonStyle?: 'primary' | 'secondary';
   buttonSize?: 'sm' | 'md';
+  children: React.ReactNode;
 }
 
-const Button = ({ label, buttonStyle = 'primary', buttonSize = 'md' }: ButtonProps) => {
+const Button = ({ buttonStyle = 'primary', buttonSize = 'md', children }: ButtonProps) => {
   const classes = classNames('btn', `btn--${buttonStyle}`, { [`btn--${buttonSize}`]: buttonSize !== 'md' });
 
   return (
     <button className={classes} data-test-id={buttonTestIds.button}>
-      {label}
+      {children}
     </button>
   );
 };

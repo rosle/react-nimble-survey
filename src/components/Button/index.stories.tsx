@@ -7,7 +7,7 @@ import Button, { ButtonProps } from './';
 export default {
   component: Button,
   args: {
-    label: 'Submit',
+    children: 'Submit',
   },
 } as Meta;
 

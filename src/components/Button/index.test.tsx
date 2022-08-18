@@ -8,7 +8,7 @@ describe('Button', () => {
   it('renders a button with the custom label', () => {
     const buttonLabel = 'Sign in';
 
-    render(<Button label={buttonLabel} />);
+    render(<Button>{buttonLabel}</Button>);
 
     const button = screen.getByTestId(buttonTestIds.button);
 
@@ -17,7 +17,7 @@ describe('Button', () => {
   });
 
   it('renders a primary and md button by default', () => {
-    render(<Button label="Sign in" />);
+    render(<Button>Sign in</Button>);
 
     const button = screen.getByTestId(buttonTestIds.button);
 
@@ -26,7 +26,7 @@ describe('Button', () => {
   });
 
   it('renders a secondary button if buttonStyle is secondary', () => {
-    render(<Button label="Sign in" buttonStyle="secondary" />);
+    render(<Button buttonStyle="secondary">Sign in</Button>);
 
     const button = screen.getByTestId(buttonTestIds.button);
 
@@ -34,7 +34,7 @@ describe('Button', () => {
   });
 
   it('renders an sm button if buttonSize is sm', () => {
-    render(<Button label="Sign in" buttonSize="sm" />);
+    render(<Button buttonSize="sm">Sign in</Button>);
 
     const button = screen.getByTestId(buttonTestIds.button);
 
