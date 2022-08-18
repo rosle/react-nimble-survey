@@ -103,7 +103,7 @@
       "!src/**/*.d.ts",
       "!src/**/*.cy.{js,jsx,ts,tsx}",
       "!src/**/*.stories.{js,jsx,ts,tsx}",
-      "!src/component/Icon/*"
+      "!src/components/Icon/*"
     ],
     "coverageReporters": [
       "json"
