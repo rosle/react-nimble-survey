@@ -15,14 +15,14 @@ const Input = ({ label, ...inputAttributes }: InputProps) => {
   const inputId = resolveInputIdFromName(inputAttributes);
 
   return (
-    <>
+    <div className="form-group">
       {label && (
         <label htmlFor={inputId} className="form-label" data-test-id={inputTestIds.label}>
           {label}
         </label>
       )}
       <input id={inputId} className="form-control" data-test-id={inputTestIds.input} {...inputAttributes} />
-    </>
+    </div>
   );
 };
 

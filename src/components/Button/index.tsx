@@ -9,11 +9,11 @@ export const buttonTestIds = {
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   buttonStyle?: 'primary' | 'secondary';
   buttonSize?: 'sm' | 'md';
-  children: React.ReactNode;
+  fullWidth?: boolean;
 }
 
-const Button = ({ buttonStyle = 'primary', buttonSize = 'md', children }: ButtonProps) => {
-  const classes = classNames('btn', `btn--${buttonStyle}`, { [`btn--${buttonSize}`]: buttonSize !== 'md' });
+const Button = ({ buttonStyle = 'primary', buttonSize = 'md', children, fullWidth = false }: ButtonProps) => {
+  const classes = classNames('btn', `btn--${buttonStyle}`, { [`btn--${buttonSize}`]: buttonSize !== 'md', 'w-100': fullWidth });
 
   return (
     <button className={classes} data-test-id={buttonTestIds.button}>

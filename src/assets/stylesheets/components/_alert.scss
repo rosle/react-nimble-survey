@@ -2,7 +2,7 @@
   display: flex;
   column-gap: rem(20px);
 
-  background-color: $alert-bg;
+  background-color: $alert-alpha-bg;
 
   &__title {
     font-size: map-get($font-sizes, 'sm');
