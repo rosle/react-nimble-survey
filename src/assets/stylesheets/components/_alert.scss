@@ -1,0 +1,19 @@
+.alert {
+  display: flex;
+  column-gap: rem(20px);
+
+  background-color: $alert-bg;
+  ;
+
+  &__title {
+    font-size: map-get($font-sizes, 'sm');
+    font-weight: bold;
+  }
+
+  &__description {
+    margin-top: rem(8px);
+
+    color: map-get($grays, '100');
+    font-size: map-get($font-sizes, 'xs');
+  }
+}

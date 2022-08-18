@@ -11,13 +11,15 @@ $gray-500: #474747;
 
 $grays: (
   '100': $gray-100,
-  '500': $gray-500
+  '500': $gray-500,
 );
 
 $body-gradient: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, $black 100%);
+$alert-bg: rgba(37, 37, 37, 0.6);
 
 // Font
 $font-sizes: (
+  xs: 0.8125rem, // 13px
   sm: 0.9375rem, // 15px
   md: 1.0625rem, // 17px
 );
@@ -51,6 +53,12 @@ $input-focus-box-shadow: 0;
 // Label
 $form-label-font-size: map-get($font-sizes, sm);
 $form-label-font-weight: bold;
+
+// Alert
+$alert-padding-y: 1rem;
+$alert-padding-x: 1.25rem;
+$alert-margin-bottom: 1.5rem;
+$alert-border-radius: 0.75rem;
 
 // Button
 $btn-padding-y: 1.25rem;
