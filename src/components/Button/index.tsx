@@ -1,14 +1,25 @@
 import React from 'react';
 
+import classNames from 'classnames';
+
+export const buttonTestIds = {
+  button: 'button',
+};
+
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   label: string;
-  buttonStyle?: 'primary' | 'secondary' | 'link';
+  buttonStyle?: 'primary' | 'secondary';
   buttonSize?: 'sm' | 'md';
 }
 
-// TODO: Override Bootstrap class to be in BEM
 const Button = ({ label, buttonStyle = 'primary', buttonSize = 'md' }: ButtonProps) => {
-  return <button className={`btn btn-${buttonStyle} btn-${buttonSize}`}>{label}</button>;
+  const classes = classNames('btn', `btn--${buttonStyle}`, { [`btn--${buttonSize}`]: buttonSize !== 'md' });
+
+  return (
+    <button className={classes} data-test-id={buttonTestIds.button}>
+      {label}
+    </button>
+  );
 };
 
 export default Button;

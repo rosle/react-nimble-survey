@@ -23,8 +23,3 @@ export const SecondaryButton: Story<ButtonProps> = Template.bind({});
 SecondaryButton.args = {
   buttonStyle: 'secondary',
 };
-
-export const LinkButton: Story<ButtonProps> = Template.bind({});
-LinkButton.args = {
-  buttonStyle: 'link',
-};
