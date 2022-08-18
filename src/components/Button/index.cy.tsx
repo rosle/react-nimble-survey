@@ -14,7 +14,8 @@ describe('Button', () => {
   it('renders a primary and md button by default', () => {
     cy.mount(<Button label="Sign in" />);
 
-    cy.findByTestId(buttonTestIds.button).should('have.class', 'btn--primary');
+    // Expect the button to have the exact classes
+    cy.findByTestId(buttonTestIds.button).should('have.attr', 'class', 'btn btn--primary');
   });
 
   it('renders a secondary button if buttonStyle is secondary', () => {

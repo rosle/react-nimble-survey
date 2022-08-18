@@ -21,7 +21,8 @@ describe('Button', () => {
 
     const button = screen.getByTestId(buttonTestIds.button);
 
-    expect(button).toHaveClass('btn--primary');
+    // Expect the button to have the exact classes
+    expect(button).toHaveAttribute('class', 'btn btn--primary');
   });
 
   it('renders a secondary button if buttonStyle is secondary', () => {
