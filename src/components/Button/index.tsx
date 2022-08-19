@@ -13,7 +13,10 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
 }
 
 const Button = ({ buttonStyle = 'primary', buttonSize = 'md', children, fullWidth = false }: ButtonProps) => {
-  const classes = classNames('btn', `btn--${buttonStyle}`, { [`btn--${buttonSize}`]: buttonSize !== 'md', 'w-100': fullWidth });
+  const classes = classNames('btn', `btn--${buttonStyle}`, {
+    [`btn--${buttonSize}`]: buttonSize !== 'md',
+    'btn--w-100': fullWidth,
+  });
 
   return (
     <button className={classes} data-test-id={buttonTestIds.button}>

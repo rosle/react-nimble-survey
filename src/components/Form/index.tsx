@@ -12,6 +12,7 @@ const Form = ({ children }: FormProps) => {
   const { t } = useTranslation(['shared']);
   const [isError] = useState(false);
 
+  // TODO: Update to get the message from the backend later on #6
   const errorMessage = () => (
     <>
       <ul>
@@ -20,8 +21,6 @@ const Form = ({ children }: FormProps) => {
       </ul>
     </>
   );
-
-  console.log(isError);
 
   return (
     <form className="form">
