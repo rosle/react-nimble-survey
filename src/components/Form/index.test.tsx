@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactHookForm from 'react-hook-form';
 
+import { render, screen, within } from '@testing-library/react';
+
 import { alertTestIds } from 'components/Alert';
 import { warningIconTestId } from 'components/Icon/Warning';
 import Input, { inputTestIds } from 'components/Input';
 
 import Form, { formTestIds } from '.';
-import { render, screen, within } from '@testing-library/react';
 
 describe('Form', () => {
   it('renders form children', () => {
@@ -20,7 +21,7 @@ describe('Form', () => {
 
     expect(form).toBeVisible();
 
-    const formInput = within(form).getByTestId(inputTestIds.input)
+    const formInput = within(form).getByTestId(inputTestIds.input);
 
     expect(formInput).toBeVisible();
   });

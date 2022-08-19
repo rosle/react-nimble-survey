@@ -17,7 +17,7 @@ const LoginScreen = () => {
   } = useForm();
 
   const onSubmit = () => {
-    // TODO: To be implemented on #6
+    // TODO: To be implemented on issue#6
     console.info('onFormSubmit');
   };
 
