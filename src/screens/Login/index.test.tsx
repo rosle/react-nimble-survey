@@ -12,6 +12,6 @@ describe('LoginScreen', () => {
 
     const authLayoutHeaderTitle = screen.getByTestId(authLayoutTestIds.headerTitle);
 
-    expect(authLayoutHeaderTitle).toHaveTextContent('auth:sign_in');
+    expect(authLayoutHeaderTitle).toHaveTextContent('auth:heading.sign_in');
   });
 });
