@@ -1,7 +1,10 @@
 {
-  "sample_page": {
-    "message": "Edit {{codeSample}} and save to reload",
-    "learn_react": "Learn React"
+  "error": "Error",
+  "form_error": {
+    "required": "can't be blank"
   },
-  "error": "Error"
+  "sample_page": {
+    "learn_react": "Learn React",
+    "message": "Edit {{codeSample}} and save to reload"
+  }
 }

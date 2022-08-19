@@ -11,7 +11,7 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
   label?: string;
 }
 
-const Input = ({ label, ...inputAttributes }: InputProps) => {
+const Input = ({ label, ...inputAttributes }: InputProps, ref: React.ForwardedRef<HTMLInputElement>) => {
   const inputId = resolveInputIdFromName(inputAttributes);
 
   return (
@@ -21,9 +21,9 @@ const Input = ({ label, ...inputAttributes }: InputProps) => {
           {label}
         </label>
       )}
-      <input id={inputId} className="form-control" data-test-id={inputTestIds.input} {...inputAttributes} />
+      <input id={inputId} ref={ref} className="form-control" data-test-id={inputTestIds.input} {...inputAttributes} />
     </div>
   );
 };
 
-export default Input;
+export default React.forwardRef(Input);

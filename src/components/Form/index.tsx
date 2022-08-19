@@ -1,33 +1,46 @@
-import React, { useState } from 'react';
+import React from 'react';
+import ReactHookForm from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+
+import _ from 'lodash';
 
 import Alert from 'components/Alert';
 import WarningIcon from 'components/Icon/Warning';
 
-interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {
+export const formTestIds = {
+  form: 'form',
+  formError: 'form-error',
+};
+
+type FormErrors = string | ReactHookForm.FieldErrors;
+type FieldError = { type: 'required' };
+
+export interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {
   children: React.ReactNode;
+  errors?: FormErrors;
 }
 
-const Form = ({ children }: FormProps) => {
+const Form = ({ children, errors, ...formAttributes }: FormProps) => {
   const { t } = useTranslation(['shared']);
-  const [isError] = useState(false);
 
-  // TODO: Update to get the message from the backend later on #6
-  const errorMessage = () => (
-    <>
-      <ul>
-        <li>Email can&apos;t be blank</li>
-        <li>Password can&apos;t be blank</li>
-      </ul>
-    </>
-  );
+  // TODO: Refactor
+  const displayError = (formErrors: FormErrors): React.ReactNode => {
+    if (typeof formErrors === 'string') return formErrors;
+
+    const errorList = _.chain(formErrors)
+      .mapValues(({ type: fieldErrorType }: FieldError, key) => <li>{`${key} ${t(`shared:form_error.${fieldErrorType}`)}`}</li>)
+      .values()
+      .value();
+
+    return <ul>{errorList}</ul>;
+  };
 
   return (
-    <form className="form">
-      {isError && (
-        <div className="form__alert">
+    <form className="form" data-test-id={formTestIds.form} {...formAttributes}>
+      {errors && !_.isEmpty(errors) && (
+        <div className="form__error" data-test-id={formTestIds.formError}>
           <Alert Icon={WarningIcon} title={t('shared:error')}>
-            {errorMessage()}
+            {displayError(errors)}
           </Alert>
         </div>
       )}
