@@ -1,4 +1,4 @@
-https://github.com/nimblehq/git-template/issues/??
+Closes https://github.com/rosle/react-nimble-survey/issues/??
 
 ## What happened 👀
 

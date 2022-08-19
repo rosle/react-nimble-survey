@@ -1,0 +1,23 @@
+@font-face {
+  font-family: 'Neuzeit S LT Std';
+  font-style: normal;
+  font-weight: $font-weight-normal;
+  font-display: swap;
+
+  src: url('/assets/fonts/Neuzeit-S-LT-Std.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Neuzeit S LT Std';
+  font-style: normal;
+  font-weight: $font-weight-bold;
+  font-display: swap;
+
+  src: url('/assets/fonts/Neuzeit-S-LT-Std-Bold.ttf') format('truetype');
+}
+
+html,
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
