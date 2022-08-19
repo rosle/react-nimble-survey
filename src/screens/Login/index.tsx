@@ -14,7 +14,9 @@ const LoginScreen = () => {
       <Form>
         <Input type="email" name="email" label={t('auth:email')} />
         <Input type="password" name="password" label={t('auth:password')} />
-        <Button type="submit" label={t('auth:action.sign_in')} fullWidth />
+        <Button type="submit" fullWidth>
+          {t('auth:action.sign_in')}
+        </Button>
       </Form>
     </AuthLayout>
   );
