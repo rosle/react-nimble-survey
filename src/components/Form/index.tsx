@@ -23,8 +23,7 @@ export interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {
 const Form = ({ children, errors, ...formAttributes }: FormProps) => {
   const { t } = useTranslation(['shared']);
 
-  // TODO: Refactor
-  const displayError = (formErrors: FormErrors): React.ReactNode => {
+  const errorMessage = (formErrors: FormErrors): React.ReactNode => {
     if (typeof formErrors === 'string') return formErrors;
 
     const errorList = _.chain(formErrors)
@@ -42,7 +41,7 @@ const Form = ({ children, errors, ...formAttributes }: FormProps) => {
       {errors && !_.isEmpty(errors) && (
         <div className="form__error" data-test-id={formTestIds.formError}>
           <Alert Icon={WarningIcon} title={t('shared:error')}>
-            {displayError(errors)}
+            {errorMessage(errors)}
           </Alert>
         </div>
       )}
