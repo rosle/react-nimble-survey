@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { act, render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { formTestIds } from 'components/Form';
@@ -20,7 +20,7 @@ describe('LoginScreen', () => {
   it('displays an error if any of the required inputs is blank', async () => {
     render(<LoginScreen />);
 
-    const submitButton = screen.getByTestId(loginScreenTestIds.submitButton)
+    const submitButton = screen.getByTestId(loginScreenTestIds.loginSubmit);
 
     userEvent.click(submitButton);
 
@@ -30,13 +30,14 @@ describe('LoginScreen', () => {
     expect(formError).toHaveTextContent('email shared:form_error.required');
     expect(formError).toHaveTextContent('password shared:form_error.required');
 
-    const emailInput = screen.getByTestId(loginScreenTestIds.emailInput);
+    const emailInput = screen.getByTestId(loginScreenTestIds.loginEmail);
 
-    await act(async () => {
-      await userEvent.type(emailInput, 'rossukhon@nimblehq.co');
+    userEvent.type(emailInput, 'rossukhon@nimblehq.co');
+
+    await waitFor(() => {
+      expect(formError).not.toHaveTextContent('email shared:form_error.required');
     });
 
-    expect(formError).not.toHaveTextContent('email shared:form_error.required')
     expect(formError).toHaveTextContent('password shared:form_error.required');
   });
 });
