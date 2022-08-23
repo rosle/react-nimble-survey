@@ -5,6 +5,7 @@ import userEvent from '@testing-library/user-event';
 
 import { formTestIds } from 'components/Form';
 import { authLayoutTestIds } from 'components/Layout/Auth';
+import { fillInput } from 'tests/helpers';
 
 import LoginScreen, { loginScreenTestIds } from '.';
 
@@ -33,8 +34,8 @@ describe('LoginScreen', () => {
     const emailInput = screen.getByTestId(loginScreenTestIds.loginEmail);
     const passwordInput = screen.getByTestId(loginScreenTestIds.loginPassWord);
 
-    userEvent.type(emailInput, 'rossukhon');
-    userEvent.type(passwordInput, '123456');
+    fillInput(emailInput, 'rossukhon');
+    fillInput(passwordInput, '123456');
 
     await waitFor(() => {
       expect(formError).toHaveTextContent('Email shared:form_error.pattern');
