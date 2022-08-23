@@ -28,7 +28,7 @@ const Form = ({ children, errors, ...formAttributes }: FormProps) => {
 
     const errorList = _.chain(formErrors)
       .mapValues(({ type: fieldErrorType }: FieldError, key) => (
-        <li key={key}>{`${key} ${t(`shared:form_error.${fieldErrorType}`)}`}</li>
+        <li key={key}>{`${_.capitalize(key)} ${t(`shared:form_error.${fieldErrorType}`)}`}</li>
       ))
       .values()
       .value();

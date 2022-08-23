@@ -81,6 +81,6 @@ describe('Form', () => {
 
     expect(formErrorIcon).toBeVisible();
     expect(formErrorTitle).toHaveTextContent('shared:error');
-    expect(formErrorDescription).toHaveTextContent('username shared:form_error.required');
+    expect(formErrorDescription).toHaveTextContent('Username shared:form_error.required');
   });
 });

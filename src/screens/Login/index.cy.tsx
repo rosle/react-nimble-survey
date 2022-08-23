@@ -19,13 +19,13 @@ describe('LoginScreen', () => {
     cy.findByTestId(loginScreenTestIds.loginSubmit).click();
 
     cy.findByTestId(formTestIds.formError)
-      .should('contain.text', 'email shared:form_error.required')
-      .should('contain.text', 'password shared:form_error.required');
+      .should('contain.text', 'Email shared:form_error.required')
+      .should('contain.text', 'Password shared:form_error.required');
 
     cy.findByTestId(loginScreenTestIds.loginEmail).type('rossukhon@nimblehq.co');
 
     cy.findByTestId(formTestIds.formError)
-      .should('not.contain.text', 'email shared:form_error.required')
-      .should('contain.text', 'password shared:form_error.required');
+      .should('not.contain.text', 'Email shared:form_error.required')
+      .should('contain.text', 'Password shared:form_error.required');
   });
 });

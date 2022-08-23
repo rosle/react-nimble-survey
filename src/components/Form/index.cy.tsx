@@ -66,7 +66,7 @@ describe('Form', () => {
     cy.findByTestId(formTestIds.form).within(() => {
       cy.findByTestId(warningIconTestId).should('be.visible');
       cy.findByTestId(alertTestIds.title).should('have.text', 'shared:error');
-      cy.findByTestId(alertTestIds.description).should('have.text', 'username shared:form_error.required');
+      cy.findByTestId(alertTestIds.description).should('have.text', 'Username shared:form_error.required');
     });
   });
 });

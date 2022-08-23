@@ -27,17 +27,17 @@ describe('LoginScreen', () => {
     const formError = await screen.findByTestId(formTestIds.formError);
 
     expect(formError).toBeVisible();
-    expect(formError).toHaveTextContent('email shared:form_error.required');
-    expect(formError).toHaveTextContent('password shared:form_error.required');
+    expect(formError).toHaveTextContent('Email shared:form_error.required');
+    expect(formError).toHaveTextContent('Password shared:form_error.required');
 
     const emailInput = screen.getByTestId(loginScreenTestIds.loginEmail);
 
     userEvent.type(emailInput, 'rossukhon@nimblehq.co');
 
     await waitFor(() => {
-      expect(formError).not.toHaveTextContent('email shared:form_error.required');
+      expect(formError).not.toHaveTextContent('Email shared:form_error.required');
     });
 
-    expect(formError).toHaveTextContent('password shared:form_error.required');
+    expect(formError).toHaveTextContent('Password shared:form_error.required');
   });
 });
