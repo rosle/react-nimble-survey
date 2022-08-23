@@ -1,7 +1,16 @@
 .form {
   text-align: left;
 
-  .form-group {
+  &-group {
     margin-bottom: rem(24px);
+  }
+
+  @keyframes slide-in {
+    0% { transform: translateX(20px); }
+    100% { transform: translateX(0); }
+  }
+
+  &__error {
+    animation: slide-in 0.2s;
   }
 }
