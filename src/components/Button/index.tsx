@@ -12,14 +12,20 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   fullWidth?: boolean;
 }
 
-const Button = ({ buttonStyle = 'primary', buttonSize = 'md', children, fullWidth = false }: ButtonProps) => {
+const Button = ({
+  buttonStyle = 'primary',
+  buttonSize = 'md',
+  children,
+  fullWidth = false,
+  ...buttonAttributes
+}: ButtonProps) => {
   const classes = classNames('btn', `btn--${buttonStyle}`, {
     [`btn--${buttonSize}`]: buttonSize !== 'md',
     'btn--full-width': fullWidth,
   });
 
   return (
-    <button className={classes} data-test-id={buttonTestIds.button}>
+    <button className={classes} data-test-id={buttonTestIds.button} {...buttonAttributes}>
       {children}
     </button>
   );
