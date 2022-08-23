@@ -14,6 +14,8 @@ export const loginScreenTestIds = {
   loginSubmit: 'login-form__button-submit',
 };
 
+const emailRegex = /^(([^<>()[\].,;:\s@"]+(.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+.)+[^<>()[\].,;:\s@"]{2,})$/i;
+
 const LoginScreen = () => {
   const { t } = useTranslation(['auth']);
 
@@ -35,7 +37,10 @@ const LoginScreen = () => {
         <Input
           type="email"
           label={t('auth:email')}
-          {...register('email', { required: true })}
+          {...register('email', {
+            required: true,
+            pattern: emailRegex,
+          })}
           data-test-id={loginScreenTestIds.loginEmail}
         />
         <Input

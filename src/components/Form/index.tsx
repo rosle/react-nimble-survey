@@ -13,7 +13,8 @@ export const formTestIds = {
 };
 
 type FormErrors = string | ReactHookForm.FieldErrors;
-type FieldError = { type: 'required' };
+type FieldErrorType = 'required' | 'pattern';
+type FieldError = { type: FieldErrorType };
 
 export interface FormProps extends React.FormHTMLAttributes<HTMLFormElement> {
   children: React.ReactNode;

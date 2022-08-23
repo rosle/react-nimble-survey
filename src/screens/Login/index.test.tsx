@@ -17,7 +17,7 @@ describe('LoginScreen', () => {
     expect(authLayoutHeaderTitle).toHaveTextContent('auth:heading.sign_in');
   });
 
-  it('displays an error if any of the required inputs is blank', async () => {
+  it('displays the error if any of the inputs is invalid', async () => {
     render(<LoginScreen />);
 
     const submitButton = screen.getByTestId(loginScreenTestIds.loginSubmit);
@@ -31,13 +31,15 @@ describe('LoginScreen', () => {
     expect(formError).toHaveTextContent('Password shared:form_error.required');
 
     const emailInput = screen.getByTestId(loginScreenTestIds.loginEmail);
+    const passwordInput = screen.getByTestId(loginScreenTestIds.loginPassWord);
 
-    userEvent.type(emailInput, 'rossukhon@nimblehq.co');
+    userEvent.type(emailInput, 'rossukhon');
+    userEvent.type(passwordInput, '123456');
 
     await waitFor(() => {
-      expect(formError).not.toHaveTextContent('Email shared:form_error.required');
+      expect(formError).toHaveTextContent('Email shared:form_error.pattern');
     });
 
-    expect(formError).toHaveTextContent('Password shared:form_error.required');
+    expect(formError).not.toHaveTextContent('Password shared:form_error.required');
   });
 });

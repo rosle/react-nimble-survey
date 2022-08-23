@@ -1,7 +1,8 @@
 {
   "error": "Error",
   "form_error": {
-    "required": "can't be blank"
+    "required": "can't be blank",
+    "pattern": "is invalid"
   },
   "sample_page": {
     "learn_react": "Learn React",
