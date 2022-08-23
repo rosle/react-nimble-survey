@@ -44,4 +44,12 @@ describe('Button', () => {
       expect(button).toHaveClass('btn--sm');
     });
   });
+
+  it('renders a full-width button if fullWidth is set', () => {
+    render(<Button fullWidth>Sign in</Button>);
+
+    const button = screen.getByTestId(buttonTestIds.button);
+
+    expect(button).toHaveClass('btn--full-width');
+  });
 });
