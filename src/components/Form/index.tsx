@@ -2,7 +2,7 @@ import React from 'react';
 import ReactHookForm from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import { capitalize, chain } from 'lodash';
+import { capitalize, chain, isEmpty } from 'lodash';
 
 import Alert from 'components/Alert';
 import WarningIcon from 'components/Icon/Warning';
@@ -39,7 +39,7 @@ const Form = ({ children, errors, ...formAttributes }: FormProps) => {
 
   return (
     <form className="form" data-test-id={formTestIds.form} {...formAttributes}>
-      {errors && !_.isEmpty(errors) && (
+      {errors && !isEmpty(errors) && (
         <div className="form__error" data-test-id={formTestIds.formError}>
           <Alert Icon={WarningIcon} title={t('shared:error')}>
             {errorMessage(errors)}
