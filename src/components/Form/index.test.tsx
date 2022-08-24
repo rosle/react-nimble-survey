@@ -26,61 +26,69 @@ describe('Form', () => {
     expect(formInput).toBeVisible();
   });
 
-  it('given there are no form errors, does NOT render form error', () => {
-    render(
-      <Form>
-        <Input type="text" name="username" required />
-      </Form>
-    );
+  describe('given there are no form errors', () => {
+    it('does NOT render form error', () => {
+      render(
+        <Form>
+          <Input type="text" name="username" required />
+        </Form>
+      );
 
-    const formError = screen.queryByTestId(formTestIds.formError);
+      const formError = screen.queryByTestId(formTestIds.formError);
 
-    expect(formError).not.toBeInTheDocument();
+      expect(formError).not.toBeInTheDocument();
+    });
   });
 
-  it('given an error string, renders form error', () => {
-    const errorInString = 'Something went wrong!';
+  describe('given there are form errors', () => {
+    describe('given an error string', () => {
+      it('renders the given error string as an error message', () => {
+        const errorInString = 'Something went wrong!';
 
-    render(
-      <Form errors={errorInString}>
-        <Input type="text" name="username" required />
-      </Form>
-    );
+        render(
+          <Form errors={errorInString}>
+            <Input type="text" name="username" required />
+          </Form>
+        );
 
-    const formError = screen.getByTestId(formTestIds.formError);
+        const formError = screen.getByTestId(formTestIds.formError);
 
-    expect(formError).toBeVisible();
+        expect(formError).toBeVisible();
 
-    const formErrorIcon = within(formError).getByTestId(warningIconTestId);
-    const formErrorTitle = within(formError).getByTestId(alertTestIds.title);
-    const formErrorDescription = within(formError).getByTestId(alertTestIds.description);
+        const formErrorIcon = within(formError).getByTestId(warningIconTestId);
+        const formErrorTitle = within(formError).getByTestId(alertTestIds.title);
+        const formErrorDescription = within(formError).getByTestId(alertTestIds.description);
 
-    expect(formErrorIcon).toBeVisible();
-    expect(formErrorTitle).toHaveTextContent('shared:error');
-    expect(formErrorDescription).toHaveTextContent(errorInString);
-  });
+        expect(formErrorIcon).toBeVisible();
+        expect(formErrorTitle).toHaveTextContent('shared:error');
+        expect(formErrorDescription).toHaveTextContent(errorInString);
+      });
+    });
 
-  it('given a React Hook Form error object, renders form error', () => {
-    const reactHookFormErrors: ReactHookForm.FieldErrors = {
-      username: { type: 'required', message: '' },
-    };
+    describe('given a React Hook Form error object', () => {
+      it('renders error messages from the given error object', () => {
+        const reactHookFormErrors: ReactHookForm.FieldErrors = {
+          username: { type: 'required', message: '' },
+        };
 
-    render(
-      <Form errors={reactHookFormErrors}>
-        <Input type="text" name="username" required />
-      </Form>
-    );
+        render(
+          <Form errors={reactHookFormErrors}>
+            <Input type="text" name="username" required />
+          </Form>
+        );
 
-    const formError = screen.getByTestId(formTestIds.formError);
+        const formError = screen.getByTestId(formTestIds.formError);
 
-    expect(formError).toBeVisible();
+        expect(formError).toBeVisible();
 
-    const formErrorIcon = within(formError).getByTestId(warningIconTestId);
-    const formErrorTitle = within(formError).getByTestId(alertTestIds.title);
-    const formErrorDescription = within(formError).getByTestId(alertTestIds.description);
+        const formErrorIcon = within(formError).getByTestId(warningIconTestId);
+        const formErrorTitle = within(formError).getByTestId(alertTestIds.title);
+        const formErrorDescription = within(formError).getByTestId(alertTestIds.description);
 
-    expect(formErrorIcon).toBeVisible();
-    expect(formErrorTitle).toHaveTextContent('shared:error');
-    expect(formErrorDescription).toHaveTextContent('Username shared:form_error.required');
+        expect(formErrorIcon).toBeVisible();
+        expect(formErrorTitle).toHaveTextContent('shared:error');
+        expect(formErrorDescription).toHaveTextContent('Username shared:form_error.required');
+      });
+    });
   });
 });

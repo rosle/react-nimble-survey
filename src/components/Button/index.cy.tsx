@@ -18,7 +18,7 @@ describe('Button', () => {
     cy.findByTestId(buttonTestIds.button).should('have.attr', 'class', 'btn btn--primary');
   });
 
-  describe('given a secondary buttonStyle', () => {
+  describe('given a secondary buttonStyle prop', () => {
     it('renders a secondary button', () => {
       cy.mount(<Button buttonStyle="secondary">Sign in</Button>);
 
@@ -26,11 +26,19 @@ describe('Button', () => {
     });
   });
 
-  describe('given an sm buttonSize', () => {
+  describe('given an sm buttonSize prop', () => {
     it('renders an sm button', () => {
       cy.mount(<Button buttonSize="sm">Sign in</Button>);
 
       cy.findByTestId(buttonTestIds.button).should('have.class', 'btn--sm');
+    });
+  });
+
+  describe('given a fullWidth prop', () => {
+    it('renders a full-width button', () => {
+      cy.mount(<Button fullWidth>Sign in</Button>);
+
+      cy.findByTestId(buttonTestIds.button).should('have.class', 'btn--full-width');
     });
   });
 });

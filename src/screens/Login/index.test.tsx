@@ -18,29 +18,31 @@ describe('LoginScreen', () => {
     expect(authLayoutHeaderTitle).toHaveTextContent('auth:heading.sign_in');
   });
 
-  it('given the invalid inputs, displays the error', async () => {
-    render(<LoginScreen />);
+  describe('given the invalid inputs', () => {
+    it('displays the errors', async () => {
+      render(<LoginScreen />);
 
-    const submitButton = screen.getByTestId(loginScreenTestIds.loginSubmit);
+      const submitButton = screen.getByTestId(loginScreenTestIds.loginSubmit);
 
-    userEvent.click(submitButton);
+      userEvent.click(submitButton);
 
-    const formError = await screen.findByTestId(formTestIds.formError);
+      const formError = await screen.findByTestId(formTestIds.formError);
 
-    expect(formError).toBeVisible();
-    expect(formError).toHaveTextContent('Email shared:form_error.required');
-    expect(formError).toHaveTextContent('Password shared:form_error.required');
+      expect(formError).toBeVisible();
+      expect(formError).toHaveTextContent('Email shared:form_error.required');
+      expect(formError).toHaveTextContent('Password shared:form_error.required');
 
-    const emailInput = screen.getByTestId(loginScreenTestIds.loginEmail);
-    const passwordInput = screen.getByTestId(loginScreenTestIds.loginPassWord);
+      const emailInput = screen.getByTestId(loginScreenTestIds.loginEmail);
+      const passwordInput = screen.getByTestId(loginScreenTestIds.loginPassWord);
 
-    fillInput(emailInput, 'rossukhon');
-    fillInput(passwordInput, '123456');
+      fillInput(emailInput, 'rossukhon');
+      fillInput(passwordInput, '123456');
 
-    await waitFor(() => {
-      expect(formError).toHaveTextContent('Email shared:form_error.pattern');
+      await waitFor(() => {
+        expect(formError).toHaveTextContent('Email shared:form_error.pattern');
+      });
+
+      expect(formError).not.toHaveTextContent('Password shared:form_error.required');
     });
-
-    expect(formError).not.toHaveTextContent('Password shared:form_error.required');
   });
 });

@@ -22,51 +22,59 @@ describe('Form', () => {
     });
   });
 
-  it('given there are no form errors, does NOT render form error', () => {
-    cy.mount(
-      <Form>
-        <Input type="text" name="username" required />
-      </Form>
-    );
+  describe('given there are no form errors', () => {
+    it('does NOT render form error', () => {
+      cy.mount(
+        <Form>
+          <Input type="text" name="username" required />
+        </Form>
+      );
 
-    cy.findByTestId(formTestIds.formError).should('not.exist');
-  });
-
-  it('given an error string, renders form error', () => {
-    const errorInString = 'Something went wrong!';
-
-    cy.mount(
-      <Form errors={errorInString}>
-        <Input type="text" name="username" required />
-      </Form>
-    );
-
-    cy.findByTestId(formTestIds.formError).should('be.visible');
-
-    cy.findByTestId(formTestIds.form).within(() => {
-      cy.findByTestId(warningIconTestId).should('be.visible');
-      cy.findByTestId(alertTestIds.title).should('have.text', 'shared:error');
-      cy.findByTestId(alertTestIds.description).should('have.text', errorInString);
+      cy.findByTestId(formTestIds.formError).should('not.exist');
     });
   });
 
-  it('given a React Hook Form error object, renders form error', () => {
-    const reactHookFormErrors: ReactHookForm.FieldErrors = {
-      username: { type: 'required', message: '' },
-    };
+  describe('given there are form errors', () => {
+    describe('given an error string', () => {
+      it('renders the given error string as an error message', () => {
+        const errorInString = 'Something went wrong!';
 
-    cy.mount(
-      <Form errors={reactHookFormErrors}>
-        <Input type="text" name="username" required />
-      </Form>
-    );
+        cy.mount(
+          <Form errors={errorInString}>
+            <Input type="text" name="username" required />
+          </Form>
+        );
 
-    cy.findByTestId(formTestIds.formError).should('be.visible');
+        cy.findByTestId(formTestIds.formError).should('be.visible');
 
-    cy.findByTestId(formTestIds.form).within(() => {
-      cy.findByTestId(warningIconTestId).should('be.visible');
-      cy.findByTestId(alertTestIds.title).should('have.text', 'shared:error');
-      cy.findByTestId(alertTestIds.description).should('have.text', 'Username shared:form_error.required');
+        cy.findByTestId(formTestIds.form).within(() => {
+          cy.findByTestId(warningIconTestId).should('be.visible');
+          cy.findByTestId(alertTestIds.title).should('have.text', 'shared:error');
+          cy.findByTestId(alertTestIds.description).should('have.text', errorInString);
+        });
+      });
+    });
+
+    describe('given a React Hook Form error object', () => {
+      it('renders error messages from the given error object', () => {
+        const reactHookFormErrors: ReactHookForm.FieldErrors = {
+          username: { type: 'required', message: '' },
+        };
+
+        cy.mount(
+          <Form errors={reactHookFormErrors}>
+            <Input type="text" name="username" required />
+          </Form>
+        );
+
+        cy.findByTestId(formTestIds.formError).should('be.visible');
+
+        cy.findByTestId(formTestIds.form).within(() => {
+          cy.findByTestId(warningIconTestId).should('be.visible');
+          cy.findByTestId(alertTestIds.title).should('have.text', 'shared:error');
+          cy.findByTestId(alertTestIds.description).should('have.text', 'Username shared:form_error.required');
+        });
+      });
     });
   });
 });

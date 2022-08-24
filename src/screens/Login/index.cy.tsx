@@ -13,20 +13,22 @@ describe('LoginScreen', () => {
     cy.findByTestId(authLayoutTestIds.headerTitle).should('have.text', 'auth:heading.sign_in');
   });
 
-  it('given the invalid inputs, displays the error', () => {
-    cy.mount(<LoginScreen />);
+  describe('given the invalid inputs', () => {
+    it('displays the errors', () => {
+      cy.mount(<LoginScreen />);
 
-    cy.findByTestId(loginScreenTestIds.loginSubmit).click();
+      cy.findByTestId(loginScreenTestIds.loginSubmit).click();
 
-    cy.findByTestId(formTestIds.formError)
-      .should('contain.text', 'Email shared:form_error.required')
-      .should('contain.text', 'Password shared:form_error.required');
+      cy.findByTestId(formTestIds.formError)
+        .should('contain.text', 'Email shared:form_error.required')
+        .should('contain.text', 'Password shared:form_error.required');
 
-    cy.findByTestId(loginScreenTestIds.loginEmail).type('rossukhon');
-    cy.findByTestId(loginScreenTestIds.loginPassWord).type('123456');
+      cy.findByTestId(loginScreenTestIds.loginEmail).type('rossukhon');
+      cy.findByTestId(loginScreenTestIds.loginPassWord).type('123456');
 
-    cy.findByTestId(formTestIds.formError)
-      .should('contain.text', 'Email shared:form_error.pattern')
-      .should('not.contain.text', 'Password shared:form_error.required');
+      cy.findByTestId(formTestIds.formError)
+        .should('contain.text', 'Email shared:form_error.pattern')
+        .should('not.contain.text', 'Password shared:form_error.required');
+    });
   });
 });

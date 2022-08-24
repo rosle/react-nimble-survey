@@ -25,7 +25,7 @@ describe('Button', () => {
     expect(button).toHaveAttribute('class', 'btn btn--primary');
   });
 
-  describe('given a secondary buttonStyle', () => {
+  describe('given a secondary buttonStyle prop', () => {
     it('renders a secondary button', () => {
       render(<Button buttonStyle="secondary">Sign in</Button>);
 
@@ -35,7 +35,7 @@ describe('Button', () => {
     });
   });
 
-  describe('given an sm buttonSize', () => {
+  describe('given an sm buttonSize prop', () => {
     it('renders an sm button', () => {
       render(<Button buttonSize="sm">Sign in</Button>);
 
@@ -45,11 +45,13 @@ describe('Button', () => {
     });
   });
 
-  it('renders a full-width button if fullWidth is set', () => {
-    render(<Button fullWidth>Sign in</Button>);
+  describe('given a fullWidth prop', () => {
+    it('renders a full-width button', () => {
+      render(<Button fullWidth>Sign in</Button>);
 
-    const button = screen.getByTestId(buttonTestIds.button);
+      const button = screen.getByTestId(buttonTestIds.button);
 
-    expect(button).toHaveClass('btn--full-width');
+      expect(button).toHaveClass('btn--full-width');
+    });
   });
 });

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactHookForm from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
-import _ from 'lodash';
+import { capitalize, chain } from 'lodash';
 
 import Alert from 'components/Alert';
 import WarningIcon from 'components/Icon/Warning';
@@ -27,9 +27,9 @@ const Form = ({ children, errors, ...formAttributes }: FormProps) => {
   const errorMessage = (formErrors: FormErrors): React.ReactNode => {
     if (typeof formErrors === 'string') return formErrors;
 
-    const errorList = _.chain(formErrors)
+    const errorList = chain(formErrors)
       .mapValues(({ type: fieldErrorType }: FieldError, key) => (
-        <li key={key}>{`${_.capitalize(key)} ${t(`shared:form_error.${fieldErrorType}`)}`}</li>
+        <li key={key}>{`${capitalize(key)} ${t(`shared:form_error.${fieldErrorType}`)}`}</li>
       ))
       .values()
       .value();
