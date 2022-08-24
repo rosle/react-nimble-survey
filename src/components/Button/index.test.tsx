@@ -25,19 +25,24 @@ describe('Button', () => {
     expect(button).toHaveAttribute('class', 'btn btn--primary');
   });
 
-  it('renders a secondary button if buttonStyle is secondary', () => {
-    render(<Button buttonStyle="secondary">Sign in</Button>);
+  describe('given a secondary buttonStyle', () => {
+    it('renders a secondary button', () => {
+      render(<Button buttonStyle="secondary">Sign in</Button>);
 
-    const button = screen.getByTestId(buttonTestIds.button);
+      const button = screen.getByTestId(buttonTestIds.button);
 
-    expect(button).toHaveClass('btn--secondary');
+      expect(button).toHaveClass('btn--secondary');
+    });
+
   });
 
-  it('renders an sm button if buttonSize is sm', () => {
-    render(<Button buttonSize="sm">Sign in</Button>);
+  describe('given an sm buttonSize', () => {
+    it('renders an sm button', () => {
+      render(<Button buttonSize="sm">Sign in</Button>);
 
-    const button = screen.getByTestId(buttonTestIds.button);
+      const button = screen.getByTestId(buttonTestIds.button);
 
-    expect(button).toHaveClass('btn--sm');
+      expect(button).toHaveClass('btn--sm');
+    });
   });
 });

@@ -18,15 +18,19 @@ describe('Button', () => {
     cy.findByTestId(buttonTestIds.button).should('have.attr', 'class', 'btn btn--primary');
   });
 
-  it('renders a secondary button if buttonStyle is secondary', () => {
-    cy.mount(<Button buttonStyle="secondary">Sign in</Button>);
+  describe('given a secondary buttonStyle', () => {
+    it('renders a secondary button', () => {
+      cy.mount(<Button buttonStyle="secondary">Sign in</Button>);
 
-    cy.findByTestId(buttonTestIds.button).should('have.class', 'btn--secondary');
+      cy.findByTestId(buttonTestIds.button).should('have.class', 'btn--secondary');
+    });
   });
 
-  it('renders an sm button if buttonSize is sm', () => {
-    cy.mount(<Button buttonSize="sm">Sign in</Button>);
+  describe('given an sm buttonSize', () => {
+    it('renders an sm button', () => {
+      cy.mount(<Button buttonSize="sm">Sign in</Button>);
 
-    cy.findByTestId(buttonTestIds.button).should('have.class', 'btn--sm');
+      cy.findByTestId(buttonTestIds.button).should('have.class', 'btn--sm');
+    });
   });
 });
