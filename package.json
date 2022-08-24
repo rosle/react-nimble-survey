@@ -81,7 +81,7 @@
     "cypress:e2e": "cypress run --quiet",
     "cypress:open": "cypress open",
     "storybook": "start-storybook -p 6006 -s public",
-    "build-storybook": "build-storybook -s public"
+    "storybook:build": "build-storybook -s public"
   },
   "browserslist": {
     "production": [
@@ -99,7 +99,8 @@
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,ts,tsx}",
       "!src/**/*.d.ts",
-      "!src/**/*.cy.{js,jsx,ts,tsx}"
+      "!src/**/*.cy.{js,jsx,ts,tsx}",
+      "!src/**/*.stories.{js,jsx,ts,tsx}"
     ],
     "coverageReporters": [
       "json"
