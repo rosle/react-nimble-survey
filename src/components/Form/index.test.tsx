@@ -26,7 +26,7 @@ describe('Form', () => {
     expect(formInput).toBeVisible();
   });
 
-  it('does NOT render form error if there are no form errors', () => {
+  it('given there are no form errors, does NOT render form error', () => {
     render(
       <Form>
         <Input type="text" name="username" required />
@@ -38,7 +38,7 @@ describe('Form', () => {
     expect(formError).not.toBeInTheDocument();
   });
 
-  it('renders form error if there is an error string', () => {
+  it('given an error string, renders form error', () => {
     const errorInString = 'Something went wrong!';
 
     render(
@@ -60,7 +60,7 @@ describe('Form', () => {
     expect(formErrorDescription).toHaveTextContent(errorInString);
   });
 
-  it('renders form error if there is an react hook form error object', () => {
+  it('given a React Hook Form error object, renders form error', () => {
     const reactHookFormErrors: ReactHookForm.FieldErrors = {
       username: { type: 'required', message: '' },
     };

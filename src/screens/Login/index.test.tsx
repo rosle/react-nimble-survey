@@ -18,7 +18,7 @@ describe('LoginScreen', () => {
     expect(authLayoutHeaderTitle).toHaveTextContent('auth:heading.sign_in');
   });
 
-  it('displays the error if any of the inputs is invalid', async () => {
+  it('given the invalid inputs, displays the error', async () => {
     render(<LoginScreen />);
 
     const submitButton = screen.getByTestId(loginScreenTestIds.loginSubmit);

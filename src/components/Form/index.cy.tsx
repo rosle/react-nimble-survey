@@ -22,7 +22,7 @@ describe('Form', () => {
     });
   });
 
-  it('does NOT render form error if there are no form errors', () => {
+  it('given there are no form errors, does NOT render form error', () => {
     cy.mount(
       <Form>
         <Input type="text" name="username" required />
@@ -32,7 +32,7 @@ describe('Form', () => {
     cy.findByTestId(formTestIds.formError).should('not.exist');
   });
 
-  it('renders form error if there is an error string', () => {
+  it('given an error string, renders form error', () => {
     const errorInString = 'Something went wrong!';
 
     cy.mount(
@@ -50,7 +50,7 @@ describe('Form', () => {
     });
   });
 
-  it('renders form error if there is an react hook form error object', () => {
+  it('given a React Hook Form error object, renders form error', () => {
     const reactHookFormErrors: ReactHookForm.FieldErrors = {
       username: { type: 'required', message: '' },
     };

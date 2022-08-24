@@ -13,7 +13,7 @@ describe('LoginScreen', () => {
     cy.findByTestId(authLayoutTestIds.headerTitle).should('have.text', 'auth:heading.sign_in');
   });
 
-  it('displays the error if any of the inputs is invalid', () => {
+  it('given the invalid inputs, displays the error', () => {
     cy.mount(<LoginScreen />);
 
     cy.findByTestId(loginScreenTestIds.loginSubmit).click();
