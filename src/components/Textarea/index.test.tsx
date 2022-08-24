@@ -15,21 +15,25 @@ describe('Textarea', () => {
     expect(textarea).toHaveAttribute('rows', '5');
   });
 
-  it('given the label attribute is set, renders the label', () => {
-    render(<Textarea name="item_description" label="Description" />);
+  describe('given the label attribute is set', () => {
+    it('renders the label', () => {
+      render(<Textarea name="item_description" label="Description" />);
 
-    const textareaLabel = screen.getByTestId(textareaTestIds.label);
+      const textareaLabel = screen.getByTestId(textareaTestIds.label);
 
-    expect(textareaLabel).toBeVisible();
-    expect(textareaLabel).toHaveTextContent('Description');
-    expect(textareaLabel).toHaveAttribute('for', 'itemDescription');
+      expect(textareaLabel).toBeVisible();
+      expect(textareaLabel).toHaveTextContent('Description');
+      expect(textareaLabel).toHaveAttribute('for', 'itemDescription');
+    });
   });
 
-  it('given the label attribute is NOT set, does NOT render the label', () => {
-    render(<Textarea name="first_name" />);
+  describe('given the label attribute is NOT set', () => {
+    it('does NOT render the label', () => {
+      render(<Textarea name="first_name" />);
 
-    const textareaLabel = screen.queryByTestId(textareaTestIds.label);
+      const textareaLabel = screen.queryByTestId(textareaTestIds.label);
 
-    expect(textareaLabel).not.toBeInTheDocument();
+      expect(textareaLabel).not.toBeInTheDocument();
+    });
   });
 });

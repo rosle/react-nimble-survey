@@ -12,18 +12,22 @@ describe('Textarea', () => {
       .and('have.attr', 'rows', '5');
   });
 
-  it('given the label attribute is set, renders the label', () => {
-    cy.mount(<Textarea name="item_description" label="Description" />);
+  describe('given the label attribute is set', () => {
+    it('renders the label', () => {
+      cy.mount(<Textarea name="item_description" label="Description" />);
 
-    cy.findByTestId(textareaTestIds.label)
-      .should('be.visible')
-      .and('have.text', 'Description')
-      .and('have.attr', 'for', 'itemDescription');
+      cy.findByTestId(textareaTestIds.label)
+        .should('be.visible')
+        .and('have.text', 'Description')
+        .and('have.attr', 'for', 'itemDescription');
+    });
   });
 
-  it('given the label attribute is NOT set, does NOT render the label', () => {
-    cy.mount(<Textarea name="first_name" />);
+  describe('given the label attribute is NOT set', () => {
+    it('does NOT render the label', () => {
+      cy.mount(<Textarea name="first_name" />);
 
-    cy.get(`[data-test-id="${textareaTestIds.label}"]`, { timeout: 0 }).should('not.exist');
+      cy.get(`[data-test-id="${textareaTestIds.label}"]`, { timeout: 0 }).should('not.exist');
+    });
   });
 });

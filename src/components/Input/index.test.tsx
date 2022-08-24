@@ -15,21 +15,25 @@ describe('Input', () => {
     expect(input).toHaveAttribute('type', 'text');
   });
 
-  it('given the label attribute is set, renders the label', () => {
-    render(<Input name="first_name" type="text" label="First name" />);
+  describe('given the label attribute is set', () => {
+    it('renders the label', () => {
+      render(<Input name="first_name" type="text" label="First name" />);
 
-    const inputLabel = screen.getByTestId(inputTestIds.label);
+      const inputLabel = screen.getByTestId(inputTestIds.label);
 
-    expect(inputLabel).toBeVisible();
-    expect(inputLabel).toHaveTextContent('First name');
-    expect(inputLabel).toHaveAttribute('for', 'firstName');
+      expect(inputLabel).toBeVisible();
+      expect(inputLabel).toHaveTextContent('First name');
+      expect(inputLabel).toHaveAttribute('for', 'firstName');
+    });
   });
 
-  it('given the label attribute is NOT set, does NOT render the label', () => {
-    render(<Input name="first_name" type="text" />);
+  describe('given the label attribute is NOT set', () => {
+    it('does NOT render the label', () => {
+      render(<Input name="first_name" type="text" />);
 
-    const inputLabel = screen.queryByTestId(inputTestIds.label);
+      const inputLabel = screen.queryByTestId(inputTestIds.label);
 
-    expect(inputLabel).not.toBeInTheDocument();
+      expect(inputLabel).not.toBeInTheDocument();
+    });
   });
 });
