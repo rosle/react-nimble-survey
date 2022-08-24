@@ -33,7 +33,6 @@ describe('Button', () => {
 
       expect(button).toHaveClass('btn--secondary');
     });
-
   });
 
   describe('given an sm buttonSize', () => {
