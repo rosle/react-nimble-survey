@@ -1,21 +1,23 @@
 import { resolveInputIdFromName } from './formControl';
 
-describe('resolveInputIdFromName', () => {
-  it('returns ID if ID attribute is set', () => {
-    const htmlAttributes = { id: 'MyInputA', name: 'input_a' };
+describe('formControlHelper', () => {
+  describe('resolveInputIdFromName', () => {
+    it('given the ID attribute is set, returns ID', () => {
+      const htmlAttributes = { id: 'MyInputA', name: 'input_a' };
 
-    expect(resolveInputIdFromName(htmlAttributes)).toBe('MyInputA');
-  });
+      expect(resolveInputIdFromName(htmlAttributes)).toBe('MyInputA');
+    });
 
-  it('returns camel-cased name if ID attribute is NOT set', () => {
-    const htmlAttributes = { name: 'input_a' };
+    it('given the ID attribute is NOT set, returns camel-cased name', () => {
+      const htmlAttributes = { name: 'input_a' };
 
-    expect(resolveInputIdFromName(htmlAttributes)).toBe('inputA');
-  });
+      expect(resolveInputIdFromName(htmlAttributes)).toBe('inputA');
+    });
 
-  it('returns undefined if both ID and name attribute is NOT set', () => {
-    const htmlAttributes = {};
+    it('given both ID and name attributes are NOT set, returns undefined', () => {
+      const htmlAttributes = {};
 
-    expect(resolveInputIdFromName(htmlAttributes)).toBeUndefined();
+      expect(resolveInputIdFromName(htmlAttributes)).toBeUndefined();
+    });
   });
 });

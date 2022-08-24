@@ -1,10 +1,10 @@
-import _ from 'lodash';
+import { camelCase } from 'lodash';
 
 const resolveInputIdFromName = (inputAttributes: React.AllHTMLAttributes<HTMLElement>) => {
   const id = inputAttributes?.id;
   const name = inputAttributes?.name;
 
-  return id || (name && _.camelCase(name));
+  return id || (name && camelCase(name));
 };
 
 export { resolveInputIdFromName };
