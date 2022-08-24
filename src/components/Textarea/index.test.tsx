@@ -15,7 +15,7 @@ describe('Textarea', () => {
     expect(textarea).toHaveAttribute('rows', '5');
   });
 
-  it('renders the label if label attribute is set', () => {
+  it('given the label attribute is set, renders the label', () => {
     render(<Textarea name="item_description" label="Description" />);
 
     const textareaLabel = screen.getByTestId(textareaTestIds.label);
@@ -25,7 +25,7 @@ describe('Textarea', () => {
     expect(textareaLabel).toHaveAttribute('for', 'itemDescription');
   });
 
-  it('does NOT render the label if label attribute is NOT set', () => {
+  it('given the label attribute is NOT set, does NOT render the label', () => {
     render(<Textarea name="first_name" />);
 
     const textareaLabel = screen.queryByTestId(textareaTestIds.label);

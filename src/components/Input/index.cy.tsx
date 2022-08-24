@@ -12,13 +12,13 @@ describe('Input', () => {
       .and('have.attr', 'type', 'text');
   });
 
-  it('renders the label if label attribute is set', () => {
+  it('given the label attribute is set, renders the label', () => {
     cy.mount(<Input name="first_name" type="text" label="First name" />);
 
     cy.findByTestId(inputTestIds.label).should('be.visible').and('have.text', 'First name').and('have.attr', 'for', 'firstName');
   });
 
-  it('does NOT render the label if label attribute is NOT set', () => {
+  it('given the label attribute is NOT set, does NOT render the label', () => {
     cy.mount(<Input name="first_name" type="text" />);
 
     cy.get(`[data-test-id="${inputTestIds.label}"]`, { timeout: 0 }).should('not.exist');
