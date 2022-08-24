@@ -4,8 +4,8 @@ module.exports = {
     'selector-class-pattern': [
       '^[a-z-_]+$',
       {
-        'resolveNestedSelectors': true
-      }
-    ]
-  }
+        resolveNestedSelectors: true,
+      },
+    ],
+  },
 };

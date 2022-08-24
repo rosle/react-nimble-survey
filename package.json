@@ -28,6 +28,18 @@
     "@cypress/webpack-dev-server": "2.0.0",
     "@nimblehq/eslint-config-nimble-react": "1.1.0",
     "@nimblehq/stylelint-config-nimble": "1.0.2",
+    "@storybook/addon-actions": "6.5.10",
+    "@storybook/addon-essentials": "6.5.10",
+    "@storybook/addon-interactions": "6.5.10",
+    "@storybook/addon-links": "6.5.10",
+    "@storybook/addons": "6.5.10",
+    "@storybook/builder-webpack5": "6.5.10",
+    "@storybook/manager-webpack5": "6.5.10",
+    "@storybook/node-logger": "6.5.10",
+    "@storybook/preset-create-react-app": "4.1.2",
+    "@storybook/react": "6.5.10",
+    "@storybook/testing-library": "0.0.13",
+    "@storybook/theming": "6.5.10",
     "@testing-library/cypress": "8.0.3",
     "@testing-library/jest-dom": "5.16.4",
     "@testing-library/react": "13.3.0",
@@ -37,15 +49,19 @@
     "@types/react": "18.0.15",
     "@types/react-dom": "18.0.6",
     "babel-plugin-istanbul": "6.1.1",
+    "babel-plugin-named-exports-order": "0.0.2",
     "cypress": "10.5.0",
     "cypress-react-selector": "3.0.0",
     "danger": "10.9.0",
     "danger-plugin-istanbul-coverage": "1.6.2",
     "eslint": "8.11.0",
+    "eslint-plugin-storybook": "0.6.4",
     "prettier": "2.6.0",
+    "prop-types": "15.8.1",
     "start-server-and-test": "1.14.0",
     "stylelint": "14.9.1",
-    "typescript": "4.7.4"
+    "typescript": "4.7.4",
+    "webpack": "5.74.0"
   },
   "scripts": {
     "start": "react-scripts -r @cypress/instrument-cra start",
@@ -54,8 +70,8 @@
     "eject": "react-scripts eject",
     "test:coverage": "react-scripts test --coverage --watchAll=false && npm run cypress:all && node ./scripts/coverage-merge.js && nyc report",
     "test:merge-coverage": "node ./scripts/coverage-merge.js",
-    "lint": "eslint ./ --ext .ts,.tsx",
-    "lint:fix": "eslint ./src ./cypress --ext .ts,.tsx --fix",
+    "lint": "eslint ./ --ext .js,.ts,.tsx",
+    "lint:fix": "eslint ./ --ext .js,.ts,.tsx --fix",
     "stylelint": "stylelint '**/*.scss'",
     "stylelint:fix": "stylelint '**/*.scss' --fix",
     "codebase:lint": "npm run lint && npm run stylelint",
@@ -63,10 +79,9 @@
     "cypress:all": "npm run cypress:component && npm run cypress:e2e",
     "cypress:component": "cypress run --component --quiet",
     "cypress:e2e": "cypress run --quiet",
-    "cypress:open": "cypress open"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
+    "cypress:open": "cypress open",
+    "storybook": "start-storybook -p 6006 -s public",
+    "build-storybook": "build-storybook -s public"
   },
   "browserslist": {
     "production": [
