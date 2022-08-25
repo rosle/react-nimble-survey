@@ -2,10 +2,12 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
+import AuthAdapter from 'adapters/Auth';
 import Button from 'components/Button';
 import Form from 'components/Form';
 import Input from 'components/Input';
 import AuthLayout from 'components/Layout/Auth';
+import ApiError from 'lib/errors/ApiError';
 
 export const loginScreenTestIds = {
   loginForm: 'login-form',
@@ -25,10 +27,25 @@ const LoginScreen = () => {
     formState: { errors },
   } = useForm();
 
+  // TODO: To be implemented on issue#6
   /* istanbul ignore next */
-  const onSubmit = () => {
-    // TODO: To be implemented on issue#6
+  const onSubmit = async () => {
     console.info('onFormSubmit');
+
+    try {
+      const response = await AuthAdapter.login({
+        email: 'rossukhon@nimblehq.co',
+        password: '12345',
+      });
+
+      console.log(response);
+    } catch (error) {
+      if (error instanceof ApiError) {
+        console.log(`${error}`);
+      } else {
+        console.log('Something went wrong!');
+      }
+    }
   };
 
   return (
