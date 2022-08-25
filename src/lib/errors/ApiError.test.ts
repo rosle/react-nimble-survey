@@ -1,0 +1,74 @@
+import { AxiosResponse } from 'axios';
+
+import ApiError from './ApiError';
+
+const mockAxiosResponse: AxiosResponse = {
+  config: {},
+  status: 400,
+  statusText: '',
+  headers: { 'content-type': 'application/json' },
+  data: {
+    errors: [
+      {
+        code: 'internal_error',
+        detail: 'Something went wrong. Please try again.',
+      },
+    ],
+  },
+};
+
+describe('ApiError', () => {
+  it('initializes the ApiError instance', () => {
+    const apiError = new ApiError(mockAxiosResponse);
+
+    expect(apiError.status).toBe(mockAxiosResponse.status);
+    expect(apiError.headers).toBe(mockAxiosResponse.headers);
+    expect(apiError.errors).toBe(mockAxiosResponse.data.errors);
+  });
+
+  describe('.toString()', () => {
+    describe('given there is only one error', () => {
+      it('returns an error message', () => {
+        const axiosResponse = {
+          ...mockAxiosResponse,
+          data: {
+            errors: [
+              {
+                code: 'invalid_email_or_password',
+                detail: 'Your email or password is incorrect. Please try again.',
+              },
+            ],
+          },
+        };
+
+        const apiError = new ApiError(axiosResponse);
+
+        expect(apiError.toString()).toBe('Your email or password is incorrect. Please try again.');
+      });
+    });
+
+    describe('given there are multiple errors', () => {
+      it('joins all error messages and returns the message', () => {
+        const axiosResponse = {
+          ...mockAxiosResponse,
+          data: {
+            errors: [
+              {
+                code: 'invalid_email',
+                detail: 'Your email is incorrect',
+              },
+              {
+                code: 'invalid_password',
+                detail: 'Your password is incorrect',
+              },
+            ],
+          },
+        };
+
+        const apiError = new ApiError(axiosResponse);
+
+        expect(apiError.toString()).toBe('Your email is incorrect, Your password is incorrect');
+      });
+    });
+  });
+});
