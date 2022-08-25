@@ -35,7 +35,7 @@ describe('requestManager', () => {
     requestSpy.mockRestore();
   });
 
-  describe('given the API returns error', () => {
+  describe('given the API responds with error status', () => {
     it('throws an ApiError containing the response', async () => {
       const axiosResponse: AxiosResponse = {
         config: {},
@@ -71,7 +71,7 @@ describe('requestManager', () => {
     });
   });
 
-  describe('given the unexpected errors', () => {
+  describe('given other unexpected errors', () => {
     it('throws the given error', async () => {
       const error = new Error('Network Error');
 
