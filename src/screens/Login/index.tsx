@@ -30,8 +30,6 @@ const LoginScreen = () => {
   // TODO: To be implemented on issue#6
   /* istanbul ignore next */
   const onSubmit = async () => {
-    console.info('onFormSubmit');
-
     try {
       const response = await AuthAdapter.login({
         email: 'rossukhon@nimblehq.co',

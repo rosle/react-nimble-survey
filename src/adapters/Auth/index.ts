@@ -5,10 +5,10 @@ type loginParams = {
   password: string;
 };
 
-const apiCredential = {
+const apiCredential = () => ({
   clientId: process.env.REACT_APP_API_CLIENT_ID,
   clientSecret: process.env.REACT_APP_API_CLIENT_SECRET,
-};
+});
 
 const AuthAdapter = () => {
   const login = ({ email, password }: loginParams) => {
@@ -16,7 +16,7 @@ const AuthAdapter = () => {
       grantType: 'password',
       email: email,
       password: password,
-      ...apiCredential,
+      ...apiCredential(),
     };
 
     return requestManager('post', '/api/v1/oauth/token', { data: data });
