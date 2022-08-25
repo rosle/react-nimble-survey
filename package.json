@@ -73,7 +73,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "test:coverage": "react-scripts test --coverage --watchAll=false && npm run cypress:all && node ./scripts/coverage-merge.js && nyc report",
+    "test:coverage": "rimraf coverage && react-scripts test --coverage --watchAll=false && npm run cypress:all && node ./scripts/coverage-merge.js && nyc report",
     "test:merge-coverage": "node ./scripts/coverage-merge.js",
     "lint": "eslint ./ --ext .js,.ts,.tsx",
     "lint:fix": "eslint ./ --ext .js,.ts,.tsx --fix",
@@ -106,7 +106,8 @@
       "!src/**/*.d.ts",
       "!src/**/*.cy.{js,jsx,ts,tsx}",
       "!src/**/*.stories.{js,jsx,ts,tsx}",
-      "!src/components/Icon/**/*"
+      "!src/components/Icon/**/*",
+      "!src/tests/**/*"
     ],
     "coverageReporters": [
       "json"
