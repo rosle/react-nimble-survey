@@ -20,16 +20,12 @@ export const defaultOptions: AxiosRequestConfig = {
  *                   an error object for its reason
  */
 
-const requestManager = (
-  method: HTTPMethod,
-  endpoint: string,
-  customRequestOptions: AxiosRequestConfig = {}
-): Promise<AxiosResponse> => {
+const requestManager = (method: HTTPMethod, endpoint: string, options: AxiosRequestConfig = {}): Promise<AxiosResponse> => {
   const requestOptions: AxiosRequestConfig = {
     method,
     url: endpoint,
     ...defaultOptions,
-    ...customRequestOptions,
+    ...options,
   };
 
   return axios
