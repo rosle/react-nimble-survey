@@ -106,8 +106,7 @@
       "!src/**/*.d.ts",
       "!src/**/*.cy.{js,jsx,ts,tsx}",
       "!src/**/*.stories.{js,jsx,ts,tsx}",
-      "!src/components/Icon/**/*",
-      "!src/tests/**/*"
+      "!src/components/Icon/**/*"
     ],
     "coverageReporters": [
       "json"
@@ -117,7 +116,8 @@
     "report-dir": "coverage/cypress",
     "exclude": [
       "src/reportWebVitals.ts",
-      "cypress/support/*"
+      "cypress/support/**/*",
+      "src/tests/**/*"
     ],
     "excludeAfterRemap": true
   }

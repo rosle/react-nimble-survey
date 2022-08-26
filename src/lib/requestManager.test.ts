@@ -1,4 +1,4 @@
-import axios, { AxiosError, AxiosResponse } from 'axios';
+import axios, { AxiosError, AxiosResponse, AxiosTransformer } from 'axios';
 
 import ApiError from './errors/ApiError';
 import requestManager, { defaultOptions } from './requestManager';
@@ -80,6 +80,50 @@ describe('requestManager', () => {
       await expect(requestManager('POST', endPoint)).rejects.toThrow(error);
 
       requestSpy.mockRestore();
+    });
+  });
+
+  describe('transformRequest', () => {
+    it('decamelizes the keys of the object in the body', () => {
+      const transformRequest = defaultOptions.transformRequest as AxiosTransformer[];
+
+      const requestBody = {
+        data: {
+          clientId: 'client_id_001',
+          clientSecret: 'client_secret_001',
+        },
+      };
+
+      /* eslint-disable camelcase */
+      expect(transformRequest[0](requestBody)).toEqual({
+        data: {
+          client_id: 'client_id_001',
+          client_secret: 'client_secret_001',
+        },
+      });
+      /* eslint-enable */
+    });
+  });
+
+  describe('transformResponse', () => {
+    it('camelizes the keys of the object in the body', () => {
+      const transformResponse = defaultOptions.transformResponse as AxiosTransformer[];
+
+      /* eslint-disable camelcase */
+      const responseBody = {
+        data: [
+          { id: 1, first_name: 'John' },
+          { id: 2, first_name: 'Jane' },
+        ],
+      };
+      /* eslint-enable */
+
+      expect(transformResponse[0](responseBody)).toEqual({
+        data: [
+          { id: 1, firstName: 'John' },
+          { id: 2, firstName: 'Jane' },
+        ],
+      });
     });
   });
 });
