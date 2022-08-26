@@ -7,5 +7,6 @@ module.exports = {
         resolveNestedSelectors: true,
       },
     ],
+    'scss/at-extend-no-missing-placeholder': null,
   },
 };

@@ -26,14 +26,14 @@ schedule(
     reportFileSet: 'all', // || "modified" || "created" || "createdOrModified"
 
     // What to do when the PR doesn't meet the minimum code coverage threshold
-    reportMode: 'message', // || "warn" || "fail"
+    reportMode: 'fail', // || "warn" || "message"
 
     // Minimum coverage threshold percentages. Compared against the cumulative coverage of the reportFileSet.
     threshold: {
-      statements: 80,
-      branches: 80,
-      functions: 80,
-      lines: 80,
+      statements: 100,
+      branches: 100,
+      functions: 100,
+      lines: 100,
     },
   })
 );

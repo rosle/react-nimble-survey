@@ -6,7 +6,7 @@ import Textarea, { TextareaProps } from './';
 
 export default { component: Textarea } as Meta;
 
-const Template = (arg: TextareaProps) => <Textarea {...arg} />;
+const Template = (args: TextareaProps) => <Textarea {...args} />;
 
 export const WithLabel: Story = Template.bind({});
 WithLabel.args = {

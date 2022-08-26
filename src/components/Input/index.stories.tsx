@@ -6,7 +6,7 @@ import Input, { InputProps } from './';
 
 export default { component: Input } as Meta;
 
-const Template = (arg: InputProps) => <Input {...arg} />;
+const Template = (args: InputProps) => <Input {...args} />;
 
 export const TextInput: Story = Template.bind({});
 TextInput.args = {
