@@ -106,8 +106,7 @@
       "!src/**/*.d.ts",
       "!src/**/*.cy.{js,jsx,ts,tsx}",
       "!src/**/*.stories.{js,jsx,ts,tsx}",
-      "!src/components/Icon/**/*",
-      "!src/tests/**/*"
+      "!src/components/Icon/**/*"
     ],
     "coverageReporters": [
       "json"
