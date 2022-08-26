@@ -22,7 +22,7 @@ describe('Form', () => {
     });
   });
 
-  describe('given there are no form errors', () => {
+  describe('given there are NO form errors', () => {
     it('does NOT render form error', () => {
       cy.mount(
         <Form>

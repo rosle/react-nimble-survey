@@ -18,7 +18,7 @@ describe('LoginScreen', () => {
     expect(authLayoutHeaderTitle).toHaveTextContent('auth:heading.sign_in');
   });
 
-  describe('given the invalid inputs', () => {
+  describe('given the INVALID inputs', () => {
     it('displays the errors', async () => {
       render(<LoginScreen />);
 

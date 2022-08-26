@@ -26,7 +26,7 @@ describe('Form', () => {
     expect(formInput).toBeVisible();
   });
 
-  describe('given there are no form errors', () => {
+  describe('given there are NO form errors', () => {
     it('does NOT render form error', () => {
       render(
         <Form>
