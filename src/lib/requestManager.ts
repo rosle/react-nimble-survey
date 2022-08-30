@@ -3,7 +3,6 @@ import { camelizeKeys, decamelizeKeys } from 'humps';
 
 import ApiError from './errors/ApiError';
 
-// TODO: Coverage is not 100% for transformRequest and transformResponse, recheck when adding integration test on issue#6
 export const defaultOptions: AxiosRequestConfig = {
   baseURL: process.env.REACT_APP_API_BASE_URL,
   responseType: 'json',
