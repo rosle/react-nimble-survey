@@ -3,7 +3,7 @@
 import { gunzipSync, gzipSync } from 'zlib';
 
 type Header = { name: string; value: string };
-type Headers = [Header];
+export type Headers = [Header];
 
 type ResponseContent = {
   mimeType: string;
