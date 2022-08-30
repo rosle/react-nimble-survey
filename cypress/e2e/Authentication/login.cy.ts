@@ -19,7 +19,7 @@ describe('Login', () => {
       cy.findByTestId(loginScreenTestIds.loginSubmit).click();
 
       cy.location().should((location) => {
-        expect(location.pathname).to.eq('/')
+        expect(location.pathname).to.eq('/');
       });
     });
   });

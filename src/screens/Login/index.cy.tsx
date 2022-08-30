@@ -27,7 +27,7 @@ describe('LoginScreen', () => {
       cy.findByTestId(formTestIds.formError).should('not.exist');
 
       cy.location().should((location) => {
-        expect(location.pathname).to.eq('/')
+        expect(location.pathname).to.eq('/');
       });
     });
   });
