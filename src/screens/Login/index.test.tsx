@@ -1,17 +1,29 @@
 import React from 'react';
+import { BrowserRouter } from 'react-router-dom';
 
 import { render, screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
 
 import { formTestIds } from 'components/Form';
 import { authLayoutTestIds } from 'components/Layout/Auth';
-import { fillInput } from 'tests/helpers';
+import { fillInput, submitForm } from 'tests/helpers';
+import setupPolly from 'tests/setupPolly';
 
 import LoginScreen, { loginScreenTestIds } from '.';
 
+const mockUseNavigate = jest.fn();
+
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: () => mockUseNavigate,
+}));
+
 describe('LoginScreen', () => {
   it('renders the AuthLayout with the correct title', () => {
-    render(<LoginScreen />);
+    render(
+      <BrowserRouter>
+        <LoginScreen />
+      </BrowserRouter>
+    );
 
     const authLayoutHeaderTitle = screen.getByTestId(authLayoutTestIds.headerTitle);
 
@@ -19,22 +31,33 @@ describe('LoginScreen', () => {
   });
 
   describe('given the valid inputs', () => {
-    // TODO: Add expectation after form submit on issue#6
-    it('does NOT display the error', () => {
-      render(<LoginScreen />);
+    it('does NOT display the errors and redirects to the Home page', async () => {
+      const polly = setupPolly('login_success');
+
+      render(
+        <BrowserRouter>
+          <LoginScreen />
+        </BrowserRouter>
+      );
 
       const emailInput = screen.getByTestId(loginScreenTestIds.loginEmail);
       const passwordInput = screen.getByTestId(loginScreenTestIds.loginPassWord);
       const submitButton = screen.getByTestId(loginScreenTestIds.loginSubmit);
 
       fillInput(emailInput, 'rossukhon@nimblehq.co');
-      fillInput(passwordInput, 'secret1234');
-
-      userEvent.click(submitButton);
+      fillInput(passwordInput, 'secret22');
+      submitForm(submitButton);
 
       const formError = screen.queryByTestId(formTestIds.formError);
 
       expect(formError).not.toBeInTheDocument();
+
+      await waitFor(() => {
+        expect(mockUseNavigate).toHaveBeenCalledWith('/');
+      });
+
+      await polly.stop();
+      mockUseNavigate.mockRestore();
     });
   });
 
@@ -44,7 +67,7 @@ describe('LoginScreen', () => {
 
       const submitButton = screen.getByTestId(loginScreenTestIds.loginSubmit);
 
-      userEvent.click(submitButton);
+      submitForm(submitButton);
 
       const formError = await screen.findByTestId(formTestIds.formError);
 
@@ -63,6 +86,33 @@ describe('LoginScreen', () => {
       });
 
       expect(formError).not.toHaveTextContent('Password shared:form_error.required');
+    });
+  });
+
+  describe('given the INVALID credential', () => {
+    it('displays the error', async () => {
+      const polly = setupPolly('login_failed', { record: true });
+
+      render(
+        <BrowserRouter>
+          <LoginScreen />
+        </BrowserRouter>
+      );
+
+      const emailInput = screen.getByTestId(loginScreenTestIds.loginEmail);
+      const passwordInput = screen.getByTestId(loginScreenTestIds.loginPassWord);
+      const submitButton = screen.getByTestId(loginScreenTestIds.loginSubmit);
+
+      fillInput(emailInput, 'ros@nimblehq.co');
+      fillInput(passwordInput, 'invalid22');
+      submitForm(submitButton);
+
+      const formError = await screen.findByTestId(formTestIds.formError);
+
+      expect(formError).toBeVisible();
+      expect(formError).toHaveTextContent('Your email or password is incorrect. Please try again.');
+
+      await polly.stop();
     });
   });
 });

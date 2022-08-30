@@ -13,4 +13,8 @@ const fillInput = (input: HTMLElement, value: string) => {
   fireEvent.change(input, { target: { value: value } });
 };
 
-export { fillInput };
+const submitForm = (button: HTMLElement) => {
+  fireEvent.submit(button);
+};
+
+export { fillInput, submitForm };
