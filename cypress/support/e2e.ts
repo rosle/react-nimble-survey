@@ -1,4 +1,6 @@
 import '@cypress/code-coverage/support';
-import './commands';
 import './configure-testing-library';
 import './component-selector';
+
+// Commands
+import '@testing-library/cypress/add-commands';
