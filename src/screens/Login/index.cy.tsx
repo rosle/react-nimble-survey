@@ -7,29 +7,34 @@ import LoginScreen, { loginScreenTestIds } from '.';
 
 describe('LoginScreen', () => {
   it('renders the AuthLayout with the correct title', () => {
-    cy.mount(<LoginScreen />);
+    cy.mountWithRouter(<LoginScreen />);
 
     cy.get('html').should('have.class', 'layout-auth');
     cy.findByTestId(authLayoutTestIds.headerTitle).should('have.text', 'auth:heading.sign_in');
   });
 
   describe('given the valid inputs', () => {
-    // TODO: Add expectation after form submit on issue#6
-    it('does NOT display the error', () => {
-      cy.mount(<LoginScreen />);
+    it('does NOT display the errors and redirects to the Home page', () => {
+      cy.mountWithRouter(<LoginScreen />);
 
       cy.findByTestId(loginScreenTestIds.loginEmail).type('rossukhon@nimblehq.co');
-      cy.findByTestId(loginScreenTestIds.loginPassWord).type('secret1234');
+      cy.findByTestId(loginScreenTestIds.loginPassWord).type('secret22');
+
+      cy.intercept('POST', '/api/v1/oauth/token', { statusCode: 200, fixture: 'login_success' });
 
       cy.findByTestId(loginScreenTestIds.loginSubmit).click();
 
       cy.findByTestId(formTestIds.formError).should('not.exist');
+
+      cy.location().should((location) => {
+        expect(location.pathname).to.eq('/')
+      });
     });
   });
 
   describe('given the INVALID inputs', () => {
     it('displays the errors', () => {
-      cy.mount(<LoginScreen />);
+      cy.mountWithRouter(<LoginScreen />);
 
       cy.findByTestId(loginScreenTestIds.loginSubmit).click();
 
@@ -43,6 +48,21 @@ describe('LoginScreen', () => {
       cy.findByTestId(formTestIds.formError)
         .should('contain.text', 'Email shared:form_error.pattern')
         .should('not.contain.text', 'Password shared:form_error.required');
+    });
+  });
+
+  describe('given the INVALID credentials', () => {
+    it('displays the errors', () => {
+      cy.mountWithRouter(<LoginScreen />);
+
+      cy.findByTestId(loginScreenTestIds.loginEmail).type('rossukhon@nimblehq.co');
+      cy.findByTestId(loginScreenTestIds.loginPassWord).type('invalid22');
+
+      cy.intercept('POST', '/api/v1/oauth/token', { statusCode: 400, fixture: 'login_failed' });
+
+      cy.findByTestId(loginScreenTestIds.loginSubmit).click();
+
+      cy.findByTestId(formTestIds.formError).should('contain.text', 'Your email or password is incorrect. Please try again.');
     });
   });
 });
