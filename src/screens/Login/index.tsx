@@ -41,9 +41,9 @@ const LoginScreen = () => {
       console.log(response);
     } catch (error) {
       if (error instanceof ApiError) {
-        console.log(`${error}`);
+        console.error(`${error}`);
       } else {
-        console.log('Something went wrong!');
+        console.error('Something went wrong!');
       }
     }
   };
