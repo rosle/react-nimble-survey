@@ -1,12 +1,12 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
 
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 
 import { formTestIds } from 'components/Form';
 import { authLayoutTestIds } from 'components/Layout/Auth';
 import { fillInput, submitForm } from 'tests/helpers';
-import setupPolly from 'tests/setupPolly';
+import { renderWithRouter } from 'tests/renderWithRouter';
+import { setupPolly } from 'tests/setupPolly';
 
 import LoginScreen, { loginScreenTestIds } from '.';
 
@@ -19,11 +19,7 @@ jest.mock('react-router-dom', () => ({
 
 describe('LoginScreen', () => {
   it('renders the AuthLayout with the correct title', () => {
-    render(
-      <BrowserRouter>
-        <LoginScreen />
-      </BrowserRouter>
-    );
+    renderWithRouter(<LoginScreen />);
 
     const authLayoutHeaderTitle = screen.getByTestId(authLayoutTestIds.headerTitle);
 
@@ -34,11 +30,7 @@ describe('LoginScreen', () => {
     it('does NOT display the errors and redirects to the Home page', async () => {
       const polly = setupPolly('login_success');
 
-      render(
-        <BrowserRouter>
-          <LoginScreen />
-        </BrowserRouter>
-      );
+      renderWithRouter(<LoginScreen />);
 
       const emailInput = screen.getByTestId(loginScreenTestIds.loginEmail);
       const passwordInput = screen.getByTestId(loginScreenTestIds.loginPassWord);
@@ -63,7 +55,7 @@ describe('LoginScreen', () => {
 
   describe('given the INVALID inputs', () => {
     it('displays the errors', async () => {
-      render(<LoginScreen />);
+      renderWithRouter(<LoginScreen />);
 
       const submitButton = screen.getByTestId(loginScreenTestIds.loginSubmit);
 
@@ -93,11 +85,7 @@ describe('LoginScreen', () => {
     it('displays the error', async () => {
       const polly = setupPolly('login_failed', { record: true });
 
-      render(
-        <BrowserRouter>
-          <LoginScreen />
-        </BrowserRouter>
-      );
+      renderWithRouter(<LoginScreen />);
 
       const emailInput = screen.getByTestId(loginScreenTestIds.loginEmail);
       const passwordInput = screen.getByTestId(loginScreenTestIds.loginPassWord);

@@ -53,4 +53,4 @@ const setupPolly = (cassetteName: string, options?: SetUpPollyOptions) => {
   return polly;
 };
 
-export default setupPolly;
+export { setupPolly };

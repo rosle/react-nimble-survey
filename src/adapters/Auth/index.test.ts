@@ -1,5 +1,5 @@
 import requestManager from 'lib/requestManager';
-import mockEnv from 'tests/mockEnv';
+import { mockEnv } from 'tests/mockEnv';
 
 import AuthAdapter from './';
 
