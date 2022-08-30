@@ -83,7 +83,7 @@ describe('LoginScreen', () => {
 
   describe('given the INVALID credential', () => {
     it('displays the error', async () => {
-      const polly = setupPolly('login_failed', { record: true });
+      const polly = setupPolly('login_failed');
 
       renderWithRouter(<LoginScreen />);
 
