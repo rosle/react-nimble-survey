@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 import AuthAdapter from 'adapters/Auth';
 import Button from 'components/Button';
@@ -24,33 +25,39 @@ export const loginScreenTestIds = {
 const emailRegex = /^(([^<>()[\].,;:\s@"]+(.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+.)+[^<>()[\].,;:\s@"]{2,})$/i;
 
 const LoginScreen = () => {
-  const { t } = useTranslation(['auth']);
+  const { t } = useTranslation(['auth', 'shared']);
+  const [formSubmissionErrors, setFormSubmissionErrors] = useState<string>('');
+  const navigate = useNavigate();
 
   const {
-    register,
+    formState: { isSubmitting, errors: formValidationErrors },
     handleSubmit,
-    formState: { errors },
+    register,
   } = useForm<LoginInput>();
 
-  // TODO: To be implemented on issue#6
-  /* istanbul ignore next */
   const onSubmit: SubmitHandler<LoginInput> = async ({ email, password }) => {
-    try {
-      const response = await AuthAdapter.login({ email, password });
+    setFormSubmissionErrors('');
 
-      console.log(response);
+    try {
+      await AuthAdapter.login({ email, password });
+
+      navigate('/');
     } catch (error) {
       if (error instanceof ApiError) {
-        console.error(`${error}`);
+        setFormSubmissionErrors(error.toString());
       } else {
-        console.error('Something went wrong!');
+        setFormSubmissionErrors(t('shared:generic_error'));
       }
     }
   };
 
   return (
     <AuthLayout headerTitle={t('auth:heading.sign_in')}>
-      <Form onSubmit={handleSubmit(onSubmit)} errors={errors} data-test-id={loginScreenTestIds.loginForm}>
+      <Form
+        onSubmit={handleSubmit(onSubmit)}
+        errors={formSubmissionErrors || formValidationErrors}
+        data-test-id={loginScreenTestIds.loginForm}
+      >
         <Input
           type="email"
           label={t('auth:email')}
@@ -66,7 +73,7 @@ const LoginScreen = () => {
           {...register('password', { required: true })}
           data-test-id={loginScreenTestIds.loginPassWord}
         />
-        <Button type="submit" fullWidth data-test-id={loginScreenTestIds.loginSubmit}>
+        <Button type="submit" fullWidth data-test-id={loginScreenTestIds.loginSubmit} disabled={isSubmitting}>
           {t('auth:action.sign_in')}
         </Button>
       </Form>
