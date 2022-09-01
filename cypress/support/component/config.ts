@@ -1,8 +1,8 @@
 import task from '@cypress/code-coverage/task';
 
-import webpackConfig from "./webpack.config";
+import webpackConfig from './webpack.config';
 
-const config: Cypress.ComponentConfigOptions = {
+const componentConfig: Cypress.ComponentConfigOptions = {
   setupNodeEvents: (on, config) => {
     task(on, config);
 
@@ -18,4 +18,4 @@ const config: Cypress.ComponentConfigOptions = {
   specPattern: 'src/**/*.cy.{ts,tsx}',
 };
 
-export default config;
+export default componentConfig;

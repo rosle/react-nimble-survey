@@ -3,7 +3,7 @@ import webpackPreprocessor from '@cypress/webpack-preprocessor';
 
 import webpackConfig from './webpack.config';
 
-const config: Cypress.CoreConfigOptions = {
+const e2eConfig: Cypress.CoreConfigOptions = {
   setupNodeEvents: (on, config) => {
     config.env = process.env;
 
@@ -22,4 +22,4 @@ const config: Cypress.CoreConfigOptions = {
   specPattern: 'cypress/e2e/**/*.cy.ts',
 };
 
-export default config;
+export default e2eConfig;
