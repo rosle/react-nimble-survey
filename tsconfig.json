@@ -1,6 +1,9 @@
 {
   "compilerOptions": {
     "baseUrl": "src",
+    "paths": {
+      "screens/*": ["screens/*"],
+    },
     "target": "es5",
     "lib": [
       "dom",
@@ -26,6 +29,5 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", "cypress.d.ts"],
-  "exclude": ["src/**/*.cy.{ts,tsx}"]
+  "include": ["src", "cypress.d.ts", "cypress"],
 }

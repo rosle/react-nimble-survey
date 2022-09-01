@@ -1,11 +1,9 @@
 import task from '@cypress/code-coverage/task';
+import webpackPreprocessor from '@cypress/webpack-preprocessor';
 import { defineConfig } from 'cypress';
 
-const setupNodeEvents = (on, config) => {
-  task(on, config);
-
-  return config;
-};
+import componentWebpackConfig from './cypress/support/component.webpack.config';
+import e2eWebpackConfig from './cypress/support/e2e.webpack.config';
 
 export default defineConfig({
   env: {
@@ -14,36 +12,35 @@ export default defineConfig({
     },
   },
   component: {
-    setupNodeEvents: setupNodeEvents,
+    setupNodeEvents: (on, config) => {
+      task(on, config);
+
+      return config;
+    },
     devServer: {
       framework: 'create-react-app',
       bundler: 'webpack',
       // Need to instrument the application to collect code coverage.
       // More info: https://glebbahmutov.com/blog/component-code-coverage/
-      webpackConfig: {
-        mode: 'development',
-        devtool: false,
-        module: {
-          rules: [
-            {
-              test: /\.(ts|tsx)$/,
-              exclude: /node_modules/,
-              use: {
-                loader: 'babel-loader',
-                options: {
-                  presets: ['@babel/preset-env', '@babel/preset-react', '@babel/preset-typescript'],
-                  plugins: ['istanbul'],
-                },
-              },
-            },
-          ],
-        },
-      },
+      webpackConfig: componentWebpackConfig,
     },
     specPattern: 'src/**/*.cy.{ts,tsx}',
   },
   e2e: {
-    setupNodeEvents: setupNodeEvents,
+    setupNodeEvents: (on, config) => {
+      config.env = process.env;
+
+      task(on, config);
+
+      on(
+        'file:preprocessor',
+        webpackPreprocessor({
+          webpackOptions: e2eWebpackConfig,
+        })
+      );
+
+      return config;
+    },
     baseUrl: 'http://localhost:3000',
     specPattern: 'cypress/e2e/**/*.cy.ts',
   },
