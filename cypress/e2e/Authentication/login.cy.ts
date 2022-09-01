@@ -1,4 +1,3 @@
-// TODO: How to reuse the component's test ids
 const loginScreenTestIds = {
   loginForm: 'login-form',
   loginEmail: 'login-form__input-email',
