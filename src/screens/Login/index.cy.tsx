@@ -13,7 +13,7 @@ describe('LoginScreen', () => {
     cy.findByTestId(authLayoutTestIds.headerTitle).should('have.text', 'auth:heading.sign_in');
   });
 
-  describe('given the valid inputs', () => {
+  describe('given the valid credential', () => {
     it('does NOT display the errors and redirects to the Home page', () => {
       cy.mountWithRouter(<LoginScreen />);
 
@@ -51,7 +51,7 @@ describe('LoginScreen', () => {
     });
   });
 
-  describe('given the INVALID credentials', () => {
+  describe('given the INVALID credential', () => {
     it('displays the API errors', () => {
       cy.mountWithRouter(<LoginScreen />);
 

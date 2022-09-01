@@ -27,7 +27,7 @@ describe('LoginScreen', () => {
     expect(authLayoutHeaderTitle).toHaveTextContent('auth:heading.sign_in');
   });
 
-  describe('given the valid inputs', () => {
+  describe('given the valid credential', () => {
     it('does NOT display the errors and redirects to the Home page', async () => {
       const polly = setupPolly('login_success');
 
