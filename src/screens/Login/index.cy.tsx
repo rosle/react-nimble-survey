@@ -33,7 +33,7 @@ describe('LoginScreen', () => {
   });
 
   describe('given the INVALID inputs', () => {
-    it('displays the errors', () => {
+    it('displays the validation errors', () => {
       cy.mountWithRouter(<LoginScreen />);
 
       cy.findByTestId(loginScreenTestIds.loginSubmit).click();
@@ -52,7 +52,7 @@ describe('LoginScreen', () => {
   });
 
   describe('given the INVALID credentials', () => {
-    it('displays the errors', () => {
+    it('displays the API errors', () => {
       cy.mountWithRouter(<LoginScreen />);
 
       cy.findByTestId(loginScreenTestIds.loginEmail).type('rossukhon@nimblehq.co');
@@ -63,6 +63,21 @@ describe('LoginScreen', () => {
       cy.findByTestId(loginScreenTestIds.loginSubmit).click();
 
       cy.findByTestId(formTestIds.formError).should('contain.text', 'Your email or password is incorrect. Please try again.');
+    });
+  });
+
+  describe('given the API request failed', () => {
+    it('displays the generic errors', () => {
+      cy.mountWithRouter(<LoginScreen />);
+
+      cy.findByTestId(loginScreenTestIds.loginEmail).type('rossukhon@nimblehq.co');
+      cy.findByTestId(loginScreenTestIds.loginPassWord).type('invalid22');
+
+      cy.intercept('POST', '/api/v1/oauth/token', { forceNetworkError: true });
+
+      cy.findByTestId(loginScreenTestIds.loginSubmit).click();
+
+      cy.findByTestId(formTestIds.formError).should('contain.text', 'shared:generic_error');
     });
   });
 });
