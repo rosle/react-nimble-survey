@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -8,7 +8,10 @@ import Button from 'components/Button';
 import Form from 'components/Form';
 import Input from 'components/Input';
 import AuthLayout from 'components/Layout/Auth';
+import useLocalStorage, { STORAGE_KEYS } from 'hooks/useLocalStorage';
 import ApiError from 'lib/errors/ApiError';
+import { Tokens } from 'types/data';
+import { isEmpty } from 'lodash';
 
 type LoginInput = {
   email: string;
@@ -26,8 +29,9 @@ const emailRegex = /^(([^<>()[\].,;:\s@"]+(.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<
 
 const LoginScreen = () => {
   const { t } = useTranslation(['auth', 'shared']);
-  const [formSubmissionErrors, setFormSubmissionErrors] = useState<string>('');
   const navigate = useNavigate();
+  const [formSubmissionErrors, setFormSubmissionErrors] = useState<string>('');
+  const [tokens, setTokens] = useLocalStorage(STORAGE_KEYS.tokens);
 
   const {
     formState: { isSubmitting, errors: formValidationErrors },
@@ -39,9 +43,10 @@ const LoginScreen = () => {
     setFormSubmissionErrors('');
 
     try {
-      await AuthAdapter.login({ email, password });
+      const response = await AuthAdapter.login({ email, password });
 
-      navigate('/');
+      const tokensResponse: Tokens = response.data.attributes;
+      setTokens(tokensResponse);
     } catch (error) {
       if (error instanceof ApiError) {
         setFormSubmissionErrors(error.toString());
@@ -50,6 +55,12 @@ const LoginScreen = () => {
       }
     }
   };
+
+  useEffect(() => {
+    if (!isEmpty(tokens)) {
+      navigate('/');
+    }
+  }, [navigate, tokens]);
 
   return (
     <AuthLayout headerTitle={t('auth:heading.sign_in')}>
