@@ -1,12 +1,14 @@
 import React from 'react';
 
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
+
+import { renderWithRouter } from 'tests/renderWithRouter';
 
 import HomeScreen from '.';
 
 describe('HomeScreen', () => {
   it('renders learn react link', () => {
-    render(<HomeScreen />);
+    renderWithRouter(<HomeScreen />);
 
     const linkElement = screen.getByTestId('app-link');
 

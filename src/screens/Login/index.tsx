@@ -3,6 +3,8 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
+import { isEmpty } from 'lodash';
+
 import AuthAdapter from 'adapters/Auth';
 import Button from 'components/Button';
 import Form from 'components/Form';
@@ -11,7 +13,6 @@ import AuthLayout from 'components/Layout/Auth';
 import useLocalStorage, { STORAGE_KEYS } from 'hooks/useLocalStorage';
 import ApiError from 'lib/errors/ApiError';
 import { Tokens } from 'types/data';
-import { isEmpty } from 'lodash';
 
 type LoginInput = {
   email: string;
