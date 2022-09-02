@@ -5,7 +5,7 @@ export const STORAGE_KEYS = {
   user: 'user',
 };
 
-const useLocalStorage = (key: string, defaultValue: object = {}) => {
+const useLocalStorage = (key: string, defaultValue: object | null = null) => {
   const [value, setValue] = useState(() => {
     const storedJsonValue = localStorage.getItem(key);
     const initialValue = storedJsonValue ? JSON.parse(storedJsonValue) : null;

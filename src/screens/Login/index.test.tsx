@@ -5,7 +5,9 @@ import axios from 'axios';
 
 import { formTestIds } from 'components/Form';
 import { authLayoutTestIds } from 'components/Layout/Auth';
+import { STORAGE_KEYS } from 'hooks/useLocalStorage';
 import { fillInput, submitForm } from 'tests/helpers';
+import mockLocalStorage from 'tests/mockLocalStorage';
 import { renderWithRouter } from 'tests/renderWithRouter';
 import { setupPolly } from 'tests/setupPolly';
 
@@ -28,7 +30,9 @@ describe('LoginScreen', () => {
   });
 
   describe('given the valid credential', () => {
-    it('does NOT display the errors and redirects to the Home page', async () => {
+    const localStorage = mockLocalStorage();
+
+    it('does NOT display the errors and stores the tokens to the local storage', async () => {
       const polly = setupPolly('login_success');
 
       renderWithRouter(<LoginScreen />);
@@ -46,7 +50,15 @@ describe('LoginScreen', () => {
       expect(formError).not.toBeInTheDocument();
 
       await waitFor(() => {
-        expect(mockUseNavigate).toHaveBeenCalledWith('/');
+        const expectedTokens = {
+          accessToken: '[ REDACTED ]',
+          tokenType: 'Bearer',
+          expiresIn: 7200,
+          refreshToken: '[ REDACTED ]',
+          createdAt: 1661861713,
+        };
+
+        expect(localStorage.getItem(STORAGE_KEYS.tokens)).toBe(JSON.stringify(expectedTokens));
       });
 
       await polly.stop();

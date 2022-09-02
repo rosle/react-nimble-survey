@@ -1,9 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
-
-import { isEmpty } from 'lodash';
 
 import AuthAdapter from 'adapters/Auth';
 import Button from 'components/Button';
@@ -30,9 +27,8 @@ const emailRegex = /^(([^<>()[\].,;:\s@"]+(.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<
 
 const LoginScreen = () => {
   const { t } = useTranslation(['auth', 'shared']);
-  const navigate = useNavigate();
   const [formSubmissionErrors, setFormSubmissionErrors] = useState<string>('');
-  const [tokens, setTokens] = useLocalStorage(STORAGE_KEYS.tokens);
+  const [, setTokens] = useLocalStorage(STORAGE_KEYS.tokens);
 
   const {
     formState: { isSubmitting, errors: formValidationErrors },
@@ -56,12 +52,6 @@ const LoginScreen = () => {
       }
     }
   };
-
-  useEffect(() => {
-    if (!isEmpty(tokens)) {
-      navigate('/');
-    }
-  }, [navigate, tokens]);
 
   return (
     <AuthLayout headerTitle={t('auth:heading.sign_in')}>

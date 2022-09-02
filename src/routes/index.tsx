@@ -4,15 +4,31 @@ import { RouteObject } from 'react-router-dom';
 import HomeScreen from 'screens/Home';
 import LoginScreen from 'screens/Login';
 
-const routes: RouteObject[] = [
-  {
-    path: '/',
-    element: <HomeScreen />,
-  },
+import AuthRoute from './AuthRoute';
+import ProtectedRoute from './ProtectedRoute';
+
+const authRoutes: RouteObject[] = [
   {
     path: '/sign_in',
-    element: <LoginScreen />,
+    element: (
+      <AuthRoute>
+        <LoginScreen />
+      </AuthRoute>
+    ),
   },
 ];
+
+const protectedRoutes: RouteObject[] = [
+  {
+    path: '/',
+    element: (
+      <ProtectedRoute>
+        <HomeScreen />
+      </ProtectedRoute>
+    ),
+  },
+];
+
+const routes = [...authRoutes, ...protectedRoutes];
 
 export default routes;
