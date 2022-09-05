@@ -1,10 +1,11 @@
-import { LOCAL_STORAGE_KEYS } from 'hooks/useLocalStorage';
-import { Tokens, User } from 'types/data';
+import { LOCAL_STORAGE_KEY } from 'hooks/useLocalStorage';
+import { Tokens } from 'types/tokens';
+import { User } from 'types/user';
 
-import mockLocalStorage from './mockLocalStorage';
+import { mockLocalStorage } from './mockLocalStorage';
 
 const mockUserLoggedIn = () => {
-  const localStorage = mockLocalStorage();
+  const mockedLocalStorage = mockLocalStorage();
 
   const tokens: Tokens = {
     tokenType: 'Bearer',
@@ -20,10 +21,10 @@ const mockUserLoggedIn = () => {
     avatarUrl: 'https://secure.gravatar.com/avatar/252876a66bc74a8d0a8ec1ebb3dd991c',
   };
 
-  localStorage.setItem(LOCAL_STORAGE_KEYS.tokens, JSON.stringify(tokens));
-  localStorage.setItem(LOCAL_STORAGE_KEYS.user, JSON.stringify(user));
+  mockedLocalStorage.setItem(LOCAL_STORAGE_KEY.tokens, JSON.stringify(tokens));
+  mockedLocalStorage.setItem(LOCAL_STORAGE_KEY.user, JSON.stringify(user));
 
   return { user, tokens };
 };
 
-export default mockUserLoggedIn;
+export { mockUserLoggedIn };

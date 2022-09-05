@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosResponse, AxiosTransformer } from 'axios';
 
-import mockUserLoggedIn from 'tests/mockUserLoggedIn';
+import { mockUserLoggedIn } from 'tests/mockUserLoggedIn';
 
 import ApiError from './errors/ApiError';
 import requestManager, { defaultOptions } from './requestManager';

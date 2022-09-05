@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export const LOCAL_STORAGE_KEYS = {
+export const LOCAL_STORAGE_KEY = {
   tokens: 'tokens',
   user: 'user',
 };

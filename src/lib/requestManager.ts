@@ -1,8 +1,8 @@
 import axios, { Method as HTTPMethod, AxiosRequestConfig, AxiosResponse, AxiosTransformer } from 'axios';
 import { camelizeKeys, decamelizeKeys } from 'humps';
 
-import { getLocalStorageValue, LOCAL_STORAGE_KEYS } from 'hooks/useLocalStorage';
-import { Tokens } from 'types/data';
+import { getLocalStorageValue, LOCAL_STORAGE_KEY } from 'hooks/useLocalStorage';
+import { Tokens } from 'types/tokens';
 
 import ApiError from './errors/ApiError';
 
@@ -24,7 +24,7 @@ export const defaultOptions: AxiosRequestConfig = {
  */
 
 const attachAuthorizationHeader = (requestOptions: AxiosRequestConfig) => {
-  const tokens = getLocalStorageValue(LOCAL_STORAGE_KEYS.tokens);
+  const tokens = getLocalStorageValue(LOCAL_STORAGE_KEY.tokens);
 
   if (tokens) {
     requestOptions.headers = {

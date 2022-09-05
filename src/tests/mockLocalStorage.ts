@@ -17,17 +17,17 @@ const localStorage = () => {
 };
 
 const mockLocalStorage = () => {
-  const myLocalStorage = localStorage();
+  const mockedLocalStorage = localStorage();
 
   beforeAll(() => {
     Object.defineProperty(window, 'localStorage', {
-      value: myLocalStorage,
+      value: mockedLocalStorage,
     });
   });
 
-  afterEach(() => myLocalStorage.clear());
+  afterEach(() => mockedLocalStorage.clear());
 
-  return myLocalStorage;
+  return mockedLocalStorage;
 };
 
-export default mockLocalStorage;
+export { mockLocalStorage };

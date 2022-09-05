@@ -5,9 +5,3 @@ export type Tokens = {
   createdAt: number;
   expiresIn: number;
 };
-
-export type User = {
-  email: string;
-  name: string;
-  avatarUrl: string;
-};

@@ -5,7 +5,7 @@ import { render, screen } from '@testing-library/react';
 
 import { UserContextProvider } from 'contexts/UserContext';
 import AuthRoute from 'routes/AuthRoute';
-import mockUserLoggedIn from 'tests/mockUserLoggedIn';
+import { mockUserLoggedIn } from 'tests/mockUserLoggedIn';
 
 import ProtectedRoute from '.';
 

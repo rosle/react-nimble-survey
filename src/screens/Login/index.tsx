@@ -11,7 +11,6 @@ import Input from 'components/Input';
 import AuthLayout from 'components/Layout/Auth';
 import { UserContext } from 'contexts/UserContext';
 import ApiError from 'lib/errors/ApiError';
-import { Tokens, User } from 'types/data';
 
 type LoginInput = {
   email: string;
@@ -44,7 +43,7 @@ const LoginScreen = () => {
 
     try {
       const response = await AuthAdapter.login({ email, password });
-      const tokensResponse: Tokens = response.data.attributes;
+      const tokensResponse = response.data.attributes;
 
       setTokens(tokensResponse);
     } catch (error) {
@@ -59,7 +58,7 @@ const LoginScreen = () => {
   const fetchUserProfile = useCallback(async () => {
     try {
       const response = await UserAdapter.me();
-      const userResponse: User = response.data.attributes;
+      const userResponse = response.data.attributes;
 
       setUser(userResponse);
     } catch (error) {

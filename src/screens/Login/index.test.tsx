@@ -6,7 +6,7 @@ import axios from 'axios';
 import { formTestIds } from 'components/Form';
 import { authLayoutTestIds } from 'components/Layout/Auth';
 import { fillInput, submitForm } from 'tests/helpers';
-import mockLocalStorage from 'tests/mockLocalStorage';
+import { mockLocalStorage } from 'tests/mockLocalStorage';
 import { renderWithRouter } from 'tests/renderWithRouter';
 import { setupPolly } from 'tests/setupPolly';
 
