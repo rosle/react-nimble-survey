@@ -1,22 +1,39 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, BrowserRouterProps, MemoryRouter, MemoryRouterProps } from 'react-router-dom';
 
 import { render, RenderResult } from '@testing-library/react';
 
 import { UserContextProvider } from 'contexts/UserContext';
 
-type renderWithRouterProps = {
+type customRenderWithRouterProps = {
   withContextProvider?: boolean;
 };
 
-const renderWithContextProvider = (ui: React.ReactElement) => {
-  return <UserContextProvider>{ui}</UserContextProvider>;
+type renderWithRouterProps = customRenderWithRouterProps & BrowserRouterProps;
+type renderWithMemoryRouterProps = customRenderWithRouterProps & MemoryRouterProps;
+
+const renderChildren = (children: React.ReactElement, { withContextProvider = false }) => {
+  return withContextProvider ? <UserContextProvider>{children}</UserContextProvider> : children;
 };
 
-const renderWithRouter = (ui: React.ReactElement, { withContextProvider = false }: renderWithRouterProps = {}): RenderResult => {
-  const renderedUi = withContextProvider ? renderWithContextProvider(ui) : ui;
-
-  return render(renderedUi, { wrapper: BrowserRouter });
+const renderWithRouter = (
+  children: React.ReactElement,
+  { withContextProvider, ...routerProps }: renderWithRouterProps = {}
+): RenderResult => {
+  return render(renderChildren(children, { withContextProvider }), {
+    wrapper: (props) => <BrowserRouter {...props} />,
+    ...routerProps,
+  });
 };
 
-export { renderWithRouter };
+const renderWithMemoryRouter = (
+  children: React.ReactElement,
+  { withContextProvider, ...memoryRouterProps }: renderWithMemoryRouterProps = {}
+): RenderResult => {
+  return render(renderChildren(children, { withContextProvider }), {
+    wrapper: (props) => <MemoryRouter {...props} />,
+    ...memoryRouterProps,
+  });
+};
+
+export { renderWithRouter, renderWithMemoryRouter };

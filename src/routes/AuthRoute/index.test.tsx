@@ -1,39 +1,52 @@
 import React from 'react';
-import { MemoryRouter, Route, Routes } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 
-import { UserContextProvider } from 'contexts/UserContext';
 import ProtectedRoute from 'routes/ProtectedRoute';
 import { mockUserLoggedIn } from 'tests/mockUserLoggedIn';
+import { renderWithMemoryRouter } from 'tests/renderWithRouter';
 
 import AuthRoute from '.';
 
+const HOME_ROUTE = {
+  path: '/',
+  content: 'Home page',
+};
+
+const AUTH_ROUTE = {
+  path: '/sign_in',
+  content: 'Login page',
+};
+
 const TestRoutes = () => {
   return (
-    <MemoryRouter initialEntries={['/sign_in']}>
-      <UserContextProvider>
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <ProtectedRoute>
-                <div>Home page</div>
-              </ProtectedRoute>
-            }
-          ></Route>
-          <Route
-            path="/sign_in"
-            element={
-              <AuthRoute>
-                <div>Login page</div>
-              </AuthRoute>
-            }
-          />
-        </Routes>
-      </UserContextProvider>
-    </MemoryRouter>
+    <Routes>
+      <Route
+        path={HOME_ROUTE.path}
+        element={
+          <ProtectedRoute>
+            <div>{HOME_ROUTE.content}</div>
+          </ProtectedRoute>
+        }
+      ></Route>
+      <Route
+        path={AUTH_ROUTE.path}
+        element={
+          <AuthRoute>
+            <div>{AUTH_ROUTE.content}</div>
+          </AuthRoute>
+        }
+      />
+    </Routes>
   );
+};
+
+const renderRoutes = (initialPath: string) => {
+  renderWithMemoryRouter(<TestRoutes />, {
+    initialEntries: [initialPath],
+    withContextProvider: true,
+  });
 };
 
 describe('AuthRoute', () => {
@@ -41,17 +54,17 @@ describe('AuthRoute', () => {
     mockUserLoggedIn();
 
     it('redirects to Home page', () => {
-      render(<TestRoutes />);
+      renderRoutes(AUTH_ROUTE.path);
 
-      expect(screen.queryByText('Home page')).toBeVisible();
+      expect(screen.queryByText(HOME_ROUTE.content)).toBeVisible();
     });
   });
 
   describe('given the user has NOT logged in', () => {
     it('renders the given page', () => {
-      render(<TestRoutes />);
+      renderRoutes(AUTH_ROUTE.path);
 
-      expect(screen.queryByText('Login page')).toBeVisible();
+      expect(screen.queryByText(AUTH_ROUTE.content)).toBeVisible();
     });
   });
 });
