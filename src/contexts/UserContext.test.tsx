@@ -8,16 +8,16 @@ import { UserContext, UserContextProvider } from './UserContext';
 
 const userContextConsumerTestIds = {
   tokens: 'tokens',
-  user: 'user'
-}
+  user: 'user',
+};
 
 const UserContextConsumer = () => {
   const { tokens, user } = useContext(UserContext);
 
   return (
     <>
-      {tokens && <div data-test-id={userContextConsumerTestIds.tokens}>{tokens.accessToken}</div> }
-      {user && <div data-test-id={userContextConsumerTestIds.user}>{user.email}</div> }
+      {tokens && <div data-test-id={userContextConsumerTestIds.tokens}>{tokens.accessToken}</div>}
+      {user && <div data-test-id={userContextConsumerTestIds.user}>{user.email}</div>}
     </>
   );
 };

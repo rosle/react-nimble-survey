@@ -14,6 +14,7 @@ describe('Login', () => {
       cy.findByTestId(loginScreenTestIds.loginPassWord).type('secret22');
 
       cy.intercept('POST', '/api/v1/oauth/token', { statusCode: 200, fixture: 'login_success' });
+      cy.intercept('GET', '/api/v1/me', { statusCode: 200, fixture: 'user_success' });
 
       cy.findByTestId(loginScreenTestIds.loginSubmit).click();
 
