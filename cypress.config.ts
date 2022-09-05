@@ -46,7 +46,6 @@ export default defineConfig({
     setupNodeEvents: setupNodeEvents,
     baseUrl: 'http://localhost:3000',
     specPattern: 'cypress/e2e/**/*.cy.ts',
-    experimentalSessionAndOrigin: true,
   },
   retries: {
     runMode: 2,
