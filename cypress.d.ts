@@ -5,6 +5,7 @@ declare global {
     interface Chainable {
       mount: typeof mount;
       mountWithRouter: typeof mount;
+      login(email: string, password: string): typeof Chainable;
     }
   }
 }
