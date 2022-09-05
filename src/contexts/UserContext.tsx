@@ -1,27 +1,35 @@
 import React from 'react';
 
-import useLocalStorage, { STORAGE_KEYS } from 'hooks/useLocalStorage';
-import { Tokens } from 'types/data';
+import useLocalStorage, { LOCAL_STORAGE_KEYS } from 'hooks/useLocalStorage';
+import { Tokens, User } from 'types/data';
 
 type UserContextProviderProps = {
   children: React.ReactNode;
 };
 
-// TODO: Update tokens to user
 type UserContextContent = {
-  user: Tokens | null;
-  setUser: (user: Tokens) => void;
+  tokens: Tokens | null;
+  setTokens: (token: Tokens) => void;
+  user: User | null;
+  setUser: (user: User) => void;
 };
 
 const UserContext = React.createContext<UserContextContent>({
+  tokens: null,
+  setTokens: (_tokens) => {
+    // do nothing
+  },
   user: null,
-  setUser: (user) => user,
+  setUser: (_user) => {
+    // do nothing
+  },
 });
 
 const UserContextProvider = ({ children }: UserContextProviderProps) => {
-  const [user, setUser] = useLocalStorage(STORAGE_KEYS.tokens);
+  const [tokens, setTokens] = useLocalStorage(LOCAL_STORAGE_KEYS.tokens);
+  const [user, setUser] = useLocalStorage(LOCAL_STORAGE_KEYS.user);
 
-  return <UserContext.Provider value={{ user, setUser }}>{children}</UserContext.Provider>;
+  return <UserContext.Provider value={{ tokens, setTokens, user, setUser }}>{children}</UserContext.Provider>;
 };
 
 export { UserContext, UserContextProvider };

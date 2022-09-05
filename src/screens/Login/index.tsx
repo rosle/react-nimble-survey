@@ -1,15 +1,17 @@
-import React, { useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
 
 import AuthAdapter from 'adapters/Auth';
+import UserAdapter from 'adapters/User';
 import Button from 'components/Button';
 import Form from 'components/Form';
 import Input from 'components/Input';
 import AuthLayout from 'components/Layout/Auth';
-import useLocalStorage, { STORAGE_KEYS } from 'hooks/useLocalStorage';
+import { UserContext } from 'contexts/UserContext';
 import ApiError from 'lib/errors/ApiError';
-import { Tokens } from 'types/data';
+import { Tokens, User } from 'types/data';
 
 type LoginInput = {
   email: string;
@@ -27,8 +29,9 @@ const emailRegex = /^(([^<>()[\].,;:\s@"]+(.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<
 
 const LoginScreen = () => {
   const { t } = useTranslation(['auth', 'shared']);
+  const navigate = useNavigate();
   const [formSubmissionErrors, setFormSubmissionErrors] = useState<string>('');
-  const [, setTokens] = useLocalStorage(STORAGE_KEYS.tokens);
+  const { tokens, setTokens, user, setUser } = useContext(UserContext);
 
   const {
     formState: { isSubmitting, errors: formValidationErrors },
@@ -41,8 +44,8 @@ const LoginScreen = () => {
 
     try {
       const response = await AuthAdapter.login({ email, password });
-
       const tokensResponse: Tokens = response.data.attributes;
+
       setTokens(tokensResponse);
     } catch (error) {
       if (error instanceof ApiError) {
@@ -52,6 +55,29 @@ const LoginScreen = () => {
       }
     }
   };
+
+  const fetchUserProfile = useCallback(async () => {
+    try {
+      const response = await UserAdapter.me();
+      const userResponse: User = response.data.attributes;
+
+      setUser(userResponse);
+    } catch (error) {
+      setFormSubmissionErrors(t('shared:generic_error'));
+    }
+  }, [setUser, t]);
+
+  useEffect(() => {
+    if (tokens) {
+      fetchUserProfile();
+    }
+  }, [fetchUserProfile, tokens]);
+
+  useEffect(() => {
+    if (user) {
+      navigate('/');
+    }
+  }, [navigate, user]);
 
   return (
     <AuthLayout headerTitle={t('auth:heading.sign_in')}>

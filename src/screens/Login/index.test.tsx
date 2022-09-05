@@ -5,7 +5,6 @@ import axios from 'axios';
 
 import { formTestIds } from 'components/Form';
 import { authLayoutTestIds } from 'components/Layout/Auth';
-import { STORAGE_KEYS } from 'hooks/useLocalStorage';
 import { fillInput, submitForm } from 'tests/helpers';
 import mockLocalStorage from 'tests/mockLocalStorage';
 import { renderWithRouter } from 'tests/renderWithRouter';
@@ -30,19 +29,19 @@ describe('LoginScreen', () => {
   });
 
   describe('given the valid credential', () => {
-    const localStorage = mockLocalStorage();
+    mockLocalStorage();
 
     it('does NOT display the errors and stores the tokens to the local storage', async () => {
       const polly = setupPolly('login_success');
 
-      renderWithRouter(<LoginScreen />);
+      renderWithRouter(<LoginScreen />, { withContextProvider: true });
 
       const emailInput = screen.getByTestId(loginScreenTestIds.loginEmail);
       const passwordInput = screen.getByTestId(loginScreenTestIds.loginPassWord);
       const submitButton = screen.getByTestId(loginScreenTestIds.loginSubmit);
 
       fillInput(emailInput, 'rossukhon@nimblehq.co');
-      fillInput(passwordInput, 'secret22');
+      fillInput(passwordInput, '12345678');
       submitForm(submitButton);
 
       const formError = screen.queryByTestId(formTestIds.formError);
@@ -50,15 +49,7 @@ describe('LoginScreen', () => {
       expect(formError).not.toBeInTheDocument();
 
       await waitFor(() => {
-        const expectedTokens = {
-          accessToken: '[ REDACTED ]',
-          tokenType: 'Bearer',
-          expiresIn: 7200,
-          refreshToken: '[ REDACTED ]',
-          createdAt: 1661861713,
-        };
-
-        expect(localStorage.getItem(STORAGE_KEYS.tokens)).toBe(JSON.stringify(expectedTokens));
+        expect(mockUseNavigate).toHaveBeenCalledWith('/');
       });
 
       await polly.stop();

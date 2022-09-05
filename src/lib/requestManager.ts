@@ -1,6 +1,9 @@
 import axios, { Method as HTTPMethod, AxiosRequestConfig, AxiosResponse, AxiosTransformer } from 'axios';
 import { camelizeKeys, decamelizeKeys } from 'humps';
 
+import { getLocalStorageValue, LOCAL_STORAGE_KEYS } from 'hooks/useLocalStorage';
+import { Tokens } from 'types/data';
+
 import ApiError from './errors/ApiError';
 
 export const defaultOptions: AxiosRequestConfig = {
@@ -20,13 +23,28 @@ export const defaultOptions: AxiosRequestConfig = {
  *                   an error object for its reason
  */
 
+const attachAuthorizationHeader = (requestOptions: AxiosRequestConfig) => {
+  const tokens = getLocalStorageValue(LOCAL_STORAGE_KEYS.tokens);
+
+  if (tokens) {
+    requestOptions.headers = {
+      ...requestOptions.headers,
+      authorization: `Bearer ${(tokens as Tokens).accessToken}`,
+    };
+  }
+
+  return requestOptions;
+};
+
 const requestManager = (method: HTTPMethod, endpoint: string, options: AxiosRequestConfig = {}): Promise<AxiosResponse> => {
-  const requestOptions: AxiosRequestConfig = {
+  let requestOptions: AxiosRequestConfig = {
     method,
     url: endpoint,
     ...defaultOptions,
     ...options,
   };
+
+  requestOptions = attachAuthorizationHeader(requestOptions);
 
   return axios
     .request(requestOptions)
