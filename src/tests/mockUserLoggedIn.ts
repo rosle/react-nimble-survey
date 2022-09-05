@@ -21,8 +21,10 @@ const mockUserLoggedIn = () => {
     avatarUrl: 'https://secure.gravatar.com/avatar/252876a66bc74a8d0a8ec1ebb3dd991c',
   };
 
-  mockedLocalStorage.setItem(LOCAL_STORAGE_KEY.tokens, JSON.stringify(tokens));
-  mockedLocalStorage.setItem(LOCAL_STORAGE_KEY.user, JSON.stringify(user));
+  beforeEach(() => {
+    mockedLocalStorage.setItem(LOCAL_STORAGE_KEY.tokens, JSON.stringify(tokens));
+    mockedLocalStorage.setItem(LOCAL_STORAGE_KEY.user, JSON.stringify(user));
+  });
 
   return { user, tokens };
 };

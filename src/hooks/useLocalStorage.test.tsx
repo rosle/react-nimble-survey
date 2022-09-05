@@ -7,22 +7,22 @@ import { mockLocalStorage } from 'tests/mockLocalStorage';
 
 import useLocalStorage, { LOCAL_STORAGE_KEY } from './useLocalStorage';
 
+const mockedLocalStorage = mockLocalStorage();
+const localStorageKey = LOCAL_STORAGE_KEY.user;
+const localStorageValueListItemTestIds = 'local-storage-value-list-item';
+
+const UseLocalStorageComponent = ({ defaultValue }: { defaultValue?: { [key: string]: string } }) => {
+  const [localStorageValue] = useLocalStorage(localStorageKey, defaultValue);
+
+  const valueList = chain(localStorageValue)
+    .mapValues((value, key) => <li key={key} data-test-id={localStorageValueListItemTestIds}>{`${key}: ${value}`}</li>)
+    .values()
+    .value();
+
+  return <ul>{valueList}</ul>;
+};
+
 describe('useLocalStorage', () => {
-  const mockedLocalStorage = mockLocalStorage();
-  const localStorageKey = LOCAL_STORAGE_KEY.user;
-  const localStorageValueListItemTestIds = 'local-storage-value-list-item';
-
-  const UseLocalStorageComponent = ({ defaultValue }: { defaultValue?: { [key: string]: string } }) => {
-    const [localStorageValue] = useLocalStorage(localStorageKey, defaultValue);
-
-    const valueList = chain(localStorageValue)
-      .mapValues((value, key) => <li key={key} data-test-id={localStorageValueListItemTestIds}>{`${key}: ${value}`}</li>)
-      .values()
-      .value();
-
-    return <ul>{valueList}</ul>;
-  };
-
   describe('given NO default value', () => {
     it('returns the current local storage value', () => {
       mockedLocalStorage.setItem(localStorageKey, JSON.stringify({ name: 'John' }));
