@@ -3,6 +3,7 @@ import React, { useContext } from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import { getLocalStorageValue, LocalStorageKey } from 'hooks/useLocalStorage';
 import { mockUserLoggedIn } from 'tests/mockUserLoggedIn';
 import { TokenType } from 'types/tokens';
 
@@ -51,12 +52,15 @@ describe('UserContextProvider', () => {
       </UserContextProvider>
     );
 
+    expect(getLocalStorageValue(LocalStorageKey.tokens)).toBeNull();
+
     const setTokenButton = screen.getByTestId(userContextConsumerTestIds.setTokenButton);
 
     userEvent.click(setTokenButton);
 
     const tokenContent = await screen.findByTestId(userContextConsumerTestIds.tokens);
 
+    expect(getLocalStorageValue(LocalStorageKey.tokens)).toEqual(newTokens);
     expect(tokenContent).toHaveTextContent(newTokens.accessToken);
   });
 
@@ -67,12 +71,15 @@ describe('UserContextProvider', () => {
       </UserContextProvider>
     );
 
+    expect(getLocalStorageValue(LocalStorageKey.user)).toBeNull();
+
     const setUserButton = screen.getByTestId(userContextConsumerTestIds.setUserButton);
 
     userEvent.click(setUserButton);
 
     const userContent = await screen.findByTestId(userContextConsumerTestIds.user);
 
+    expect(getLocalStorageValue(LocalStorageKey.user)).toEqual(newUser);
     expect(userContent).toHaveTextContent(newUser.email);
   });
 

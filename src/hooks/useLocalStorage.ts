@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 export const enum LocalStorageKey {
   tokens = 'tokens',
@@ -14,15 +14,16 @@ export const getLocalStorageValue = (key: LocalStorageKey) => {
 };
 
 const useLocalStorage = (key: LocalStorageKey, defaultValue: LocalStorageValue = null) => {
-  const [value, setValue] = useState(() => {
+  const [value, setStateValue] = useState(() => {
     const initialValue = getLocalStorageValue(key);
 
     return initialValue || defaultValue;
   });
 
-  useEffect(() => {
-    localStorage.setItem(key, JSON.stringify(value));
-  }, [key, value]);
+  const setValue = (newValue: LocalStorageValue) => {
+    localStorage.setItem(key, JSON.stringify(newValue));
+    setStateValue(newValue);
+  };
 
   return [value, setValue];
 };

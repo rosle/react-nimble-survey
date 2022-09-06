@@ -30,7 +30,7 @@ const LoginScreen = () => {
   const { t } = useTranslation(['auth', 'shared']);
   const navigate = useNavigate();
   const [formSubmissionErrors, setFormSubmissionErrors] = useState<string>('');
-  const { tokens, setTokens, user, setUser } = useContext(UserContext);
+  const { setTokens, user, setUser } = useContext(UserContext);
 
   const {
     formState: { isSubmitting, errors: formValidationErrors },
@@ -46,6 +46,7 @@ const LoginScreen = () => {
       const tokensResponse = response.data.attributes;
 
       setTokens(tokensResponse);
+      fetchUserProfile();
     } catch (error) {
       if (error instanceof ApiError) {
         setFormSubmissionErrors(error.toString());
@@ -65,12 +66,6 @@ const LoginScreen = () => {
       setFormSubmissionErrors(t('shared:generic_error'));
     }
   }, [setUser, t]);
-
-  useEffect(() => {
-    if (tokens) {
-      fetchUserProfile();
-    }
-  }, [fetchUserProfile, tokens]);
 
   useEffect(() => {
     if (user) {
