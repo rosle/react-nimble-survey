@@ -1,19 +1,19 @@
 import { useEffect, useState } from 'react';
 
-export const LOCAL_STORAGE_KEY = {
-  tokens: 'tokens',
-  user: 'user',
+export const enum LocalStorageKey {
+  tokens = 'tokens',
+  user = 'user',
 };
 
 export type LocalStorageValue = object | null;
 
-export const getLocalStorageValue = (key: string) => {
+export const getLocalStorageValue = (key: LocalStorageKey) => {
   const storedJsonValue = localStorage.getItem(key);
 
   return storedJsonValue ? JSON.parse(storedJsonValue) : null;
 };
 
-const useLocalStorage = (key: string, defaultValue: LocalStorageValue = null) => {
+const useLocalStorage = (key: LocalStorageKey, defaultValue: LocalStorageValue = null) => {
   const [value, setValue] = useState(() => {
     const initialValue = getLocalStorageValue(key);
 

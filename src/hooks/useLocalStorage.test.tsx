@@ -5,10 +5,10 @@ import { chain } from 'lodash';
 
 import { mockLocalStorage } from 'tests/mockLocalStorage';
 
-import useLocalStorage, { LOCAL_STORAGE_KEY } from './useLocalStorage';
+import useLocalStorage, { LocalStorageKey } from './useLocalStorage';
 
 const mockedLocalStorage = mockLocalStorage();
-const localStorageKey = LOCAL_STORAGE_KEY.user;
+const localStorageKey = LocalStorageKey.user;
 const localStorageValueListItemTestIds = 'local-storage-value-list-item';
 
 const UseLocalStorageComponent = ({ defaultValue }: { defaultValue?: { [key: string]: string } }) => {
