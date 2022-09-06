@@ -26,7 +26,7 @@ describe('LoginScreen', () => {
 
       cy.findByTestId(formTestIds.formError).should('not.exist');
 
-      // When using `navigate('/')`, Cypress component test stuck in a loop to load user profile.
+      // When using `navigate('/')`, The test stuck in a loop to load user profile.
       // Page changing in Component testing is NOT supported right now according to:
       // https://github.com/cypress-io/cypress/issues/17943#issuecomment-1071894809
     });

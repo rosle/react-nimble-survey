@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 export const enum LocalStorageKey {
   tokens = 'tokens',
   user = 'user',
-};
+}
 
 export type LocalStorageValue = object | null;
 

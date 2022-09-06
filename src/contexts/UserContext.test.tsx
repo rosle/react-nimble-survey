@@ -21,7 +21,7 @@ const newTokens = {
   refreshToken: 'new_refresh_token_12345',
   createdAt: 1661852403,
   expiresIn: 7200,
-}
+};
 
 const newUser = {
   email: 'new_user@nimblehq.co',
@@ -37,8 +37,18 @@ const UserContextConsumer = () => {
       {tokens && <div data-test-id={userContextConsumerTestIds.tokens}>{tokens.accessToken}</div>}
       {user && <div data-test-id={userContextConsumerTestIds.user}>{user.email}</div>}
 
-      <button data-test-id={userContextConsumerTestIds.setTokenButton} onClick={() => { setTokens(newTokens) }} />
-      <button data-test-id={userContextConsumerTestIds.setUserButton} onClick={() => { setUser(newUser) }} />
+      <button
+        data-test-id={userContextConsumerTestIds.setTokenButton}
+        onClick={() => {
+          setTokens(newTokens);
+        }}
+      />
+      <button
+        data-test-id={userContextConsumerTestIds.setUserButton}
+        onClick={() => {
+          setUser(newUser);
+        }}
+      />
     </>
   );
 };

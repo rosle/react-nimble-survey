@@ -2,11 +2,7 @@ import { LocalStorageKey } from 'hooks/useLocalStorage';
 import { Tokens, TokenType } from 'types/tokens';
 import { User } from 'types/user';
 
-import { mockLocalStorage } from './mockLocalStorage';
-
 const mockUserLoggedIn = () => {
-  const mockedLocalStorage = mockLocalStorage();
-
   const tokens: Tokens = {
     tokenType: TokenType.Bearer,
     accessToken: 'access_token_12345',
@@ -22,8 +18,8 @@ const mockUserLoggedIn = () => {
   };
 
   beforeEach(() => {
-    mockedLocalStorage.setItem(LocalStorageKey.tokens, JSON.stringify(tokens));
-    mockedLocalStorage.setItem(LocalStorageKey.user, JSON.stringify(user));
+    localStorage.setItem(LocalStorageKey.tokens, JSON.stringify(tokens));
+    localStorage.setItem(LocalStorageKey.user, JSON.stringify(user));
   });
 
   return { user, tokens };

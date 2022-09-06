@@ -3,11 +3,8 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { chain } from 'lodash';
 
-import { mockLocalStorage } from 'tests/mockLocalStorage';
-
 import useLocalStorage, { LocalStorageKey } from './useLocalStorage';
 
-const mockedLocalStorage = mockLocalStorage();
 const localStorageKey = LocalStorageKey.user;
 const localStorageValueListItemTestIds = 'local-storage-value-list-item';
 
@@ -25,7 +22,7 @@ const UseLocalStorageComponent = ({ defaultValue }: { defaultValue?: { [key: str
 describe('useLocalStorage', () => {
   describe('given NO default value', () => {
     it('returns the current local storage value', () => {
-      mockedLocalStorage.setItem(localStorageKey, JSON.stringify({ name: 'John' }));
+      localStorage.setItem(localStorageKey, JSON.stringify({ name: 'John' }));
 
       render(<UseLocalStorageComponent />);
 
@@ -46,7 +43,7 @@ describe('useLocalStorage', () => {
 
   describe('given a default value', () => {
     it('returns the current local storage value if there is the value in the local storage', () => {
-      mockedLocalStorage.setItem(localStorageKey, JSON.stringify({ name: 'John' }));
+      localStorage.setItem(localStorageKey, JSON.stringify({ name: 'John' }));
 
       render(<UseLocalStorageComponent defaultValue={{ name: 'Jane' }} />);
 

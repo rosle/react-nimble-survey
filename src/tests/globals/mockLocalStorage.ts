@@ -1,4 +1,4 @@
-const localStorage = () => {
+const InMemoryLocalStorage = () => {
   let store: { [key: string]: string } = {};
 
   const getItem = (key: string) => store[key];
@@ -17,17 +17,15 @@ const localStorage = () => {
 };
 
 const mockLocalStorage = () => {
-  const mockedLocalStorage = localStorage();
+  const mockedLocalStorage = InMemoryLocalStorage();
 
-  beforeAll(() => {
-    Object.defineProperty(window, 'localStorage', {
-      value: mockedLocalStorage,
-    });
+  Object.defineProperty(window, 'localStorage', {
+    value: mockedLocalStorage,
   });
 
-  afterEach(() => mockedLocalStorage.clear());
-
-  return mockedLocalStorage;
+  afterEach(() => {
+    mockedLocalStorage.clear();
+  });
 };
 
-export { mockLocalStorage };
+export default mockLocalStorage;
