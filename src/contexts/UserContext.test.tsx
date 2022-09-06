@@ -37,24 +37,14 @@ const UserContextConsumer = () => {
       {tokens && <div data-test-id={userContextConsumerTestIds.tokens}>{tokens.accessToken}</div>}
       {user && <div data-test-id={userContextConsumerTestIds.user}>{user.email}</div>}
 
-      <button
-        data-test-id={userContextConsumerTestIds.setTokenButton}
-        onClick={() => {
-          setTokens(newTokens);
-        }}
-      />
-      <button
-        data-test-id={userContextConsumerTestIds.setUserButton}
-        onClick={() => {
-          setUser(newUser);
-        }}
-      />
+      <button data-test-id={userContextConsumerTestIds.setTokenButton} onClick={() => setTokens(newTokens)} />
+      <button data-test-id={userContextConsumerTestIds.setUserButton} onClick={() => setUser(newUser)} />
     </>
   );
 };
 
 describe('UserContextProvider', () => {
-  it('provides the setTokens to the local storage', async () => {
+  it('provides the setTokens function to set the value to the local storage', async () => {
     render(
       <UserContextProvider>
         <UserContextConsumer />
@@ -70,7 +60,7 @@ describe('UserContextProvider', () => {
     expect(tokenContent).toHaveTextContent(newTokens.accessToken);
   });
 
-  it('provides the setUser to the local storage', async () => {
+  it('provides the setUser function to set the value to the local storage', async () => {
     render(
       <UserContextProvider>
         <UserContextConsumer />

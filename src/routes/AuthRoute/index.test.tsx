@@ -53,7 +53,7 @@ describe('AuthRoute', () => {
   describe('given the user has logged in', () => {
     mockUserLoggedIn();
 
-    it('redirects to Home page', () => {
+    it('redirects to the Home page', () => {
       renderRoutes(AUTH_ROUTE.path);
 
       expect(screen.queryByText(HOME_ROUTE.content)).toBeVisible();

@@ -21,45 +21,53 @@ const UseLocalStorageComponent = ({ defaultValue }: { defaultValue?: { [key: str
 
 describe('useLocalStorage', () => {
   describe('given NO default value', () => {
-    it('returns the current local storage value', () => {
-      localStorage.setItem(localStorageKey, JSON.stringify({ name: 'John' }));
+    describe('given a value in the local storage', () => {
+      it('returns the current local storage value', () => {
+        localStorage.setItem(localStorageKey, JSON.stringify({ name: 'John' }));
 
-      render(<UseLocalStorageComponent />);
+        render(<UseLocalStorageComponent />);
 
-      const localStorageValueListItems = screen.getAllByTestId(localStorageValueListItemTestIds);
+        const localStorageValueListItems = screen.getAllByTestId(localStorageValueListItemTestIds);
 
-      expect(localStorageValueListItems).toHaveLength(1);
-      expect(localStorageValueListItems[0]).toHaveTextContent('name: John');
+        expect(localStorageValueListItems).toHaveLength(1);
+        expect(localStorageValueListItems[0]).toHaveTextContent('name: John');
+      });
     });
 
-    it('returns the empty object if there is NO value in the local storage', () => {
-      render(<UseLocalStorageComponent />);
+    describe('given NO value in the local storage', () => {
+      it('returns the empty object', () => {
+        render(<UseLocalStorageComponent />);
 
-      const localStorageValueListItems = screen.queryAllByTestId(localStorageValueListItemTestIds);
+        const localStorageValueListItems = screen.queryAllByTestId(localStorageValueListItemTestIds);
 
-      expect(localStorageValueListItems).toHaveLength(0);
+        expect(localStorageValueListItems).toHaveLength(0);
+      });
     });
   });
 
   describe('given a default value', () => {
-    it('returns the current local storage value if there is the value in the local storage', () => {
-      localStorage.setItem(localStorageKey, JSON.stringify({ name: 'John' }));
+    describe('given a value in the local storage', () => {
+      it('returns the current local storage value', () => {
+        localStorage.setItem(localStorageKey, JSON.stringify({ name: 'John' }));
 
-      render(<UseLocalStorageComponent defaultValue={{ name: 'Jane' }} />);
+        render(<UseLocalStorageComponent defaultValue={{ name: 'Jane' }} />);
 
-      const localStorageValueListItems = screen.getAllByTestId(localStorageValueListItemTestIds);
+        const localStorageValueListItems = screen.getAllByTestId(localStorageValueListItemTestIds);
 
-      expect(localStorageValueListItems).toHaveLength(1);
-      expect(localStorageValueListItems[0]).toHaveTextContent('name: John');
+        expect(localStorageValueListItems).toHaveLength(1);
+        expect(localStorageValueListItems[0]).toHaveTextContent('name: John');
+      });
     });
 
-    it('sets and returns the default value if there is NO value in the local storage', () => {
-      render(<UseLocalStorageComponent defaultValue={{ name: 'Jane' }} />);
+    describe('given NO value in the local storage', () => {
+      it('sets and returns the default value', () => {
+        render(<UseLocalStorageComponent defaultValue={{ name: 'Jane' }} />);
 
-      const localStorageValueListItems = screen.getAllByTestId(localStorageValueListItemTestIds);
+        const localStorageValueListItems = screen.getAllByTestId(localStorageValueListItemTestIds);
 
-      expect(localStorageValueListItems).toHaveLength(1);
-      expect(localStorageValueListItems[0]).toHaveTextContent('name: Jane');
+        expect(localStorageValueListItems).toHaveLength(1);
+        expect(localStorageValueListItems[0]).toHaveTextContent('name: Jane');
+      });
     });
   });
 });

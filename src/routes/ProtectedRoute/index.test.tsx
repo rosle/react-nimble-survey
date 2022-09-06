@@ -61,7 +61,7 @@ describe('ProtectedRoute', () => {
   });
 
   describe('given the user has NOT logged in', () => {
-    it('renders the Login page', () => {
+    it('redirects to the Login page', () => {
       renderRoutes(PROTECTED_ROUTE.path);
 
       expect(screen.queryByText(LOGIN_ROUTE.content)).toBeVisible();

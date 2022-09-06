@@ -40,7 +40,7 @@ describe('requestManager', () => {
   describe('given the tokens exists', () => {
     const { tokens } = mockUserLoggedIn();
 
-    it('attaches authorization headers', async () => {
+    it('attaches the authorization header', async () => {
       const requestOptions = { ...defaultOptions, method: 'POST', url: endPoint };
 
       const requestSpy = jest.spyOn(axios, 'request').mockImplementation(() => Promise.resolve({}));
