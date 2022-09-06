@@ -50,7 +50,7 @@ const renderRoutes = (initialPath: string) => {
 };
 
 describe('AuthRoute', () => {
-  describe('given the user has already logged in', () => {
+  describe('given the user has logged in', () => {
     mockUserLoggedIn();
 
     it('redirects to Home page', () => {

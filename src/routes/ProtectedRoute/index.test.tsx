@@ -50,7 +50,7 @@ const renderRoutes = (initialPath: string) => {
 };
 
 describe('ProtectedRoute', () => {
-  describe('given the user has already logged in', () => {
+  describe('given the user has logged in', () => {
     mockUserLoggedIn();
 
     it('renders the given page', () => {

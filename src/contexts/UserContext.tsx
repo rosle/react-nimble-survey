@@ -15,14 +15,15 @@ type UserContextContent = {
   setUser: (user: User) => void;
 };
 
+/* istanbul ignore next */
 const UserContext = React.createContext<UserContextContent>({
   tokens: null,
   setTokens: () => {
-    // Do nothing
+    // Do nothing for default set tokens.
   },
   user: null,
   setUser: () => {
-    // Do nothing
+    // Do nothing for default set user.
   },
 });
 
