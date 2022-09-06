@@ -1,19 +1,27 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import logo from 'assets/images/logo.svg';
 import DefaultLayout from 'components/Layout/Default';
+import { UserContext } from 'contexts/UserContext';
+import { User } from 'types/user';
+
+import UserMenu from 'components/UserMenu';
+import { Link } from 'react-router-dom';
 
 const HomeScreen = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation(['shared']);
+  const { user } = useContext(UserContext) as { user: User} ;
 
   return (
     <DefaultLayout>
-      <img src={logo} className="app-logo" alt="logo" />
-      <p>{t('sample_page.message', { codeSample: '<code>src/App.tsx</code>' })}</p>
-      <a className="app-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer" data-test-id="app-link">
-        {t('sample_page.learn_react')}
-      </a>
+      <nav>
+        <Link to="/">
+          <span className="visually-hidden">{t('shared:app_name')}</span>
+          <img src={logo} className="app-logo" alt="logo" />
+        </Link>
+        <UserMenu user={user}/>
+      </nav>
     </DefaultLayout>
   );
 };

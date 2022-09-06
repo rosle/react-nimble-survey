@@ -1,4 +1,5 @@
 {
+  "app_name": "React Nimble Survey",
   "error": "Error",
   "form_error": {
     "required": "can't be blank",
