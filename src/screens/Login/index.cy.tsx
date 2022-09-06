@@ -66,7 +66,7 @@ describe('LoginScreen', () => {
     });
   });
 
-  describe('given the API request failed', () => {
+  describe('given the login API request failed', () => {
     it('displays the generic errors', () => {
       cy.mountWithRouter(<LoginScreen />);
 
@@ -74,6 +74,22 @@ describe('LoginScreen', () => {
       cy.findByTestId(loginScreenTestIds.loginPassWord).type('invalid22');
 
       cy.intercept('POST', '/api/v1/oauth/token', { forceNetworkError: true });
+
+      cy.findByTestId(loginScreenTestIds.loginSubmit).click();
+
+      cy.findByTestId(formTestIds.formError).should('contain.text', 'shared:generic_error');
+    });
+  });
+
+  describe('given the user API request failed', () => {
+    it('displays the generic errors', () => {
+      cy.mountWithRouter(<LoginScreen />, { withContextProvider: true });
+
+      cy.findByTestId(loginScreenTestIds.loginEmail).type('rossukhon@nimblehq.co');
+      cy.findByTestId(loginScreenTestIds.loginPassWord).type('secret22');
+
+      cy.intercept('POST', '/api/v1/oauth/token', { statusCode: 200, fixture: 'login_success' });
+      cy.intercept('GET', '/api/v1/me', { forceNetworkError: true });
 
       cy.findByTestId(loginScreenTestIds.loginSubmit).click();
 

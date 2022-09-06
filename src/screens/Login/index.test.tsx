@@ -1,8 +1,9 @@
 import React from 'react';
 
 import { screen, waitFor } from '@testing-library/react';
-import axios from 'axios';
 
+import AuthAdapter from 'adapters/Auth';
+import UserAdapter from 'adapters/User';
 import { formTestIds } from 'components/Form';
 import { authLayoutTestIds } from 'components/Layout/Auth';
 import { fillInput, submitForm } from 'tests/helpers';
@@ -41,7 +42,7 @@ describe('LoginScreen', () => {
       const submitButton = screen.getByTestId(loginScreenTestIds.loginSubmit);
 
       fillInput(emailInput, 'rossukhon@nimblehq.co');
-      fillInput(passwordInput, '12345678');
+      fillInput(passwordInput, 'secret22');
       submitForm(submitButton);
 
       const formError = screen.queryByTestId(formTestIds.formError);
@@ -108,21 +109,43 @@ describe('LoginScreen', () => {
     });
   });
 
-  describe('given the API request failed', () => {
+  describe('given the login API request failed', () => {
     it('displays the generic errors', async () => {
-      const polly = setupPolly('login_failed');
-
       renderWithRouter(<LoginScreen />);
 
       const emailInput = screen.getByTestId(loginScreenTestIds.loginEmail);
       const passwordInput = screen.getByTestId(loginScreenTestIds.loginPassWord);
       const submitButton = screen.getByTestId(loginScreenTestIds.loginSubmit);
 
+      const requestSpy = jest.spyOn(AuthAdapter, 'login').mockRejectedValueOnce(new Error('Timeout'));
+
       fillInput(emailInput, 'ros@nimblehq.co');
       fillInput(passwordInput, 'invalid22');
+      submitForm(submitButton);
 
-      const requestSpy = jest.spyOn(axios, 'request').mockRejectedValueOnce(new Error('Timeout'));
+      const formError = await screen.findByTestId(formTestIds.formError);
 
+      expect(formError).toBeVisible();
+      expect(formError).toHaveTextContent('shared:generic_error');
+
+      requestSpy.mockRestore();
+    });
+  });
+
+  describe('given the user API request failed', () => {
+    it('displays the generic errors', async () => {
+      const polly = setupPolly('login_success');
+
+      renderWithRouter(<LoginScreen />, { withContextProvider: true });
+
+      const emailInput = screen.getByTestId(loginScreenTestIds.loginEmail);
+      const passwordInput = screen.getByTestId(loginScreenTestIds.loginPassWord);
+      const submitButton = screen.getByTestId(loginScreenTestIds.loginSubmit);
+
+      const requestSpy = jest.spyOn(UserAdapter, 'me').mockRejectedValueOnce(new Error('Timeout'));
+
+      fillInput(emailInput, 'rossukhon@nimblehq.co');
+      fillInput(passwordInput, 'secret22');
       submitForm(submitButton);
 
       const formError = await screen.findByTestId(formTestIds.formError);

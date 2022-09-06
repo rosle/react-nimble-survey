@@ -17,12 +17,12 @@ type UserContextContent = {
 
 const UserContext = React.createContext<UserContextContent>({
   tokens: null,
-  setTokens: (_tokens) => {
-    // do nothing
+  setTokens: () => {
+    // Do nothing
   },
   user: null,
-  setUser: (_user) => {
-    // do nothing
+  setUser: () => {
+    // Do nothing
   },
 });
 
