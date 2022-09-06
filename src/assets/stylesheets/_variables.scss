@@ -15,7 +15,8 @@ $grays: (
 );
 
 $body-gradient: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, $black 100%);
-$alert-bg: rgba(37, 37, 37, 0.6);
+$input-alpha-bg: rgba(255, 255, 255, 0.18);
+$alert-alpha-bg: rgba(37, 37, 37, 0.6);
 
 // Font
 $font-sizes: (
@@ -40,7 +41,7 @@ $font-size-base: map-get($font-sizes, md);
 $body-color: $white;
 
 // Input
-$input-bg: map-get($grays, '500');
+$input-bg: $input-alpha-bg;
 $input-padding-y: 1rem;
 $input-padding-x: 0.75rem;
 

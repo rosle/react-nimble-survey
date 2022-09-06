@@ -13,3 +13,7 @@
 .btn--md {
   @extend .btn-sm;
 }
+
+.btn--full-width {
+  width: 100%;
+}
