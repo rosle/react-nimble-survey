@@ -1,5 +1,5 @@
 import { LOCAL_STORAGE_KEY } from 'hooks/useLocalStorage';
-import { Tokens } from 'types/tokens';
+import { Tokens, TokenType } from 'types/tokens';
 import { User } from 'types/user';
 
 import { mockLocalStorage } from './mockLocalStorage';
@@ -8,7 +8,7 @@ const mockUserLoggedIn = () => {
   const mockedLocalStorage = mockLocalStorage();
 
   const tokens: Tokens = {
-    tokenType: 'Bearer',
+    tokenType: TokenType.Bearer,
     accessToken: 'access_token_12345',
     refreshToken: 'refresh_token_12345',
     createdAt: 1661852403,

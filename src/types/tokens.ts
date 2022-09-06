@@ -1,5 +1,9 @@
+export enum TokenType {
+  Bearer = 'Bearer',
+}
+
 export type Tokens = {
-  tokenType: 'Bearer';
+  tokenType: TokenType;
   accessToken: string;
   refreshToken: string;
   createdAt: number;
