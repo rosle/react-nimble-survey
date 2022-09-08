@@ -9,5 +9,6 @@
   "sample_page": {
     "learn_react": "Learn React",
     "message": "Edit {{codeSample}} and save to reload"
-  }
+  },
+  "version": "v{{version}}"
 }
