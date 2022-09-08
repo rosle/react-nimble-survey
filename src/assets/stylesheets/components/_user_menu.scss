@@ -1,0 +1,66 @@
+.user-menu {
+  &__toggler {
+    padding: 0;
+  }
+
+  &__avatar {
+    width: rem(36px);
+    height: rem(36px);
+
+    border-radius: 50%;
+  }
+
+  &__collapse {
+    display: none;
+
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+
+    min-width: rem(264px);
+
+    padding: rem(32px 32px 20px 32px);
+
+    background-color: $user-menu-alpha-bg;
+
+    &--open {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding-bottom: rem(20px);
+
+    border-bottom: 1px solid map-get($grays, '300');
+
+    font-size: map-get($font-sizes, xl);
+    font-weight: bold;
+  }
+
+  &__nav {
+    flex: 1;
+    margin: rem(35px 0 35px);
+
+    a {
+      padding-left: 0;
+
+      opacity: 50%;
+
+      font-size: map-get($font-sizes, lg);
+    }
+  }
+
+  &__footer {
+    opacity: 50%;
+
+    font-size: map-get($font-sizes, xxs);
+
+    letter-spacing: rem(0.07px);
+  }
+}

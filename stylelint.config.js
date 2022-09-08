@@ -7,6 +7,7 @@ module.exports = {
         resolveNestedSelectors: true,
       },
     ],
+    'selector-max-compound-selectors': 4,
     'scss/at-extend-no-missing-placeholder': null,
   },
 };
