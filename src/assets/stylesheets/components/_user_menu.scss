@@ -12,18 +12,8 @@ $user-menu-width: rem(264px);
     border-radius: 50%;
   }
 
-  @keyframes user-menu-slide-open {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-$user-menu-width); }
-  }
-
-  @keyframes user-menu-slide-close {
-    0% { transform: translateX(0); }
-    100% { transform: translateX($user-menu-width); }
-  }
-
   &__collapse {
-    display: none;
+    display: block;
 
     position: absolute;
     top: 0;
@@ -32,19 +22,14 @@ $user-menu-width: rem(264px);
 
     width: $user-menu-width;
 
-    &--open {
-      display: block;
+    transition: 0.5s;
 
-      animation: user-menu-slide-open 0.5s;
-      animation-fill-mode: forwards;
+    &--open {
+      transform: translateX(-$user-menu-width);
     }
 
     &--close {
-      display: block;
-      right: 0;
-
-      animation: user-menu-slide-close 0.5s;
-      animation-fill-mode: forwards;
+      transform: translateX(0);
     }
   }
 

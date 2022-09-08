@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
+import classNames from 'classnames';
+
 import Button from 'components/Button';
 import { User } from 'types/user';
-import classNames from 'classnames';
 
 type UserMenuProps = {
   user: User;
@@ -13,21 +14,21 @@ type UserMenuProps = {
 
 const UserMenu = ({ user }: UserMenuProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  // TODO: Is there a better way? Need it to disable animation on the first render
-  const [isUserToggle, setIsUserToggle] = useState(false);
+  const userMenuCollapseRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation(['shared', 'auth']);
 
   const toggleUserMenu = () => {
     setIsOpen(!isOpen);
-    setIsUserToggle(true);
   };
 
-  const collapseClasses = classNames('user-menu__collapse', {
-    'user-menu__collapse--open': isOpen,
-    'user-menu__collapse--close': isUserToggle && !isOpen,
+  document.addEventListener('mousedown', (e) => {
+    if (isOpen && userMenuCollapseRef.current && !userMenuCollapseRef.current.contains(e.target as Node)) {
+      setIsOpen(false);
+    }
   });
 
-  // TODO: Or click outside?
+  const collapseClasses = classNames('user-menu__collapse', isOpen ? 'user-menu__collapse--open' : 'user-menu__collapse--close');
+
   const AvatarToggler = () => {
     return (
       <Button className="user-menu__toggler" type="button" buttonStyle="link" onClick={toggleUserMenu}>
@@ -39,7 +40,7 @@ const UserMenu = ({ user }: UserMenuProps) => {
   return (
     <div className="user-menu">
       <AvatarToggler />
-      <div className={collapseClasses}>
+      <div className={collapseClasses} ref={userMenuCollapseRef}>
         <div className="user-menu__content">
           <header className="user-menu__header">
             <div className="user-menu__username">{user.name}</div>
