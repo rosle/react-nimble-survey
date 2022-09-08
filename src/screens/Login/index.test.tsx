@@ -29,7 +29,7 @@ describe('LoginScreen', () => {
   });
 
   describe('given the valid credential', () => {
-    it('does NOT display the errors and stores the tokens to the local storage', async () => {
+    it('does NOT display the errors and redirects to the Home page', async () => {
       const polly = setupPolly('login_success');
 
       renderWithRouter(<LoginScreen />, { withContextProvider: true });
