@@ -23,6 +23,8 @@ $user-menu-width: rem(264px);
   }
 
   &__collapse {
+    display: none;
+
     position: absolute;
     top: 0;
     right: -$user-menu-width;
@@ -31,11 +33,14 @@ $user-menu-width: rem(264px);
     width: $user-menu-width;
 
     &--open {
+      display: block;
+
       animation: user-menu-slide-open 0.5s;
       animation-fill-mode: forwards;
     }
 
     &--close {
+      display: block;
       right: 0;
 
       animation: user-menu-slide-close 0.5s;
