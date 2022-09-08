@@ -4,6 +4,6 @@ describe('Home', () => {
 
     cy.visit('/');
 
-    cy.findByTestId('app-link').should('be.visible').and('have.text', 'Learn React');
+    cy.findByText('This is the home page content').should('be.visible');
   });
 });

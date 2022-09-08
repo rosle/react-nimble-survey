@@ -3,12 +3,13 @@ import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 
 import DefaultLayout from '.';
+import { renderWithRouter } from 'tests/renderWithRouter';
 
 describe('DefaultLayout', () => {
   it('adds the html class', async () => {
     const onHelmetStateChange = jest.fn();
 
-    render(<DefaultLayout onHelmetStateChange={onHelmetStateChange}></DefaultLayout>);
+    renderWithRouter(<DefaultLayout onHelmetStateChange={onHelmetStateChange}></DefaultLayout>);
 
     await waitFor(() => {
       expect(onHelmetStateChange).toHaveBeenCalledTimes(1);
@@ -22,7 +23,7 @@ describe('DefaultLayout', () => {
   it('renders the children', () => {
     const childrenContent = 'This is component children';
 
-    render(
+    renderWithRouter(
       <DefaultLayout>
         <p>{childrenContent}</p>
       </DefaultLayout>
