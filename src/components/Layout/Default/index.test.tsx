@@ -1,9 +1,10 @@
 import React from 'react';
 
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
+
+import { renderWithRouter } from 'tests/renderWithRouter';
 
 import DefaultLayout from '.';
-import { renderWithRouter } from 'tests/renderWithRouter';
 
 describe('DefaultLayout', () => {
   it('adds the html class', async () => {

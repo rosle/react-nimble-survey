@@ -11,7 +11,7 @@ describe('HomeScreen', () => {
     renderWithRouter(<HomeScreen />);
 
     // TODO: this will be update later when implementing the real home page
-    const homeContent = screen.queryByText('This is the home page content')
+    const homeContent = screen.queryByText('This is the home page content');
 
     expect(homeContent).toBeInTheDocument();
   });
