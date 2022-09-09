@@ -16,7 +16,7 @@ export const userMenuTestIds = {
   appVersion: 'user-menu__app-version',
 };
 
-interface UserMenuProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface UserMenuProps extends React.HTMLAttributes<HTMLDivElement> {
   user: User;
   children?: React.ReactNode;
 }
