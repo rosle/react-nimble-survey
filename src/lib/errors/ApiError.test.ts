@@ -55,11 +55,11 @@ describe('ApiError', () => {
             errors: [
               {
                 code: 'invalid_email',
-                detail: 'Your email is incorrect',
+                detail: 'Your email cannot be blank',
               },
               {
                 code: 'invalid_password',
-                detail: 'Your password is incorrect',
+                detail: 'Your password cannot be blank',
               },
             ],
           },
@@ -67,7 +67,7 @@ describe('ApiError', () => {
 
         const apiError = new ApiError(axiosResponse);
 
-        expect(apiError.toString()).toBe('Your email is incorrect, Your password is incorrect');
+        expect(apiError.toString()).toBe('Your email cannot be blank, Your password cannot be blank');
       });
     });
   });
