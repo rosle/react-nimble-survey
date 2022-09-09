@@ -7,6 +7,11 @@ import logo from 'assets/images/logo.svg';
 import UserMenu from 'components/UserMenu';
 import { UserContext } from 'contexts/UserContext';
 
+export const defaultLayoutTestIds = {
+  logoLink: 'app-logo-link',
+  userMenu: 'user-menu',
+};
+
 export type DefaultLayoutProps = {
   onHelmetStateChange?: () => void;
   children?: React.ReactNode;
@@ -22,11 +27,11 @@ const DefaultLayout = ({ onHelmetStateChange, children }: DefaultLayoutProps) =>
         <html className="layout-default"></html>
       </Helmet>
       <header>
-        <Link to="/">
+        <Link to="/" data-test-id={defaultLayoutTestIds.logoLink}>
           <span className="visually-hidden">{t('shared:app_name')}</span>
           <img src={logo} className="app-logo" alt="logo" />
         </Link>
-        {user && <UserMenu user={user} />}
+        {user && <UserMenu user={user} data-test-id={defaultLayoutTestIds.userMenu} />}
       </header>
       <main>{children}</main>
     </HelmetProvider>

@@ -1,27 +1,23 @@
-const loginTestIds = {
-  loginEmail: 'login-form__input-email',
-  loginPassWord: 'login-form__input-password',
-  loginSubmit: 'login-form__button-submit',
+import { Tokens, TokenType } from 'types/tokens';
+import { User } from 'types/user';
+
+const mockTokens: Tokens = {
+  tokenType: TokenType.Bearer,
+  accessToken: 'access_token_12345',
+  refreshToken: 'refresh_token_12345',
+  createdAt: 1661852403,
+  expiresIn: 7200,
 };
 
-const login = (email: string, password: string) => {
-  // TODO: Move to use cy.session
-  // Right now having issue when run cypress:e2e, it fails.
-  // Even though running with cypress:open passes. Not sure what is the issue yet.
-  // This might be related:
-  // https://github.com/cypress-io/cypress/issues/22751
-  // cy.session([email, password], () => {
-  cy.visit('/sign_in');
+const mockUser: User = {
+  email: 'rossukhon@nimblehq.co',
+  name: 'Ros',
+  avatarUrl: 'https://secure.gravatar.com/avatar/252876a66bc74a8d0a8ec1ebb3dd991c',
+};
 
-  cy.findByTestId(loginTestIds.loginEmail).type(email);
-  cy.findByTestId(loginTestIds.loginPassWord).type(password);
-
-  cy.intercept('POST', '/api/v1/oauth/token', { statusCode: 200, fixture: 'login_success' });
-  cy.intercept('GET', '/api/v1/me', { statusCode: 200, fixture: 'get_user_profile_success' });
-
-  cy.findByTestId(loginTestIds.loginSubmit).click();
-
-  cy.url().should('contain', '/');
+const login = (user: User = mockUser, tokens: Tokens = mockTokens) => {
+  localStorage.setItem('user', JSON.stringify(user));
+  localStorage.setItem('tokens', JSON.stringify(tokens));
 };
 
 Cypress.Commands.add('login', login);

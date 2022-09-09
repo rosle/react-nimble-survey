@@ -1,6 +1,6 @@
 describe('Home', () => {
   it('visits the app', () => {
-    cy.login('dev@nimblehq.co', 'secret22');
+    cy.login();
 
     cy.visit('/');
 

@@ -7,12 +7,12 @@ import classNames from 'classnames';
 import Button from 'components/Button';
 import { User } from 'types/user';
 
-type UserMenuProps = {
+interface UserMenuProps extends React.HTMLAttributes<HTMLDivElement> {
   user: User;
   children?: React.ReactNode;
-};
+}
 
-const UserMenu = ({ user }: UserMenuProps) => {
+const UserMenu = ({ user, ...props }: UserMenuProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const userMenuCollapseRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation(['shared', 'auth']);
@@ -38,7 +38,7 @@ const UserMenu = ({ user }: UserMenuProps) => {
   };
 
   return (
-    <div className="user-menu">
+    <div className="user-menu" {...props}>
       <AvatarToggler />
       <div className={collapseClasses} ref={userMenuCollapseRef}>
         <div className="user-menu__content">
