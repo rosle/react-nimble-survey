@@ -19,7 +19,7 @@ export type DefaultLayoutProps = {
 
 const DefaultLayout = ({ onHelmetStateChange, children }: DefaultLayoutProps) => {
   const { t } = useTranslation(['shared']);
-  const { user } = useContext(UserContext);
+  const { user, clearTokensAndUser } = useContext(UserContext);
 
   return (
     <HelmetProvider>
@@ -31,7 +31,7 @@ const DefaultLayout = ({ onHelmetStateChange, children }: DefaultLayoutProps) =>
           <span className="visually-hidden">{t('shared:app_name')}</span>
           <img src={logo} className="app-logo" alt="logo" />
         </Link>
-        {user && <UserMenu user={user} data-test-id={defaultLayoutTestIds.userMenu} />}
+        {user && <UserMenu user={user} data-test-id={defaultLayoutTestIds.userMenu} onLogout={clearTokensAndUser} />}
       </header>
       <main>{children}</main>
     </HelmetProvider>

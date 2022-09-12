@@ -17,10 +17,11 @@ export const userMenuTestIds = {
 
 export interface UserMenuProps extends React.HTMLAttributes<HTMLDivElement> {
   user: User;
+  onLogout: () => void;
   children?: React.ReactNode;
 }
 
-const UserMenu = ({ user, ...props }: UserMenuProps) => {
+const UserMenu = ({ user, onLogout, ...props }: UserMenuProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const userMenuCollapseRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation(['shared', 'auth']);
@@ -58,7 +59,7 @@ const UserMenu = ({ user, ...props }: UserMenuProps) => {
           </header>
           <ul className="nav user-menu__nav" data-test-id={userMenuTestIds.nav}>
             <li className="nav-item user-menu__nav-item">
-              <Button type="button" className="nav-link user-menu__nav-link" buttonStyle="link">
+              <Button type="button" className="nav-link user-menu__nav-link" buttonStyle="link" onClick={onLogout}>
                 {t('auth:action.sign_out')}
               </Button>
             </li>
