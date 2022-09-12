@@ -6,18 +6,20 @@ import { User } from 'types/user';
 
 import UserMenu, { UserMenuProps } from '.';
 
-export default {
-  component: UserMenu,
-} as Meta;
-
 const user: User = {
   email: 'dev@nimblehq.co',
   name: 'Developer',
-  avatarUrl: 'https://secure.gravatar.com/avatar/252876a66bc74a8d0a8ec1ebb3dd991c',
+  avatarUrl: 'https://avatars.dicebear.com/v2/female/56762df0114df9fa952b5ba46f97e651.svg',
 };
 
-// TODO: Configure Args
-const Template = () => <UserMenu user={user} />;
+export default {
+  component: UserMenu,
+  args: {
+    user: user,
+  },
+} as Meta;
+
+const Template = (args: UserMenuProps) => <UserMenu {...args} />;
 
 export const Default: Story<UserMenuProps> = Template.bind({});
 Default.storyName = UserMenu.name;
