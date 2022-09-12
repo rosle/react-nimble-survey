@@ -61,6 +61,7 @@ describe('UserMenu', () => {
 
       cy.findByTestId(userMenuTestIds.userMenuContentToggler).click();
 
+      // TODO: Still haven't found a way how to test i18n with interpolation.
       cy.findByTestId(userMenuTestIds.appVersion).should('have.text', 'shared:version');
     });
 

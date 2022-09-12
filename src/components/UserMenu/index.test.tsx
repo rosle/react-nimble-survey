@@ -3,6 +3,7 @@ import React from 'react';
 import { screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import { mockEnv } from 'tests/mockEnv';
 import { mockUser } from 'tests/mockUserLoggedIn';
 import { renderWithRouter } from 'tests/renderWithRouter';
 
@@ -35,6 +36,12 @@ describe('UserMenu', () => {
   });
 
   describe('given the user clicks on the user avatar', () => {
+    const mockAppVersion = '1.0.0';
+
+    mockEnv({
+      REACT_APP_VERSION: mockAppVersion,
+    });
+
     it('opens the menu collapsed content', async () => {
       renderWithRouter(<UserMenu user={mockUser} />);
 
@@ -87,8 +94,7 @@ describe('UserMenu', () => {
       const appVersion = screen.getByTestId(userMenuTestIds.appVersion);
 
       expect(appVersion).toBeVisible();
-      // TODO: Check for version number?
-      expect(appVersion).toHaveTextContent('shared:version');
+      expect(appVersion).toHaveTextContent(`shared:version|${mockAppVersion}`);
     });
 
     describe('given the user clicks on the user avatar again', () => {
