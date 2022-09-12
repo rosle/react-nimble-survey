@@ -10,4 +10,4 @@ const mockEnv = (env = {}) => {
   });
 };
 
-export default mockEnv;
+export { mockEnv };

@@ -2,6 +2,11 @@ name: Test
 
 on: pull_request
 
+env:
+  REACT_APP_API_BASE_URL: ${{ secrets.REACT_APP_API_BASE_URL }}
+  REACT_APP_API_CLIENT_ID: ${{ secrets.REACT_APP_API_CLIENT_ID }}
+  REACT_APP_API_CLIENT_SECRET: ${{ secrets.REACT_APP_API_CLIENT_SECRET }}
+
 jobs:
   lints:
     name: Run linters
@@ -30,6 +35,7 @@ jobs:
   jest_tests:
     name: Run Jest tests
     runs-on: ubuntu-latest
+    environment: test
     steps:
       - name: Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.9.1
@@ -60,6 +66,7 @@ jobs:
   cypress_tests:
     name: Run Cypress tests
     runs-on: ubuntu-latest
+    environment: test
     steps:
       - name: Cancel Previous Runs
         uses: styfle/cancel-workflow-action@0.9.1
