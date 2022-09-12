@@ -13,7 +13,6 @@ type UserContextContent = {
   setTokens: (token: Tokens | null) => void;
   user: User | null;
   setUser: (user: User | null) => void;
-  clearTokensAndUser: () => void;
 };
 
 /* istanbul ignore next */
@@ -26,21 +25,13 @@ const UserContext = React.createContext<UserContextContent>({
   setUser: () => {
     // Do nothing for default set user.
   },
-  clearTokensAndUser: () => {
-    // Do nothing for default set user.
-  },
 });
 
 const UserContextProvider = ({ children }: UserContextProviderProps) => {
   const [tokens, setTokens] = useLocalStorage(LocalStorageKey.tokens);
   const [user, setUser] = useLocalStorage(LocalStorageKey.user);
 
-  const clearTokensAndUser = () => {
-    setTokens(null);
-    setUser(null);
-  };
-
-  return <UserContext.Provider value={{ tokens, setTokens, user, setUser, clearTokensAndUser }}>{children}</UserContext.Provider>;
+  return <UserContext.Provider value={{ tokens, setTokens, user, setUser }}>{children}</UserContext.Provider>;
 };
 
 export { UserContext, UserContextProvider };
