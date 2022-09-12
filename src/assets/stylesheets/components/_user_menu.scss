@@ -9,12 +9,12 @@ $user-menu-width: rem(264px);
     width: rem(36px);
     height: rem(36px);
 
+    object-fit: cover;
+
     border-radius: 50%;
   }
 
   &__collapse {
-    display: block;
-
     position: absolute;
     top: 0;
     right: -$user-menu-width;
