@@ -1,6 +1,5 @@
 import React, { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
 
 import classNames from 'classnames';
 
@@ -57,11 +56,13 @@ const UserMenu = ({ user, ...props }: UserMenuProps) => {
             </div>
             <AvatarToggler data-test-id={userMenuTestIds.userAvatar} />
           </header>
-          <nav className="nav user-menu__nav" data-test-id={userMenuTestIds.nav}>
-            <Link className="nav-link" to="#">
-              {t('auth:action.sign_out')}
-            </Link>
-          </nav>
+          <ul className="nav user-menu__nav" data-test-id={userMenuTestIds.nav}>
+            <li className="nav-item user-menu__nav-item">
+              <Button type="button" className="nav-link user-menu__nav-link" buttonStyle="link">
+                {t('auth:action.sign_out')}
+              </Button>
+            </li>
+          </ul>
           <footer className="user-menu__footer">
             <span data-test-id={userMenuTestIds.appVersion}>
               {t('shared:version', { version: process.env.REACT_APP_VERSION })}
