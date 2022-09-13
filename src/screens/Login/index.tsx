@@ -1,10 +1,9 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 
 import AuthAdapter from 'adapters/Auth';
-import UserAdapter from 'adapters/User';
 import Button from 'components/Button';
 import Form from 'components/Form';
 import Input from 'components/Input';
@@ -30,7 +29,7 @@ const LoginScreen = () => {
   const { t } = useTranslation(['auth', 'shared']);
   const navigate = useNavigate();
   const [formSubmissionErrors, setFormSubmissionErrors] = useState<string>('');
-  const { setTokens, user, setUser } = useContext(UserContext);
+  const { tokens, setTokens } = useContext(UserContext);
 
   const {
     formState: { isSubmitting, errors: formValidationErrors },
@@ -46,7 +45,6 @@ const LoginScreen = () => {
       const tokensResponse = response.data.attributes;
 
       setTokens(tokensResponse);
-      fetchUserProfile();
     } catch (error) {
       if (error instanceof ApiError) {
         setFormSubmissionErrors(error.toString());
@@ -56,22 +54,11 @@ const LoginScreen = () => {
     }
   };
 
-  const fetchUserProfile = useCallback(async () => {
-    try {
-      const response = await UserAdapter.me();
-      const userResponse = response.data.attributes;
-
-      setUser(userResponse);
-    } catch (error) {
-      setFormSubmissionErrors(t('shared:generic_error'));
-    }
-  }, [setUser, t]);
-
   useEffect(() => {
-    if (user) {
+    if (tokens) {
       navigate('/');
     }
-  }, [navigate, user]);
+  }, [navigate, tokens]);
 
   return (
     <AuthLayout headerTitle={t('auth:heading.sign_in')}>

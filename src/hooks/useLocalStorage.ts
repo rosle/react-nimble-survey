@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import { Tokens } from 'types/tokens';
 import { User } from 'types/user';
@@ -8,11 +8,7 @@ export const enum LocalStorageKey {
   user = 'user',
 }
 
-export type LocalStorageValue<T> = T extends LocalStorageKey.tokens
-  ? Tokens | null
-  : T extends LocalStorageKey.user
-  ? User | null
-  : any;
+export type LocalStorageValue<T> = T extends LocalStorageKey.tokens ? Nullable<Tokens> : Nullable<User>;
 
 export const getLocalStorageValue = <T extends LocalStorageKey>(key: T): LocalStorageValue<T> => {
   const storedJsonValue = localStorage.getItem(key);
@@ -20,7 +16,10 @@ export const getLocalStorageValue = <T extends LocalStorageKey>(key: T): LocalSt
   return storedJsonValue ? JSON.parse(storedJsonValue) : null;
 };
 
-const useLocalStorage = <T>(key: LocalStorageKey, defaultValue?: LocalStorageValue<T>) => {
+const useLocalStorage = <T extends LocalStorageKey>(
+  key: T,
+  defaultValue: LocalStorageValue<T> = null as LocalStorageValue<T>
+): [LocalStorageValue<T>, React.Dispatch<LocalStorageValue<T>>] => {
   const [value, setStateValue] = useState(() => {
     const initialValue = getLocalStorageValue(key);
 

@@ -3,12 +3,14 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { chain } from 'lodash';
 
-import useLocalStorage, { LocalStorageKey } from './useLocalStorage';
+import { User } from 'types/user';
+
+import useLocalStorage, { LocalStorageKey, LocalStorageValue } from './useLocalStorage';
 
 const localStorageKey = LocalStorageKey.user;
 const localStorageValueListItemTestIds = 'local-storage-value-list-item';
 
-const UseLocalStorageComponent = ({ defaultValue }: { defaultValue?: { [key: string]: string } }) => {
+const UseLocalStorageComponent = ({ defaultValue }: { defaultValue?: LocalStorageValue<User> }) => {
   const [localStorageValue] = useLocalStorage(localStorageKey, defaultValue);
 
   const valueList = chain(localStorageValue)
@@ -50,7 +52,13 @@ describe('useLocalStorage', () => {
       it('returns the current local storage value', () => {
         localStorage.setItem(localStorageKey, JSON.stringify({ name: 'John' }));
 
-        render(<UseLocalStorageComponent defaultValue={{ name: 'Jane' }} />);
+        const defaultValue = {
+          name: 'Jane',
+          email: 'jane.doe@mail.com',
+          avatarUrl: 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLH/avatar/315.jpg',
+        };
+
+        render(<UseLocalStorageComponent defaultValue={defaultValue} />);
 
         const localStorageValueListItems = screen.getAllByTestId(localStorageValueListItemTestIds);
 
@@ -61,7 +69,13 @@ describe('useLocalStorage', () => {
 
     describe('given NO value in the local storage', () => {
       it('sets and returns the default value', () => {
-        render(<UseLocalStorageComponent defaultValue={{ name: 'Jane' }} />);
+        const defaultValue = {
+          name: 'Jane',
+          email: 'jane.doe@mail.com',
+          avatarUrl: 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLH/avatar/315.jpg',
+        };
+
+        render(<UseLocalStorageComponent defaultValue={defaultValue} />);
 
         const localStorageValueListItems = screen.getAllByTestId(localStorageValueListItemTestIds);
 

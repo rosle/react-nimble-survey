@@ -9,10 +9,10 @@ type UserContextProviderProps = {
 };
 
 type UserContextContent = {
-  tokens: Tokens | null;
-  setTokens: (token: Tokens) => void;
-  user: User | null;
-  setUser: (user: User) => void;
+  tokens: Nullable<Tokens>;
+  setTokens: (token: Nullable<Tokens>) => void;
+  user: Nullable<User>;
+  setUser: (user: Nullable<User>) => void;
 };
 
 /* istanbul ignore next */

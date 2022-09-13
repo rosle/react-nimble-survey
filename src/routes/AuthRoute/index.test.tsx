@@ -1,11 +1,12 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import { screen } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 
 import ProtectedRoute from 'routes/ProtectedRoute';
-import { mockUserLoggedIn } from 'tests/mockUserLoggedIn';
+import { mockTokensLoggedIn } from 'tests/mockUserLoggedIn';
 import { renderWithMemoryRouter } from 'tests/renderWithRouter';
+import { setupPolly } from 'tests/setupPolly';
 
 import AuthRoute from '.';
 
@@ -50,17 +51,23 @@ const renderRoutes = (initialPath: string) => {
 };
 
 describe('AuthRoute', () => {
-  describe('given the user has logged in', () => {
-    mockUserLoggedIn();
+  describe('given there are tokens in the local storage', () => {
+    mockTokensLoggedIn();
 
-    it('redirects to the Home page', () => {
+    it('redirects to the Home page', async () => {
+      const polly = setupPolly('get_user_profile_success');
+
       renderRoutes(AUTH_ROUTE.path);
 
-      expect(screen.queryByText(HOME_ROUTE.content)).toBeVisible();
+      await waitFor(() => {
+        expect(screen.queryByText(HOME_ROUTE.content)).toBeVisible();
+      });
+
+      await polly.stop();
     });
   });
 
-  describe('given the user has NOT logged in', () => {
+  describe('given NO tokens in the local storage', () => {
     it('renders the given page', () => {
       renderRoutes(AUTH_ROUTE.path);
 

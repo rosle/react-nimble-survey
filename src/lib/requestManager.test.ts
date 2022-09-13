@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosResponse, AxiosTransformer } from 'axios';
 
-import { mockUserLoggedIn } from 'tests/mockUserLoggedIn';
+import { mockTokensLoggedIn } from 'tests/mockUserLoggedIn';
 
 import ApiError from './errors/ApiError';
 import requestManager, { defaultOptions } from './requestManager';
@@ -38,7 +38,7 @@ describe('requestManager', () => {
   });
 
   describe('given the tokens exists', () => {
-    const { tokens } = mockUserLoggedIn();
+    const { tokens } = mockTokensLoggedIn();
 
     it('attaches the authorization header', async () => {
       const requestOptions = { ...defaultOptions, method: 'POST', url: endPoint };

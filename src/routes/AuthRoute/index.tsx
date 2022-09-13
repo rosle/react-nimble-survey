@@ -14,9 +14,9 @@ type AuthRouteProps = {
   Which should not be accessible after the user logged in.
 */
 const AuthRoute = ({ children }: AuthRouteProps) => {
-  const { user } = useContext(UserContext);
+  const { tokens } = useContext(UserContext);
 
-  return user ? <Navigate to={HOME_PAGE_PATH} /> : children;
+  return tokens ? <Navigate to={HOME_PAGE_PATH} /> : children;
 };
 
 export default AuthRoute;
