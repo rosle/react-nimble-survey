@@ -29,7 +29,7 @@ const attachAuthorizationHeader = (requestOptions: AxiosRequestConfig) => {
   if (tokens) {
     requestOptions.headers = {
       ...requestOptions.headers,
-      authorization: `Bearer ${(tokens as Tokens).accessToken}`,
+      authorization: `Bearer ${tokens.accessToken}`,
     };
   }
 
