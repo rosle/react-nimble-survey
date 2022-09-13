@@ -79,7 +79,7 @@ describe('useLocalStorage', () => {
 
         const localStorageValueListItems = screen.getAllByTestId(localStorageValueListItemTestIds);
 
-        expect(localStorageValueListItems).toHaveLength(1);
+        expect(localStorageValueListItems).toHaveLength(3);
         expect(localStorageValueListItems[0]).toHaveTextContent('name: Jane');
       });
     });

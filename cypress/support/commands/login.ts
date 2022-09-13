@@ -17,7 +17,7 @@ const login = (email: string, password: string) => {
   cy.findByTestId(loginTestIds.loginPassWord).type(password);
 
   cy.intercept('POST', '/api/v1/oauth/token', { statusCode: 200, fixture: 'login_success' });
-  cy.intercept('GET', '/api/v1/me', { statusCode: 200, fixture: 'user_success' });
+  cy.intercept('GET', '/api/v1/me', { statusCode: 200, fixture: 'get_user_profile_success' });
 
   cy.findByTestId(loginTestIds.loginSubmit).click();
 
