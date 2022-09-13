@@ -1,6 +1,12 @@
 {
+  "error": "Error",
+  "form_error": {
+    "required": "can't be blank",
+    "pattern": "is invalid"
+  },
+  "generic_error": "Something went wrong, please try again.",
   "sample_page": {
-    "message": "Edit {{codeSample}} and save to reload",
-    "learn_react": "Learn React"
+    "learn_react": "Learn React",
+    "message": "Edit {{codeSample}} and save to reload"
   }
 }

@@ -28,6 +28,7 @@
     min-width: rem(340px);
 
     margin: auto;
+    padding: 0 rem(10px);
 
     text-align: center;
   }
@@ -36,5 +37,9 @@
     margin-top: rem(24px);
 
     opacity: 0.6;
+  }
+
+  .app-content {
+    margin-top: rem(32px);
   }
 }

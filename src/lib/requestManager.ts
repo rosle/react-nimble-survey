@@ -1,7 +1,13 @@
-import axios, { Method as HTTPMethod, ResponseType, AxiosRequestConfig, AxiosResponse } from 'axios';
+import axios, { Method as HTTPMethod, AxiosRequestConfig, AxiosResponse, AxiosTransformer } from 'axios';
+import { camelizeKeys, decamelizeKeys } from 'humps';
 
-export const defaultOptions: { responseType: ResponseType } = {
+import ApiError from './errors/ApiError';
+
+export const defaultOptions: AxiosRequestConfig = {
+  baseURL: process.env.REACT_APP_API_BASE_URL,
   responseType: 'json',
+  transformRequest: [(data) => decamelizeKeys(data), ...(axios.defaults.transformRequest as AxiosTransformer[])],
+  transformResponse: [...(axios.defaults.transformResponse as AxiosTransformer[]), (data) => camelizeKeys(data)],
 };
 
 /**
@@ -14,21 +20,26 @@ export const defaultOptions: { responseType: ResponseType } = {
  *                   an error object for its reason
  */
 
-const requestManager = (
-  method: HTTPMethod,
-  endpoint: string,
-  requestOptions: AxiosRequestConfig = {}
-): Promise<AxiosResponse> => {
-  const requestParams: AxiosRequestConfig = {
+const requestManager = (method: HTTPMethod, endpoint: string, options: AxiosRequestConfig = {}): Promise<AxiosResponse> => {
+  const requestOptions: AxiosRequestConfig = {
     method,
     url: endpoint,
     ...defaultOptions,
-    ...requestOptions,
+    ...options,
   };
 
-  return axios.request(requestParams).then((response: AxiosResponse) => {
-    return response.data;
-  });
+  return axios
+    .request(requestOptions)
+    .then((response: AxiosResponse) => {
+      return response.data;
+    })
+    .catch((error) => {
+      if (axios.isAxiosError(error) && error.response) {
+        throw new ApiError(error.response);
+      } else {
+        throw error;
+      }
+    });
 };
 
 export default requestManager;

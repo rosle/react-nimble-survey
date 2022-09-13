@@ -2,18 +2,75 @@
 // Shared variables //
 //////////////////////
 
-// Colors
+// Color
 $black: #000;
 $white: #fff;
 
+$gray-100: #999;
+$gray-500: #474747;
+
+$grays: (
+  '100': $gray-100,
+  '500': $gray-500,
+);
+
 $body-gradient: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, $black 100%);
+$input-alpha-bg: rgba(255, 255, 255, 0.18);
+$alert-alpha-bg: rgba(37, 37, 37, 0.6);
+
+// Font
+$font-sizes: (
+  xs: 0.8125rem, // 13px
+  sm: 0.9375rem, // 15px
+  md: 1.0625rem, // 17px
+);
 
 ////////////////////////////////
 // Custom Bootstrap variables //
 ////////////////////////////////
 
+// Color
+$primary: $white;
+$secondary: map-get($grays, '500');
+
+// Font
+$font-family-sans-serif: 'Neuzeit S LT Std';
+$font-size-base: map-get($font-sizes, md);
+
+// Body
 $body-color: $white;
 
-$font-family-sans-serif: 'Neuzeit S LT Std';
+// Input
+$input-bg: $input-alpha-bg;
+$input-padding-y: 1rem;
+$input-padding-x: 0.75rem;
 
-$font-size-base: 1.0625rem; // 17px
+$input-border-radius: 0.75rem;
+$input-border-width: 0;
+
+$input-focus-border-color: $white;
+$input-focus-box-shadow: 0;
+
+// Label
+$form-label-font-size: map-get($font-sizes, sm);
+$form-label-font-weight: bold;
+
+// Alert
+$alert-padding-y: 1rem;
+$alert-padding-x: 1.25rem;
+$alert-margin-bottom: 1.5rem;
+$alert-border-radius: 0.75rem;
+
+// Button
+$btn-padding-y: 1.25rem;
+$btn-padding-x: 2rem;
+$btn-font-weight: bold;
+
+$btn-padding-y-sm: 0.75rem;
+$btn-padding-x-sm: 1rem;
+$btn-font-size-sm: $font-size-base;
+
+$btn-border-radius: 0.625rem;
+$btn-border-radius-sm: $btn-border-radius;
+
+$btn-link-color: map-get($grays, '100');
