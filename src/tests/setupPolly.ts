@@ -12,7 +12,7 @@ interface SetUpPollyOptions extends PollyConfig {
   record?: boolean;
 }
 
-const SECRET_FIELDS = ['password', 'client_id', 'client_secret', 'access_token', 'refresh_token'];
+const SECRET_FIELDS = ['password', 'client_id', 'client_secret', 'access_token', 'refresh_token', 'token'];
 const EXCLUDED_HEADERS = ['authorization', 'user-agent'];
 const REDACT_VAL = '[REDACTED]';
 

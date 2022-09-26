@@ -97,6 +97,23 @@ describe('UserMenu', () => {
       expect(appVersion).toHaveTextContent(`shared:version|${mockAppVersion}`);
     });
 
+    describe('given the user clicks on the logout menu', () => {
+      it('calls the logout function', async () => {
+        const mockLogoutFn = jest.fn();
+
+        renderWithRouter(<UserMenu user={mockUser} onLogout={mockLogoutFn} />);
+
+        await openUserMenu();
+
+        const userMenuNav = screen.getByTestId(userMenuTestIds.nav);
+        const logoutMenu = within(userMenuNav).getByText('auth:action.sign_out');
+
+        await userEvent.click(logoutMenu);
+
+        expect(mockLogoutFn).toHaveBeenCalledTimes(1);
+      });
+    });
+
     describe('given the user clicks on the user avatar again', () => {
       it('closes the menu collapsed content', async () => {
         renderWithRouter(<UserMenu user={mockUser} onLogout={jest.fn()} />);

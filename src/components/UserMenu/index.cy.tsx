@@ -65,6 +65,22 @@ describe('UserMenu', () => {
       cy.findByTestId(userMenuTestIds.appVersion).should('have.text', 'shared:version');
     });
 
+    describe('given the user clicks on the logout menu', () => {
+      it.only('calls the logout function', () => {
+        const mockLogoutFn = cy.stub();
+
+        cy.mountWithRouter(<UserMenu user={mockUser} onLogout={mockLogoutFn} />);
+
+        cy.findByTestId(userMenuTestIds.userMenuContentToggler).click();
+
+        cy.findByText('auth:action.sign_out')
+          .click()
+          .then(() => {
+            expect(mockLogoutFn).to.be.called;
+          });
+      });
+    });
+
     describe('given the user clicks on the user avatar again', () => {
       it('closes the menu collapsed content', () => {
         cy.mountWithRouter(<UserMenu user={mockUser} onLogout={cy.stub()} />);
