@@ -84,7 +84,7 @@ describe('UserContextProvider', () => {
   });
 
   describe('given the user has logged in', () => {
-    const { tokens, user } = mockUserLoggedIn();
+    const { mockTokens, mockUser } = mockUserLoggedIn();
 
     it('provides the tokens from the local storage', async () => {
       render(
@@ -95,7 +95,7 @@ describe('UserContextProvider', () => {
 
       const tokenContent = await screen.findByTestId(userContextConsumerTestIds.tokens);
 
-      expect(tokenContent).toHaveTextContent(tokens.accessToken);
+      expect(tokenContent).toHaveTextContent(mockTokens.accessToken);
     });
 
     it('provides the user from the local storage', async () => {
@@ -107,7 +107,7 @@ describe('UserContextProvider', () => {
 
       const userContent = await screen.findByTestId(userContextConsumerTestIds.user);
 
-      expect(userContent).toHaveTextContent(user.email);
+      expect(userContent).toHaveTextContent(mockUser.email);
     });
   });
 

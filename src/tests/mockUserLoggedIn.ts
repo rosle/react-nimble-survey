@@ -30,7 +30,7 @@ const mockUserLoggedIn = () => {
     localStorage.setItem(LocalStorageKey.user, JSON.stringify(mockUser));
   });
 
-  return { tokens: mockTokens, user: mockUser };
+  return { mockTokens, mockUser };
 };
 
 export { mockTokensLoggedIn, mockUserLoggedIn };
