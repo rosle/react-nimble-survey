@@ -23,9 +23,7 @@ const DefaultLayout = ({ onHelmetStateChange, children }: DefaultLayoutProps) =>
   const { setTokens, setUser, tokens, user } = useContext(UserContext);
 
   const logout = async () => {
-    if (tokens === null) return;
-
-    await AuthAdapter.logout(tokens);
+    tokens && (await AuthAdapter.logout(tokens));
 
     setTokens(null);
     setUser(null);
