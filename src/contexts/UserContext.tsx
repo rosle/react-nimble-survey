@@ -1,6 +1,7 @@
 import React from 'react';
 
-import useLocalStorage, { LocalStorageKey } from 'hooks/useLocalStorage';
+import useLocalStorage from 'hooks/useLocalStorage';
+import { LocalStorageKey } from 'lib/localStorage';
 import { Tokens } from 'types/tokens';
 import { User } from 'types/user';
 

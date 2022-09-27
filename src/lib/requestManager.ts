@@ -1,7 +1,7 @@
 import axios, { Method as HTTPMethod, AxiosRequestConfig, AxiosResponse, AxiosTransformer } from 'axios';
 import { camelizeKeys, decamelizeKeys } from 'humps';
 
-import { getLocalStorageValue, LocalStorageKey } from 'hooks/useLocalStorage';
+import { getLocalStorageValue, LocalStorageKey } from 'lib/localStorage';
 
 import ApiError from './errors/ApiError';
 

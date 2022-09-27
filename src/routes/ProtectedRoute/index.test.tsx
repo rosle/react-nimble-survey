@@ -3,7 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import { screen, waitFor } from '@testing-library/react';
 
-import { LocalStorageKey } from 'hooks/useLocalStorage';
+import { LocalStorageKey } from 'lib/localStorage';
 import AuthRoute from 'routes/AuthRoute';
 import { mockTokensLoggedIn, mockUserLoggedIn } from 'tests/mockUserLoggedIn';
 import { renderWithMemoryRouter } from 'tests/renderWithRouter';

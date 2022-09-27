@@ -1,4 +1,4 @@
-import { LocalStorageKey } from 'hooks/useLocalStorage';
+import { LocalStorageKey } from 'lib/localStorage';
 import { Tokens, TokenType } from 'types/tokens';
 import { User } from 'types/user';
 

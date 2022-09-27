@@ -3,7 +3,7 @@ import React from 'react';
 import { screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { LocalStorageKey } from 'hooks/useLocalStorage';
+import { LocalStorageKey } from 'lib/localStorage';
 import { mockUserLoggedIn } from 'tests/mockUserLoggedIn';
 import { renderWithRouter } from 'tests/renderWithRouter';
 import { setupPolly } from 'tests/setupPolly';
