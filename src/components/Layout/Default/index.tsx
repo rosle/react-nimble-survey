@@ -25,14 +25,10 @@ const DefaultLayout = ({ onHelmetStateChange, children }: DefaultLayoutProps) =>
   const logout = async () => {
     if (tokens === null) return;
 
-    try {
-      await AuthAdapter.logout(tokens);
+    await AuthAdapter.logout(tokens);
 
-      setTokens(null);
-      setUser(null);
-    } catch (error) {
-      console.log(error);
-    }
+    setTokens(null);
+    setUser(null);
   };
 
   return (
