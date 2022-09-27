@@ -17,7 +17,7 @@ module.exports = {
     },
     {
       // Turn off the error when using Chai assertions.
-      files: ['**/*.test.tsx', '**/*.cy.tsx'],
+      files: ['**/*.cy.tsx'],
       rules: {
         'no-unused-expressions': 'off',
         '@typescript-eslint/no-unused-expressions': 'off',
