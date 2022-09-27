@@ -66,7 +66,7 @@ describe('UserMenu', () => {
     });
 
     describe('given the user clicks on the logout menu', () => {
-      it.only('calls the logout function', () => {
+      it('calls the logout function', () => {
         const mockLogoutFn = cy.stub();
 
         cy.mountWithRouter(<UserMenu user={mockUser} onLogout={mockLogoutFn} />);
