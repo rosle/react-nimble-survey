@@ -12,7 +12,6 @@ const handleRequestError = (error: unknown) => {
   const apiError = new ApiError(error.response);
 
   if (isInvalidTokenError(apiError)) {
-    console.info('API TOKEN EXPIRED');
     setLocalStorageValue(LocalStorageKey.tokens, null);
     setLocalStorageValue(LocalStorageKey.user, null);
 

@@ -1,5 +1,6 @@
-import axios, { AxiosError, AxiosResponse, AxiosTransformer } from 'axios';
+import axios, { AxiosTransformer } from 'axios';
 
+import { buildAxiosError, buildAxiosResponse } from 'tests/factories/axios';
 import { mockTokensLoggedIn } from 'tests/mockUserLoggedIn';
 
 import ApiError from './errors/ApiError';
@@ -60,11 +61,8 @@ describe('requestManager', () => {
 
   describe('given the API responds with error status', () => {
     it('throws an ApiError containing the response', async () => {
-      const axiosResponse: AxiosResponse = {
-        config: {},
+      const axiosResponse = buildAxiosResponse({
         status: 400,
-        statusText: '',
-        headers: { 'content-type': 'application/json' },
         data: {
           errors: [
             {
@@ -73,16 +71,9 @@ describe('requestManager', () => {
             },
           ],
         },
-      };
+      });
 
-      const axiosError: AxiosError = {
-        config: {},
-        name: 'Error',
-        message: 'Request failed with status code 400',
-        isAxiosError: true,
-        toJSON: jest.fn(),
-        response: axiosResponse,
-      };
+      const axiosError = buildAxiosError({ response: axiosResponse });
 
       const requestSpy = jest.spyOn(axios, 'request').mockImplementation(() => Promise.reject(axiosError));
       const isAxiosErrorSpy = jest.spyOn(axios, 'isAxiosError').mockReturnValueOnce(true);
