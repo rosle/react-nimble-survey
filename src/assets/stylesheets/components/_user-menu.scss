@@ -55,7 +55,7 @@ $user-menu-width: rem(264px);
     border-bottom: 1px solid map-get($grays, '300');
 
     font-size: map-get($font-sizes, xl);
-    font-weight: bold;
+    font-weight: $font-weight-bold;
   }
 
   &__nav {

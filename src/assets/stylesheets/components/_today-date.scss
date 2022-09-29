@@ -1,0 +1,18 @@
+.today-date {
+  &__date {
+    font-size: map-get($font-sizes, xs);
+    font-weight: $font-weight-bold;
+
+    letter-spacing: rem(-0.08px);
+    line-height: rem(18px);
+    text-transform: uppercase;
+  }
+
+  &__title {
+    font-size: map-get($font-sizes, xxl);
+    font-weight: $font-weight-bold;
+
+    letter-spacing: rem(-1px);
+    line-height: rem(41px);
+  }
+}
