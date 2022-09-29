@@ -1,0 +1,15 @@
+body.home {
+  main {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .home__survey-list {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+
+    padding-bottom: rem(160px);
+  }
+}
