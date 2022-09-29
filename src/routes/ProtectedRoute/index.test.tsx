@@ -94,10 +94,10 @@ describe('ProtectedRoute', () => {
           renderRoutes(PROTECTED_ROUTE.path);
 
           await waitFor(() => {
-            expect(localStorage.getItem(LocalStorageKey.tokens)).toBe(JSON.stringify(null));
+            expect(window.location.href).toBe(routePath.login);
           });
 
-          expect(window.location.href).toBe(routePath.login);
+          expect(localStorage.getItem(LocalStorageKey.tokens)).toBe(JSON.stringify(null));
 
           await polly.stop();
         });

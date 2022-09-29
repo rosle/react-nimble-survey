@@ -10,13 +10,17 @@ describe('getLocalStorageValue', () => {
 
       localStorage.setItem(localStorageKey, JSON.stringify(user));
 
-      expect(getLocalStorageValue(localStorageKey)).toEqual(user);
+      const localStorageValue = getLocalStorageValue(localStorageKey);
+
+      expect(localStorageValue).toEqual(user);
     });
   });
 
   describe('given there is NO value in the local storage', () => {
     it('returns null', () => {
-      expect(getLocalStorageValue(LocalStorageKey.user)).toBeNull();
+      const localStorageValue = getLocalStorageValue(LocalStorageKey.user);
+
+      expect(localStorageValue).toBeNull();
     });
   });
 });

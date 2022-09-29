@@ -33,7 +33,7 @@ describe('handleRequestError', () => {
     });
   });
 
-  describe('given the other API errors', () => {
+  describe('given other API errors', () => {
     it('returns the rejected promise with the given error', async () => {
       const axiosError = buildAxiosError();
 
@@ -41,7 +41,7 @@ describe('handleRequestError', () => {
     });
   });
 
-  describe('given the other unexpected errors', () => {
+  describe('given other unexpected errors', () => {
     it('returns the rejected promise with the given error', async () => {
       const axiosError = buildAxiosError({ response: undefined });
 
