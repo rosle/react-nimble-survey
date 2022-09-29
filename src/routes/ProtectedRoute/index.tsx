@@ -3,8 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import UserAdapter from 'adapters/User';
 import { UserContext } from 'contexts/UserContext';
-
-const LOGIN_PAGE_PATH = '/sign_in';
+import routePath from 'routes/routePath';
 
 type ProtectedRouteProps = {
   children: JSX.Element;
@@ -14,7 +13,7 @@ type ProtectedRouteProps = {
   Routes for pages that require authentication before accessing.
 */
 const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
-  const { tokens, setTokens, setUser, user } = useContext(UserContext);
+  const { tokens, setUser, user } = useContext(UserContext);
   const navigate = useNavigate();
 
   const fetchUserProfile = useCallback(async () => {
@@ -23,14 +22,13 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
       const userResponse = response.data.attributes;
 
       setUser(userResponse);
-    } catch (error) {
-      setTokens(null);
-      navigate(LOGIN_PAGE_PATH);
+    } catch (_error) {
+      // 401 should be raised and handle by request interceptor
     }
-  }, [navigate, setTokens, setUser]);
+  }, [setUser]);
 
   useEffect(() => {
-    if (!tokens) return navigate(LOGIN_PAGE_PATH);
+    if (!tokens) return navigate(routePath.login);
     if (user) return;
 
     fetchUserProfile();

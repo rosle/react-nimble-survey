@@ -93,10 +93,10 @@ describe('ProtectedRoute', () => {
           renderRoutes(PROTECTED_ROUTE.path);
 
           await waitFor(() => {
-            expect(screen.queryByText(LOGIN_ROUTE.content)).toBeVisible();
+            expect(localStorage.getItem(LocalStorageKey.tokens)).toBe(JSON.stringify(null));
           });
 
-          expect(localStorage.getItem(LocalStorageKey.tokens)).toBe(JSON.stringify(null));
+          expect(window.location.href).toBe('/sign_in');
 
           await polly.stop();
         });
