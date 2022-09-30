@@ -113,6 +113,7 @@
       "!src/**/*.d.ts",
       "!src/**/*.cy.{js,jsx,ts,tsx}",
       "!src/**/*.stories.{js,jsx,ts,tsx}",
+      "!src/**/*.config.js",
       "!src/components/Icon/**/*"
     ],
     "coverageReporters": [
