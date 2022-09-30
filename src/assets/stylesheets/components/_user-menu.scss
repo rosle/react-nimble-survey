@@ -42,7 +42,7 @@ $user-menu-width: rem(264px);
 
     padding: rem(32px 32px 20px 32px);
 
-    background-color: $user-menu-alpha-bg;
+    background-color: map-get($grays, '800');
   }
 
   &__header {

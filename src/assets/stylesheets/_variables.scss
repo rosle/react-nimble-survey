@@ -9,17 +9,18 @@ $white: #fff;
 $gray-100: #999;
 $gray-300: #5b5b5b;
 $gray-500: #474747;
+$gray-800: #1a1a1a;
 
 $grays: (
   '100': $gray-100,
   '300': $gray-300,
   '500': $gray-500,
+  '800': $gray-800,
 );
 
 $body-gradient: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, $black 100%);
 $input-alpha-bg: rgba(255, 255, 255, 0.18);
 $alert-alpha-bg: rgba(37, 37, 37, 0.6);
-$user-menu-alpha-bg: rgba(30, 30, 30, 0.9);
 
 // Font
 $font-sizes: (
