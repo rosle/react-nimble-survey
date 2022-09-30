@@ -8,10 +8,8 @@ interface BlankStateProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const BlankState = ({ emoji, description, className, ...props }: BlankStateProps) => {
-  const classes = classNames('blank-state', className);
-
   return (
-    <div className={classes} {...props}>
+    <div className={classNames('blank-state', className)} {...props}>
       <div className="blank-state__emoji">{emoji}</div>
       <h2>{description}</h2>
     </div>

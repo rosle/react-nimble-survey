@@ -12,8 +12,12 @@ const HomeScreen = () => {
         <body className="home"></body>
       </Helmet>
       <DefaultLayout>
-        <TodayDate />
-        <SurveyList className="home__survey-list" />
+        <section className="home__today-date">
+          <TodayDate />
+        </section>
+        <section className="home__survey-list">
+          <SurveyList />
+        </section>
       </DefaultLayout>
     </HelmetProvider>
   );
