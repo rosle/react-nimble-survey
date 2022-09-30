@@ -6,9 +6,6 @@
     "pattern": "is invalid"
   },
   "generic_error": "Something went wrong, please try again.",
-  "sample_page": {
-    "learn_react": "Learn React",
-    "message": "Edit {{codeSample}} and save to reload"
-  },
+  "today": "Today",
   "version": "v{{version}}"
 }

@@ -4,15 +4,22 @@ import { screen } from '@testing-library/react';
 
 import { renderWithRouter } from 'tests/renderWithRouter';
 
-import HomeScreen from '.';
+import HomeScreen, { homeScreenTestIds } from '.';
 
 describe('HomeScreen', () => {
-  it('renders learn react link', () => {
+  it("renders today's date", () => {
     renderWithRouter(<HomeScreen />);
 
-    // TODO: this will be update later when implementing the real home page
-    const homeContent = screen.queryByText('This is the home page content');
+    const todayDate = screen.getByTestId(homeScreenTestIds.todayDate);
 
-    expect(homeContent).toBeInTheDocument();
+    expect(todayDate).toBeVisible();
+  });
+
+  it('renders the survey list', () => {
+    renderWithRouter(<HomeScreen />);
+
+    const surveyList = screen.getByTestId(homeScreenTestIds.surveyList);
+
+    expect(surveyList).toBeVisible();
   });
 });

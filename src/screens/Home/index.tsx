@@ -5,6 +5,11 @@ import DefaultLayout from 'components/Layout/Default';
 import SurveyList from 'components/SurveyList';
 import TodayDate from 'components/TodayDate';
 
+export const homeScreenTestIds = {
+  todayDate: 'home__today-date',
+  surveyList: 'home__survey-list',
+};
+
 const HomeScreen = () => {
   return (
     <HelmetProvider>
@@ -13,10 +18,10 @@ const HomeScreen = () => {
       </Helmet>
       <DefaultLayout>
         <section className="home__today-date">
-          <TodayDate />
+          <TodayDate data-test-id={homeScreenTestIds.todayDate} />
         </section>
         <section className="home__survey-list">
-          <SurveyList />
+          <SurveyList data-test-id={homeScreenTestIds.surveyList} />
         </section>
       </DefaultLayout>
     </HelmetProvider>
