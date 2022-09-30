@@ -12,7 +12,7 @@ export const todayDateTestIds = {
 const weekdayFormat: Intl.DateTimeFormatOptions = { weekday: 'long' };
 const monthFormat: Intl.DateTimeFormatOptions = { month: 'long' };
 
-type TodayDateProps = React.HTMLAttributes<HTMLDivElement>;
+export type TodayDateProps = React.HTMLAttributes<HTMLDivElement>;
 
 const TodayDate = ({ className, ...props }: TodayDateProps) => {
   const currentLocale = i18next.language;

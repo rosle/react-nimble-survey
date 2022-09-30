@@ -9,7 +9,7 @@ export const surveyListTestIds = {
   blankState: 'survey-list__blank-state',
 };
 
-type SurveyListProps = React.HTMLAttributes<HTMLDivElement>;
+export type SurveyListProps = React.HTMLAttributes<HTMLDivElement>;
 
 const SurveyList = ({ className, ...props }: SurveyListProps) => {
   const { t } = useTranslation(['survey']);

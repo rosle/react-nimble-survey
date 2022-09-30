@@ -7,7 +7,7 @@ export const blankStateTestIds = {
   description: 'blank-state__description',
 };
 
-interface BlankStateProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface BlankStateProps extends React.HTMLAttributes<HTMLDivElement> {
   emoji: string;
   description: string;
 }
