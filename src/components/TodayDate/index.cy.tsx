@@ -9,7 +9,7 @@ describe('TodayDate', () => {
 
     cy.mount(<TodayDate />);
 
-    cy.findByTestId(todayDateTestIds.date).should('be.visible').should('contain.text', 'Thursday, September 29');
+    cy.findByTestId(todayDateTestIds.date).should('be.visible').should('have.text', 'Thursday, September 29');
   });
 
   it('displays the today title', () => {
