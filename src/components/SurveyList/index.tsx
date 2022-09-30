@@ -7,7 +7,6 @@ import BlankState from 'components/BlankState';
 type SurveyListProps = React.HTMLAttributes<HTMLDivElement>;
 
 // TODO: Extract text to the locale file
-// TODO: react/prop-types: 'className' is missing in props validation
 const SurveyList = ({ className, ...props }: SurveyListProps) => {
   const classes = classNames('survey-list', className);
 
