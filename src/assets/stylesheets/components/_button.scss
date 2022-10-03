@@ -28,3 +28,15 @@
 .btn--full-width {
   width: 100%;
 }
+
+.btn--round {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: rem(56px);
+  height: rem(56px);
+
+  border-radius: 100%;
+  padding: rem(13px);
+}

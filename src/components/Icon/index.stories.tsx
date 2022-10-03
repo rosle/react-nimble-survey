@@ -4,15 +4,18 @@ import { Meta, Story } from '@storybook/react';
 
 import NotificationIcon from './Notification';
 import WarningIcon from './Warning';
+import CaretRightIcon from './CaretRight';
 
 export default { component: WarningIcon } as Meta;
 
 export const All = () => (
   <>
+    <CaretRightIcon />
     <NotificationIcon />
     <WarningIcon />
   </>
 );
 
+export const CaretRight: Story = () => <CaretRightIcon />;
 export const Notification: Story = () => <NotificationIcon />;
 export const Warning: Story = () => <WarningIcon />;
