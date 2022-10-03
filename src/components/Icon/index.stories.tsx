@@ -2,9 +2,9 @@ import React from 'react';
 
 import { Meta, Story } from '@storybook/react';
 
+import CaretRightIcon from './CaretRight';
 import NotificationIcon from './Notification';
 import WarningIcon from './Warning';
-import CaretRightIcon from './CaretRight';
 
 export default { component: WarningIcon } as Meta;
 

@@ -69,7 +69,11 @@ describe('Button', () => {
 
   describe('given a round prop', () => {
     it('renders a round button', () => {
-      render(<Button round><CaretRightIcon /></Button>);
+      render(
+        <Button round>
+          <CaretRightIcon />
+        </Button>
+      );
 
       const button = screen.getByTestId(buttonTestIds.button);
 
