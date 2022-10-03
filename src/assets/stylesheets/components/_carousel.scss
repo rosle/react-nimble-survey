@@ -2,4 +2,10 @@
   &-indicators [data-bs-target] {
     border-radius: 100%;
   };
+
+  &-item {
+    // Add min height to always have the indicator visible when content is too small
+    // This also helps on the test, where it tries to find the indicator.
+    min-height: rem(48px);
+  }
 }
