@@ -15,7 +15,7 @@ export interface CarouselProps<T> extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 const Carousel = <T extends React.ReactNode>({ id, items, ...props }: CarouselProps<T>) => {
-  const carouselRef = useRef(null);
+  const carouselRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     new BootstrapCarousel(carouselRef.current!);

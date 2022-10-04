@@ -37,8 +37,8 @@ describe('Carousel', () => {
 
     cy.findAllByTestId(carouselTestIds.carouselItem).as('carouselItems').should('have.length', items.length);
 
-    cy.get('@carouselItems').eq(0).should('have.class', 'active');
-    cy.get('@carouselItems').eq(1).should('not.have.class', 'active');
+    cy.get('@carouselItems').eq(0).should('have.class', 'active').should('have.text', items[0]);
+    cy.get('@carouselItems').eq(1).should('not.have.class', 'active').should('have.text', items[1]);
   });
 
   context('given the user clicks on the carousel indicator', () => {

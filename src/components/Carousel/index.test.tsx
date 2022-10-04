@@ -43,7 +43,10 @@ describe('Carousel', () => {
     expect(carouselItems).toHaveLength(items.length);
 
     expect(carouselItems[0]).toHaveClass('active');
+    expect(carouselItems[0]).toHaveTextContent(items[0]);
+
     expect(carouselItems[1]).not.toHaveClass('active');
+    expect(carouselItems[1]).toHaveTextContent(items[1]);
   });
 
   // Need to disable the rule to wait for the animation to be completely ended.

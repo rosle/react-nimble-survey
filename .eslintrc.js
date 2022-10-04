@@ -3,6 +3,7 @@ module.exports = {
   ignorePatterns: ['!.storybook'],
   rules: {
     'react/prop-types': 'off',
+    '@typescript-eslint/no-non-null-assertion': 'off',
   },
   overrides: [
     {
