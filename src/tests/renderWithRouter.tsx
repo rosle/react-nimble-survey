@@ -31,8 +31,7 @@ const renderWithMemoryRouter = (
   { withContextProvider, ...memoryRouterProps }: renderWithMemoryRouterProps = {}
 ): RenderResult => {
   return render(renderChildren(children, { withContextProvider }), {
-    wrapper: (props) => <MemoryRouter {...props} />,
-    ...memoryRouterProps,
+    wrapper: (props) => <MemoryRouter {...memoryRouterProps} {...props} />,
   });
 };
 
