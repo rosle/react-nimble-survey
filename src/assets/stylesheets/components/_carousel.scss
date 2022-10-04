@@ -1,4 +1,8 @@
 .carousel {
+  &-indicators {
+    margin-bottom: rem(20px);
+  };
+
   &-indicators [data-bs-target] {
     border-radius: 100%;
   };

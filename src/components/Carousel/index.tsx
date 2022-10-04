@@ -14,7 +14,7 @@ export interface CarouselProps<T> extends React.HTMLAttributes<HTMLDivElement> {
   items: T[];
 }
 
-const Carousel = <T extends React.ReactNode>({ id, items, ...props }: CarouselProps<T>) => {
+const Carousel = <T extends React.ReactNode>({ id, className, items, ...props }: CarouselProps<T>) => {
   const carouselRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -35,8 +35,10 @@ const Carousel = <T extends React.ReactNode>({ id, items, ...props }: CarouselPr
     );
   };
 
+  const classes = classNames('carousel', 'slide', className);
+
   return (
-    <div id={id} className="carousel slide" {...props} ref={carouselRef} data-test-id={carouselTestIds.carousel}>
+    <div id={id} className={classes} ref={carouselRef} data-test-id={carouselTestIds.carousel} {...props}>
       <div className="carousel-indicators">
         {items.map((_item, index) => (
           <CarouselIndicator index={index} key={index} />
