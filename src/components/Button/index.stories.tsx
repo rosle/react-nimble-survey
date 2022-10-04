@@ -2,6 +2,8 @@ import React from 'react';
 
 import { Meta, Story } from '@storybook/react';
 
+import CaretRight from 'components/Icon/CaretRight';
+
 import Button, { ButtonProps } from './';
 
 export default {
@@ -27,4 +29,10 @@ SecondaryButton.args = {
 export const LinkButton: Story<ButtonProps> = Template.bind({});
 LinkButton.args = {
   buttonStyle: 'link',
+};
+
+export const RoundButton: Story<ButtonProps> = Template.bind({});
+RoundButton.args = {
+  round: true,
+  children: <CaretRight />,
 };
