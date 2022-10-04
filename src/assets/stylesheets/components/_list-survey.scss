@@ -1,4 +1,16 @@
 .list-survey {
+  &__blank-state {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    height: 100%;
+  }
+
+  &__carousel {
+    height: 100%;
+  }
+
   &-item {
     margin: rem(0 32px);
 
