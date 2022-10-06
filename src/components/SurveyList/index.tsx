@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import classNames from 'classnames';
@@ -26,9 +26,9 @@ const SurveyList = ({ blank = false, className, ...props }: SurveyListProps) => 
   const { t } = useTranslation(['survey']);
   const [currentSurvey, setCurrentSurvey] = useState<Survey>(mockSurveyList[0]);
 
-  const handleSurveyChanged = (index: number) => {
+  const handleSurveyChanged = useCallback((index: number) => {
     setCurrentSurvey(mockSurveyList[index]);
-  };
+  }, []);
 
   /* istanbul ignore next: Will be handled after connected to the API on #19 */
   const handleSurveySelected = (survey: Survey) => {

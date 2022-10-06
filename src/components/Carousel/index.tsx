@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { memo, useCallback, useEffect, useRef } from 'react';
 
 import { Carousel as BootstrapCarousel } from 'bootstrap';
 import classNames from 'classnames';
@@ -43,28 +43,25 @@ const Carousel = <T extends React.ReactNode>({ id, className, items, onItemChang
     };
   }, [onCarouselSlid]);
 
-  const CarouselIndicator = ({ index }: { index: number }) => {
-    const indicatorClasses = classNames({ active: index === 0 });
-
-    return (
-      <button
-        type="button"
-        data-bs-target={`#${id}`}
-        data-bs-slide-to={index}
-        className={indicatorClasses}
-        data-test-id={carouselTestIds.carouselIndicator}
-      ></button>
-    );
-  };
-
   const classes = classNames('carousel', 'slide', className);
 
   return (
     <div id={id} className={classes} ref={carouselRef} data-test-id={carouselTestIds.carousel} {...props}>
       <div className="carousel-indicators">
-        {items.map((_item, index) => (
-          <CarouselIndicator index={index} key={index} />
-        ))}
+        {items.map((_item, index) => {
+          const indicatorClasses = classNames({ active: index === 0 });
+
+          return (
+            <button
+              type="button"
+              key={index}
+              data-bs-target={`#${id}`}
+              data-bs-slide-to={index}
+              className={indicatorClasses}
+              data-test-id={carouselTestIds.carouselIndicator}
+            ></button>
+          );
+        })}
       </div>
       <div className="carousel-inner">
         {items.map((item, index) => {
@@ -81,4 +78,4 @@ const Carousel = <T extends React.ReactNode>({ id, className, items, onItemChang
   );
 };
 
-export default Carousel;
+export default memo(Carousel);
