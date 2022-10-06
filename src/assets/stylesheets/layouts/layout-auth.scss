@@ -9,20 +9,6 @@
     display: flex;
   }
 
-  body {
-    backdrop-filter: blur(50px);
-
-    background: {
-      image:
-        $body-gradient,
-        url('/assets/images/background.png');
-      repeat: no-repeat;
-      size: cover;
-
-      position: center;
-    };
-  };
-
   main {
     width: 25%;
     min-width: rem(340px);

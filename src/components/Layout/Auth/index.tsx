@@ -1,7 +1,9 @@
 import React from 'react';
 import { Helmet, HelmetProvider } from 'react-helmet-async';
 
+import background from 'assets/images/background.png';
 import logo from 'assets/images/logo.svg';
+import BackgroundImage from 'components/BackgroundImage';
 
 export const authLayoutTestIds = {
   headerLogo: 'app-header__logo',
@@ -20,6 +22,7 @@ const AuthLayout = ({ headerTitle, onHelmetStateChange, children }: AuthLayoutPr
       <Helmet onChangeClientState={onHelmetStateChange}>
         <html className="layout-auth"></html>
       </Helmet>
+      <BackgroundImage imageUrl={background} />
       <main>
         <header className="app-header">
           <img src={logo} className="app-header__logo" alt="logo" data-test-id={authLayoutTestIds.headerLogo} />
