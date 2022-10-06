@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 
 import { Carousel as BootstrapCarousel } from 'bootstrap';
 import classNames from 'classnames';
@@ -12,14 +12,36 @@ export const carouselTestIds = {
 export interface CarouselProps<T> extends React.HTMLAttributes<HTMLDivElement> {
   id: string;
   items: T[];
+  onItemChanged?: (index: number) => void;
 }
 
-const Carousel = <T extends React.ReactNode>({ id, className, items, ...props }: CarouselProps<T>) => {
+const Carousel = <T extends React.ReactNode>({ id, className, items, onItemChanged, ...props }: CarouselProps<T>) => {
   const carouselRef = useRef<HTMLDivElement>(null);
 
+  const onCarouselSlid = useCallback(() => {
+    const carouselEl = carouselRef.current;
+
+    if (!carouselEl) return;
+
+    const activeItem = carouselEl.querySelector('.carousel-item.active') as HTMLElement;
+    const activeItemIndex: number = parseInt(activeItem.dataset.index as string);
+
+    onItemChanged && onItemChanged(activeItemIndex);
+  }, [onItemChanged]);
+
   useEffect(() => {
-    carouselRef.current && new BootstrapCarousel(carouselRef.current);
-  }, []);
+    const carouselEl = carouselRef.current;
+
+    if (!carouselEl) return;
+
+    new BootstrapCarousel(carouselEl);
+
+    carouselEl.addEventListener('slid.bs.carousel', onCarouselSlid);
+
+    return () => {
+      carouselEl.removeEventListener('slid.bs.carousel', onCarouselSlid);
+    };
+  }, [onCarouselSlid]);
 
   const CarouselIndicator = ({ index }: { index: number }) => {
     const indicatorClasses = classNames({ active: index === 0 });
@@ -49,7 +71,7 @@ const Carousel = <T extends React.ReactNode>({ id, className, items, ...props }:
           const itemClasses = classNames('carousel-item', { active: index === 0 });
 
           return (
-            <div className={itemClasses} key={index} data-test-id={carouselTestIds.carouselItem}>
+            <div className={itemClasses} key={index} data-index={index} data-test-id={carouselTestIds.carouselItem}>
               {item}
             </div>
           );

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { render, screen, within } from '@testing-library/react';
+import { render, screen, waitFor, within } from '@testing-library/react';
 
 import { carouselTestIds } from 'components/Carousel';
 
@@ -24,6 +24,23 @@ describe('SurveyList', () => {
 
       expect(surveyListItem0).toHaveTextContent(mockSurveyList[0].title);
       expect(surveyListItem1).toHaveTextContent(mockSurveyList[1].title);
+    });
+
+    it('renders the background image based on the selected survey', async () => {
+      render(<SurveyList />);
+
+      const backgroundImageComp = screen.getByTestId(surveyListTestIds.backgroundImage);
+      const backgroundImage = within(backgroundImageComp).getByRole('img');
+      const carouselIndicators = screen.getAllByTestId(carouselTestIds.carouselIndicator);
+
+      expect(backgroundImage).toBeVisible();
+      expect(backgroundImage).toHaveAttribute('src', mockSurveyList[0].coverImageUrl);
+
+      carouselIndicators[1].click();
+
+      await waitFor(() => {
+        expect(backgroundImage).toHaveAttribute('src', mockSurveyList[1].coverImageUrl);
+      });
     });
   });
 

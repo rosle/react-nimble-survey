@@ -49,9 +49,9 @@ describe('Carousel', () => {
     expect(carouselItems[1]).toHaveTextContent(items[1]);
   });
 
-  // Need to disable the rule to wait for the animation to be completely ended.
-  /* eslint-disable testing-library/no-wait-for-multiple-assertions */
   describe('given the user clicks on the carousel indicator', () => {
+    // Need to disable the rule to wait for the animation to be completely ended.
+    /* eslint-disable testing-library/no-wait-for-multiple-assertions */
     it('goes to the correct carousel items', async () => {
       const items = ['Slide 1', 'Slide 2', 'Slide 3'];
 
@@ -80,6 +80,27 @@ describe('Carousel', () => {
         expect(carouselItems[2]).toHaveClass('active');
       });
     });
+    /* eslint-enable */
+
+    it('triggers the onItemChanged callback', async () => {
+      const items = ['Slide 1', 'Slide 2', 'Slide 3'];
+      const mockOnItemChangedFn = jest.fn();
+
+      render(<Carousel id="myCarousel" items={items} onItemChanged={mockOnItemChangedFn} />);
+
+      const carouselIndicators = screen.getAllByTestId(carouselTestIds.carouselIndicator);
+
+      carouselIndicators[1].click();
+
+      await waitFor(() => {
+        expect(mockOnItemChangedFn).toHaveBeenCalledWith(1);
+      });
+
+      carouselIndicators[2].click();
+
+      await waitFor(() => {
+        expect(mockOnItemChangedFn).toHaveBeenCalledWith(2);
+      });
+    });
   });
-  /* eslint-enable */
 });

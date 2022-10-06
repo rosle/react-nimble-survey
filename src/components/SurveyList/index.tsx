@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import classNames from 'classnames';
 
+import BackgroundImage from 'components/BackgroundImage';
 import BlankState from 'components/BlankState';
 import Carousel from 'components/Carousel';
 import { Survey } from 'types/survey';
@@ -13,6 +14,7 @@ import ListItem from './ListItem';
 export const surveyListTestIds = {
   blankState: 'list-survey__blank-state',
   carousel: 'list-survey__carousel',
+  backgroundImage: 'list-survey__backgroundImage',
 };
 
 // TODO: Later remove blank prop after fetching response from API on #19
@@ -22,6 +24,11 @@ export interface SurveyListProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const SurveyList = ({ blank = false, className, ...props }: SurveyListProps) => {
   const { t } = useTranslation(['survey']);
+  const [currentSurvey, setCurrentSurvey] = useState<Survey>(mockSurveyList[0]);
+
+  const handleSurveyChanged = (index: number) => {
+    setCurrentSurvey(mockSurveyList[index]);
+  };
 
   const handleSurveySelected = (survey: Survey) => {
     console.info(`Selected Survey ID ${survey.id}`);
@@ -41,12 +48,16 @@ const SurveyList = ({ blank = false, className, ...props }: SurveyListProps) => 
           data-test-id={surveyListTestIds.blankState}
         />
       ) : (
-        <Carousel
-          id="surveyListCarousel"
-          className="list-survey__carousel"
-          items={surveyListItems}
-          data-test-id={surveyListTestIds.carousel}
-        />
+        <>
+          <BackgroundImage imageUrl={currentSurvey.coverImageUrl} data-test-id={surveyListTestIds.backgroundImage} />
+          <Carousel
+            id="surveyListCarousel"
+            className="list-survey__carousel"
+            items={surveyListItems}
+            onItemChanged={handleSurveyChanged}
+            data-test-id={surveyListTestIds.carousel}
+          />
+        </>
       )}
     </div>
   );

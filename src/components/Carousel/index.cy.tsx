@@ -66,5 +66,29 @@ describe('Carousel', () => {
       cy.get('@carouselItems').eq(1).should('not.have.class', 'active');
       cy.get('@carouselItems').eq(2).should('have.class', 'active');
     });
+
+    it('triggers the onItemChanged callback', () => {
+      const items = ['Slide 1', 'Slide 2', 'Slide 3'];
+      const mockOnItemChangedFn = cy.stub().as('onItemChanged');
+
+      cy.mount(<Carousel id="myCarousel" items={items} onItemChanged={mockOnItemChangedFn} />);
+
+      cy.findAllByTestId(carouselTestIds.carouselIndicator).as('carouselIndicators');
+      cy.findAllByTestId(carouselTestIds.carouselItem).as('carouselItems');
+
+      cy.get('@carouselIndicators')
+        .eq(1)
+        .click()
+        .then(() => {
+          cy.get('@onItemChanged').should('have.been.calledOnceWith', 1);
+        });
+
+      cy.get('@carouselIndicators')
+        .eq(2)
+        .click()
+        .then(() => {
+          cy.get('@onItemChanged').should('have.been.calledWith', 2);
+        });
+    });
   });
 });

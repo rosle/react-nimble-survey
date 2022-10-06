@@ -8,9 +8,9 @@ export interface BackgroundImageProps extends React.HTMLAttributes<HTMLDivElemen
   imageUrl: string;
 }
 
-const BackgroundImage = ({ imageUrl }: BackgroundImageProps) => {
+const BackgroundImage = ({ imageUrl, ...props }: BackgroundImageProps) => {
   return (
-    <div className="background-image" data-test-id={backgroundImageTestIds.backgroundImage}>
+    <div className="background-image" data-test-id={backgroundImageTestIds.backgroundImage} {...props}>
       <img src={imageUrl} alt="background" />
     </div>
   );
