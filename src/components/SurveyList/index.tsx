@@ -30,6 +30,7 @@ const SurveyList = ({ blank = false, className, ...props }: SurveyListProps) => 
     setCurrentSurvey(mockSurveyList[index]);
   };
 
+  /* istanbul ignore next: Will be handled after connected to the API on #19 */
   const handleSurveySelected = (survey: Survey) => {
     console.info(`Selected Survey ID ${survey.id}`);
   };
