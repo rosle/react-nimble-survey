@@ -1,6 +1,6 @@
 const listSurveysTestIds = {
   todayDate: 'home__today-date',
-  surveyList: 'home__survey-list',
+  surveyList: 'home__list-survey',
 };
 
 describe('List Surveys', () => {

@@ -1,0 +1,27 @@
+.list-survey {
+  &-item {
+    margin: rem(0 32px);
+
+    &__cover {
+      width: 100%;
+      height: rem(302px);
+
+      object-fit: cover;
+
+      border-radius: rem(12px);
+    }
+
+    &__detail {
+      display: flex;
+      justify-content: space-between;
+
+      margin-top: rem(32px);
+    }
+
+    &__description {
+      padding-right: rem(8px);
+
+      opacity: 0.6;
+    }
+  }
+}

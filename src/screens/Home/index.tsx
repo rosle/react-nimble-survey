@@ -7,7 +7,7 @@ import TodayDate from 'components/TodayDate';
 
 export const homeScreenTestIds = {
   todayDate: 'home__today-date',
-  surveyList: 'home__survey-list',
+  surveyList: 'home__list-survey',
 };
 
 const HomeScreen = () => {
@@ -20,7 +20,7 @@ const HomeScreen = () => {
         <section className="home__today-date">
           <TodayDate data-test-id={homeScreenTestIds.todayDate} />
         </section>
-        <section className="home__survey-list">
+        <section className="home__list-survey">
           <SurveyList data-test-id={homeScreenTestIds.surveyList} />
         </section>
       </DefaultLayout>

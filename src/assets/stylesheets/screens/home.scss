@@ -4,8 +4,8 @@ body.home {
     flex-direction: column;
   }
 
-  .home__survey-list {
-    $self: '.survey-list';
+  .home__list-survey {
+    $self: '.list-survey';
 
     display: flex;
     flex: 1;
