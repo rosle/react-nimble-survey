@@ -1,4 +1,4 @@
-// TODO: Remove this one connected to the API.
+// TODO: Remove this mock after connected to the API.
 import { Survey } from 'types/survey';
 
 export const mockSurveyList: Survey[] = [

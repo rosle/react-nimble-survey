@@ -9,7 +9,7 @@ import { mockSurveyList } from './data';
 import { listItemTestIds } from './ListItem';
 
 describe('SurveyList', () => {
-  describe('given there are surveys in the list', () => {
+  describe('given there are surveys', () => {
     it('renders the survey list carousel', () => {
       render(<SurveyList />);
 
@@ -44,7 +44,7 @@ describe('SurveyList', () => {
     });
   });
 
-  describe('given there is NO survey in the list', () => {
+  describe('given there is NO survey', () => {
     it('renders the blank state', () => {
       render(<SurveyList blank />);
 

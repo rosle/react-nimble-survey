@@ -14,7 +14,7 @@ import ListItem from './ListItem';
 export const surveyListTestIds = {
   blankState: 'list-survey__blank-state',
   carousel: 'list-survey__carousel',
-  backgroundImage: 'list-survey__backgroundImage',
+  backgroundImage: 'list-survey__background-image',
 };
 
 // TODO: Later remove blank prop after fetching response from API on #19
