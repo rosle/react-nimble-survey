@@ -18,20 +18,20 @@ export const surveyListTestIds = {
   backgroundImage: 'list-survey__background-image',
 };
 
-// TODO: Later remove blank prop after fetching response from API on #19
-export interface SurveyListProps extends React.HTMLAttributes<HTMLDivElement> {
-  blank?: boolean;
-}
+export type SurveyListProps = React.HTMLAttributes<HTMLDivElement>;
 
-const SurveyList = ({ blank = false, className, ...props }: SurveyListProps) => {
+const SurveyList = ({ className, ...props }: SurveyListProps) => {
   const { t } = useTranslation(['survey']);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [surveys, setSurveys] = useState<Survey[]>([]);
   const [currentSurvey, setCurrentSurvey] = useState<Nullable<Survey>>(null);
 
-  const handleSurveyChanged = (index: number) => {
-    setCurrentSurvey(surveys[index]);
-  };
+  const handleSurveyChanged = useCallback(
+    (index: number) => {
+      setCurrentSurvey(surveys[index]);
+    },
+    [surveys]
+  );
 
   /* istanbul ignore next: Will be handled after connected to the API on #21 */
   const handleSurveySelected = (survey: Survey) => {
@@ -42,23 +42,23 @@ const SurveyList = ({ blank = false, className, ...props }: SurveyListProps) => 
     setIsLoading(true);
 
     const data = await SurveyAdapter.list();
-    const surveys: Survey[] = Serializer.deserialize('survey', data);
+    const surveysResponse: Survey[] = Serializer.deserialize('survey', data);
 
-    setSurveys(surveys);
-    setCurrentSurvey(surveys[0]);
+    setSurveys(surveysResponse);
+    setCurrentSurvey(surveysResponse[0]);
     setIsLoading(false);
   }, []);
 
   useEffect(() => {
     fetchSurveyList();
-  }, []);
+  }, [fetchSurveyList]);
 
   if (isLoading) {
     return <></>;
   } else {
     return (
       <div className={classNames('list-survey', className)} {...props}>
-        {surveys.length == 0 ? (
+        {surveys.length === 0 ? (
           <BlankState
             className="list-survey__blank-state"
             emoji="😎"

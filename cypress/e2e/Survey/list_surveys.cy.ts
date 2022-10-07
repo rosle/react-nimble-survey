@@ -1,5 +1,3 @@
-import { mockSurveyList } from 'components/SurveyList/data';
-
 const listSurveysTestIds = {
   todayDate: 'home__today-date',
   surveyList: 'home__list-survey',
@@ -26,6 +24,8 @@ describe('List Surveys', () => {
 
   context('given there are surveys', () => {
     it('displays the survey list', () => {
+      cy.intercept('GET', '/api/v1/surveys', { statusCode: 200, fixture: 'list_survey_success' });
+
       cy.login();
       cy.visit('/');
 
@@ -34,6 +34,8 @@ describe('List Surveys', () => {
     });
 
     it('displays the survey list items', () => {
+      cy.intercept('GET', '/api/v1/surveys', { statusCode: 200, fixture: 'list_survey_success' });
+
       cy.login();
       cy.visit('/');
 
@@ -45,19 +47,28 @@ describe('List Surveys', () => {
       cy.findAllByTestId(listSurveysTestIds.surveyListItem).should('be.visible').as('surveyListItems');
       cy.findAllByTestId(listSurveysTestIds.surveyListCarouselIndicator).should('be.visible').as('surveyListCarouselIndicators');
 
-      cy.get('@surveyListBackgroundImage').should('have.attr', 'src', mockSurveyList[0].coverImageUrl);
-      cy.get('@surveyListItems').eq(0).should('be.visible').should('contain.text', mockSurveyList[0].title);
+      cy.get('@surveyListBackgroundImage').should(
+        'have.attr',
+        'src',
+        'https://dhdbhh0jsld0o.cloudfront.net/m/1ea51560991bcb7d00d0_'
+      );
+      cy.get('@surveyListItems').eq(0).should('be.visible').should('contain.text', 'Scarlett Bangkok');
 
       cy.get('@surveyListCarouselIndicators').eq(1).click();
 
-      cy.get('@surveyListBackgroundImage').should('have.attr', 'src', mockSurveyList[1].coverImageUrl);
-      cy.get('@surveyListItems').eq(1).should('be.visible').should('contain.text', mockSurveyList[1].title);
+      cy.get('@surveyListBackgroundImage').should(
+        'have.attr',
+        'src',
+        'https://dhdbhh0jsld0o.cloudfront.net/m/287db81c5e4242412cc0_'
+      );
+      cy.get('@surveyListItems').eq(1).should('be.visible').should('contain.text', 'ibis Bangkok Riverside');
     });
   });
 
-  // TODO: Enable this test again after connected to the API on #19
-  context.skip('given there is NO survey', () => {
+  context('given there is NO survey', () => {
     it('displays the survey list blank state', () => {
+      cy.intercept('GET', '/api/v1/surveys', { statusCode: 200, fixture: 'list_survey_success_empty' });
+
       cy.login();
       cy.visit('/');
 
