@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import classNames from 'classnames';
 
+import SurveyAdapter from 'adapters/Survey';
 import BackgroundImage from 'components/BackgroundImage';
 import BlankState from 'components/BlankState';
 import Carousel from 'components/Carousel';
+import Serializer from 'lib/serializers';
 import { Survey } from 'types/survey';
 
-import { mockSurveyList } from './data';
 import ListItem from './ListItem';
 
 export const surveyListTestIds = {
@@ -24,44 +25,63 @@ export interface SurveyListProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const SurveyList = ({ blank = false, className, ...props }: SurveyListProps) => {
   const { t } = useTranslation(['survey']);
-  const [currentSurvey, setCurrentSurvey] = useState<Survey>(mockSurveyList[0]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [surveys, setSurveys] = useState<Survey[]>([]);
+  const [currentSurvey, setCurrentSurvey] = useState<Nullable<Survey>>(null);
 
   const handleSurveyChanged = (index: number) => {
-    setCurrentSurvey(mockSurveyList[index]);
+    setCurrentSurvey(surveys[index]);
   };
 
-  /* istanbul ignore next: Will be handled after connected to the API on #19 */
+  /* istanbul ignore next: Will be handled after connected to the API on #21 */
   const handleSurveySelected = (survey: Survey) => {
     console.info(`Selected Survey ID ${survey.id}`);
   };
 
-  const surveyListItems = mockSurveyList.map((survey) => (
-    <ListItem key={survey.id} survey={survey} onSelected={handleSurveySelected} />
-  ));
+  const fetchSurveyList = useCallback(async () => {
+    setIsLoading(true);
 
-  return (
-    <div className={classNames('list-survey', className)} {...props}>
-      {blank ? (
-        <BlankState
-          className="list-survey__blank-state"
-          emoji="😎"
-          description={t('survey:completed')}
-          data-test-id={surveyListTestIds.blankState}
-        />
-      ) : (
-        <>
-          <BackgroundImage imageUrl={currentSurvey.coverImageUrl} data-test-id={surveyListTestIds.backgroundImage} />
-          <Carousel
-            id="surveyListCarousel"
-            className="list-survey__carousel"
-            items={surveyListItems}
-            onItemChanged={handleSurveyChanged}
-            data-test-id={surveyListTestIds.carousel}
+    const data = await SurveyAdapter.list();
+    const surveys: Survey[] = Serializer.deserialize('survey', data);
+
+    setSurveys(surveys);
+    setCurrentSurvey(surveys[0]);
+    setIsLoading(false);
+  }, []);
+
+  useEffect(() => {
+    fetchSurveyList();
+  }, []);
+
+  if (isLoading) {
+    return <></>;
+  } else {
+    return (
+      <div className={classNames('list-survey', className)} {...props}>
+        {surveys.length == 0 ? (
+          <BlankState
+            className="list-survey__blank-state"
+            emoji="😎"
+            description={t('survey:completed')}
+            data-test-id={surveyListTestIds.blankState}
           />
-        </>
-      )}
-    </div>
-  );
+        ) : (
+          <>
+            <BackgroundImage imageUrl={currentSurvey!.coverImageUrl} data-test-id={surveyListTestIds.backgroundImage} />
+            <Carousel
+              id="surveyListCarousel"
+              className="list-survey__carousel"
+              items={surveys.map((survey) => (
+                <ListItem key={survey.id} survey={survey} onSelected={handleSurveySelected} />
+              ))}
+              onItemChanged={handleSurveyChanged}
+              data-test-id={surveyListTestIds.carousel}
+            />
+          </>
+        )}
+      </div>
+    );
+  }
 };
 
 export default SurveyList;
