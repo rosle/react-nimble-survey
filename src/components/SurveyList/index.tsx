@@ -7,7 +7,7 @@ import SurveyAdapter from 'adapters/Survey';
 import BackgroundImage from 'components/BackgroundImage';
 import BlankState from 'components/BlankState';
 import Carousel from 'components/Carousel';
-import Serializer from 'lib/serializers';
+import Serializer from 'lib/serializer';
 import { Survey } from 'types/survey';
 
 import ListItem from './ListItem';
