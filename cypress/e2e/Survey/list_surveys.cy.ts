@@ -13,6 +13,8 @@ describe('List Surveys', () => {
     const now = Date.parse('2022-08-22T04:15:27.898Z');
     cy.clock(now, ['Date']);
 
+    cy.intercept('GET', '/api/v1/surveys', { statusCode: 200, fixture: 'list_survey_success' });
+
     cy.login();
     cy.visit('/');
 
