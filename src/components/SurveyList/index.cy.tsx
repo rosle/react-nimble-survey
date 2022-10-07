@@ -14,7 +14,7 @@ describe('SurveyList', () => {
 
       cy.findByTestId(surveyListTestIds.carousel).should('be.visible');
 
-      cy.findAllByTestId(carouselTestIds.carouselItem).as('carouselItems');
+      cy.findAllByTestId(carouselTestIds.carouselItem).should('have.length', 5).as('carouselItems');
 
       cy.get('@carouselItems').eq(0).findByTestId(listItemTestIds.listItem).should('contain.text', 'Scarlett Bangkok');
       cy.get('@carouselItems').eq(1).findByTestId(listItemTestIds.listItem).should('contain.text', 'ibis Bangkok Riverside');

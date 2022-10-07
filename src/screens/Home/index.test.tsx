@@ -1,8 +1,9 @@
 import React from 'react';
 
-import { screen } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 
 import { renderWithRouter } from 'tests/renderWithRouter';
+import { setupPolly } from 'tests/setupPolly';
 
 import HomeScreen, { homeScreenTestIds } from '.';
 
@@ -15,11 +16,17 @@ describe('HomeScreen', () => {
     expect(todayDate).toBeVisible();
   });
 
-  it('renders the survey list', () => {
+  it('renders the survey list', async () => {
+    const polly = setupPolly('list_survey_success');
+
     renderWithRouter(<HomeScreen />);
 
-    const surveyList = screen.getByTestId(homeScreenTestIds.surveyList);
+    await waitFor(() => {
+      const surveyList = screen.getByTestId(homeScreenTestIds.surveyList);
 
-    expect(surveyList).toBeVisible();
+      expect(surveyList).toBeVisible();
+    });
+
+    await polly.stop();
   });
 });
