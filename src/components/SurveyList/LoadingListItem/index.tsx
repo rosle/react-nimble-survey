@@ -3,11 +3,15 @@ import React from 'react';
 import Button from 'components/Button';
 import CaretRightIcon from 'components/Icon/CaretRight';
 
-export type ListItemProps = React.HTMLAttributes<HTMLDivElement>;
+export const loadingListItemTestIds = {
+  loadingListItem: 'list-survey-item--loading',
+};
 
-const LoadingListItem = ({}: ListItemProps) => {
+export type LoadingListItemProps = React.HTMLAttributes<HTMLDivElement>;
+
+const LoadingListItem = ({ ...props }: LoadingListItemProps) => {
   return (
-    <div className="list-survey-item list-survey-item--loading">
+    <div className="list-survey-item list-survey-item--loading" data-test-id={loadingListItemTestIds.loadingListItem} {...props}>
       <div className="list-survey-item__cover" />
       <div className="list-survey-item__detail">
         <div>

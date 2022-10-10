@@ -57,11 +57,13 @@
 
       display: block;
 
+      // Set position to be bigger than the actual to cover the whole the content.
+      // Because some text could be slipped out of the covered div.
       position: absolute;
       top: -1px;
-      right: -1px;
+      right: -2px;
       bottom: -1px;
-      left: -1px;
+      left: -2px;
 
       animation: 1.5s linear infinite loadingShimmer;
 

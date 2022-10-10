@@ -12,6 +12,7 @@ import ListItem from './ListItem';
 import LoadingListItem from './LoadingListItem';
 
 export const surveyListTestIds = {
+  loadingState: 'list-survey__loading-state',
   blankState: 'list-survey__blank-state',
   carousel: 'list-survey__carousel',
   backgroundImage: 'list-survey__background-image',
@@ -40,7 +41,7 @@ const SurveyList = ({ className, isLoading, surveys, ...props }: SurveyListProps
   }, [isLoading, surveys]);
 
   if (isLoading) {
-    return <LoadingListItem />
+    return <LoadingListItem data-test-id={surveyListTestIds.loadingState} />;
   } else {
     return (
       <div className={classNames('list-survey', className)} {...props}>

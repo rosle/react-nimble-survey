@@ -9,12 +9,21 @@ import SurveyList, { surveyListTestIds } from '.';
 import { listItemTestIds } from './ListItem';
 
 describe('SurveyList', () => {
+  it('renders the loading state', () => {
+    cy.intercept('GET', '/api/v1/surveys', { statusCode: 200, fixture: 'list_survey_success' });
+
+    cy.mount(<SurveyList />);
+
+    cy.findByTestId(surveyListTestIds.loadingState).should('be.visible');
+  });
+
   describe('given there are surveys', () => {
     it('renders the survey list carousel', () => {
       const surveys = times(2, () => buildSurvey());
 
       cy.mountWithRouter(<SurveyList isLoading={false} surveys={surveys} />);
 
+      cy.findByTestId(surveyListTestIds.loadingState).should('not.exist');
       cy.findByTestId(surveyListTestIds.carousel).should('be.visible');
 
       cy.findAllByTestId(carouselTestIds.carouselItem).should('have.length', 2).as('carouselItems');
@@ -28,6 +37,7 @@ describe('SurveyList', () => {
 
       cy.mountWithRouter(<SurveyList isLoading={false} surveys={surveys} />);
 
+      cy.findByTestId(surveyListTestIds.loadingState).should('not.exist');
       cy.findByTestId(surveyListTestIds.backgroundImage).should('be.visible').findByRole('img').as('backgroundImage');
       cy.findAllByTestId(carouselTestIds.carouselIndicator).as('carouselIndicators');
 
@@ -42,6 +52,8 @@ describe('SurveyList', () => {
   describe('given there is NO survey', () => {
     it('renders the blank state', () => {
       cy.mount(<SurveyList isLoading={false} surveys={[]} />);
+
+      cy.findByTestId(surveyListTestIds.loadingState).should('not.exist');
 
       cy.findByTestId(surveyListTestIds.blankState)
         .should('be.visible')
