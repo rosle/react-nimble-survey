@@ -41,28 +41,16 @@ describe('List Surveys', () => {
       cy.login();
       cy.visit('/');
 
-      cy.findByTestId(listSurveysTestIds.surveyListBackgroundImage)
-        .should('be.visible')
-        .findByRole('img')
-        .as('surveyListBackgroundImage');
-
+      cy.findByTestId(listSurveysTestIds.surveyListBackgroundImage).should('be.visible').findByRole('img').as('backgroundImage');
       cy.findAllByTestId(listSurveysTestIds.surveyListItem).should('be.visible').as('surveyListItems');
       cy.findAllByTestId(listSurveysTestIds.surveyListCarouselIndicator).should('be.visible').as('surveyListCarouselIndicators');
 
-      cy.get('@surveyListBackgroundImage').should(
-        'have.attr',
-        'src',
-        'https://dhdbhh0jsld0o.cloudfront.net/m/1ea51560991bcb7d00d0_'
-      );
+      cy.get('@backgroundImage').should('have.attr', 'src', 'https://dhdbhh0jsld0o.cloudfront.net/m/1ea51560991bcb7d00d0_');
       cy.get('@surveyListItems').eq(0).should('be.visible').should('contain.text', 'Scarlett Bangkok');
 
       cy.get('@surveyListCarouselIndicators').eq(1).click();
 
-      cy.get('@surveyListBackgroundImage').should(
-        'have.attr',
-        'src',
-        'https://dhdbhh0jsld0o.cloudfront.net/m/287db81c5e4242412cc0_'
-      );
+      cy.get('@backgroundImage').should('have.attr', 'src', 'https://dhdbhh0jsld0o.cloudfront.net/m/287db81c5e4242412cc0_');
       cy.get('@surveyListItems').eq(1).should('be.visible').should('contain.text', 'ibis Bangkok Riverside');
     });
   });
