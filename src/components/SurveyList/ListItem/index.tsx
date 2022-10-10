@@ -31,9 +31,9 @@ const ListItem = ({ survey }: ListItemProps) => {
           <h3 className="list-survey-item__title" data-test-id={listItemTestIds.title}>
             {survey.title}
           </h3>
-          <div className="list-survey-item__description" data-test-id={listItemTestIds.description}>
+          <span className="list-survey-item__description" data-test-id={listItemTestIds.description}>
             {survey.description}
-          </div>
+          </span>
         </div>
         {/* TODO: Update the link to the survey page on #21 */}
         <Link to="/" data-test-id={listItemTestIds.viewButton}>

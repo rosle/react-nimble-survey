@@ -9,6 +9,7 @@ import Carousel from 'components/Carousel';
 import { Survey } from 'types/survey';
 
 import ListItem from './ListItem';
+import LoadingListItem from './LoadingListItem';
 
 export const surveyListTestIds = {
   blankState: 'list-survey__blank-state',
@@ -39,7 +40,7 @@ const SurveyList = ({ className, isLoading, surveys, ...props }: SurveyListProps
   }, [isLoading, surveys]);
 
   if (isLoading) {
-    return <></>;
+    return <LoadingListItem />
   } else {
     return (
       <div className={classNames('list-survey', className)} {...props}>

@@ -9,16 +9,19 @@ $white: #fff;
 $gray-100: #999;
 $gray-300: #5b5b5b;
 $gray-500: #474747;
+$gray-700: #313136;
 $gray-800: #1a1a1a;
 
 $grays: (
   '100': $gray-100,
   '300': $gray-300,
   '500': $gray-500,
+  '700': $gray-700,
   '800': $gray-800,
 );
 
 $body-gradient: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, $black 100%);
+$loading-shimmer-gradient: linear-gradient(90deg, map-get($grays, '700') 40%, #47474c, map-get($grays, '700') 60%);
 $input-alpha-bg: rgba(255, 255, 255, 0.18);
 $alert-alpha-bg: rgba(37, 37, 37, 0.6);
 

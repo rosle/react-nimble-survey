@@ -1,4 +1,6 @@
 .list-survey {
+  $self: &;
+
   &__blank-state {
     display: flex;
     flex-direction: column;
@@ -34,6 +36,47 @@
       padding-right: rem(8px);
 
       opacity: 0.6;
+    }
+  }
+
+  @keyframes loadingShimmer {
+    0% { background-position: 120%; }
+    100% { background-position: -20%; }
+  }
+
+  &-item--loading &-item__cover,
+  &-item--loading &-item__title,
+  &-item--loading &-item__description,
+  &-item--loading &-item__action {
+    position: relative;
+
+    opacity: 100%;
+
+    &::after {
+      content: '';
+
+      display: block;
+
+      position: absolute;
+      top: -1px;
+      right: -1px;
+      bottom: -1px;
+      left: -1px;
+
+      animation: 1.5s linear infinite loadingShimmer;
+
+      border-radius: rem(12px);
+
+      background: $loading-shimmer-gradient;
+      background-size: 200%;
+    }
+  }
+
+  &-item--loading &-item__action {
+    border: 0;
+
+    &::after {
+      border-radius: 100%;
     }
   }
 }
