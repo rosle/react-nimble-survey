@@ -1,6 +1,6 @@
 import requestManager from 'lib/requestManager';
 
-const surveyAdapter = () => {
+const SurveyAdapter = () => {
   const list = () => {
     return requestManager('get', '/api/v1/surveys');
   };
@@ -8,4 +8,4 @@ const surveyAdapter = () => {
   return { list };
 };
 
-export default surveyAdapter();
+export default SurveyAdapter();

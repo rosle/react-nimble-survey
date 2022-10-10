@@ -1,4 +1,4 @@
-import Serializer from './serializer';
+import JsonApiSerializer from './jsonApiSerializer';
 
 const surveyResponse = {
   data: [
@@ -41,10 +41,10 @@ const surveyResponse = {
   },
 };
 
-describe('Serializer', () => {
+describe('JsonApiSerializer', () => {
   describe('.deserialize()', () => {
     it('deserializes the survey response', () => {
-      expect(Serializer.deserialize('survey', surveyResponse)).toEqual([
+      expect(JsonApiSerializer.deserialize('survey', surveyResponse)).toEqual([
         {
           id: 'd5de6a8f8f5f1cfe51bc',
           title: 'Scarlett Bangkok',

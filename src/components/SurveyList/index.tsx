@@ -7,7 +7,7 @@ import SurveyAdapter from 'adapters/Survey';
 import BackgroundImage from 'components/BackgroundImage';
 import BlankState from 'components/BlankState';
 import Carousel from 'components/Carousel';
-import Serializer from 'lib/serializer';
+import JsonApiSerializer from 'lib/jsonApiSerializer';
 import { Survey } from 'types/survey';
 
 import ListItem from './ListItem';
@@ -42,7 +42,7 @@ const SurveyList = ({ className, ...props }: SurveyListProps) => {
     setIsLoading(true);
 
     const data = await SurveyAdapter.list();
-    const surveysResponse: Survey[] = Serializer.deserialize('survey', data);
+    const surveysResponse: Survey[] = JsonApiSerializer.deserialize('survey', data);
 
     setSurveys(surveysResponse);
     setCurrentSurvey(surveysResponse[0]);
