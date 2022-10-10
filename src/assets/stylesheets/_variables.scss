@@ -21,7 +21,7 @@ $grays: (
 );
 
 $body-gradient: linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, $black 100%);
-$loading-shimmer-gradient: linear-gradient(90deg, map-get($grays, '700') 40%, #47474c, map-get($grays, '700') 60%);
+$loading-shimmer-gradient: linear-gradient(90deg, $gray-700 40%, #47474c, $gray-700 60%);
 $input-alpha-bg: rgba(255, 255, 255, 0.18);
 $alert-alpha-bg: rgba(37, 37, 37, 0.6);
 
