@@ -1,0 +1,13 @@
+.layout-fullscreen {
+  &,
+  body,
+  .root-container {
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  header,
+  main {
+    padding: rem(32px);
+  }
+}

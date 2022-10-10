@@ -47,6 +47,16 @@ describe('Button', () => {
     });
   });
 
+  describe('given an fit buttonSize prop', () => {
+    it('renders an fit button', () => {
+      render(<Button buttonSize="fit">Sign in</Button>);
+
+      const button = screen.getByTestId(buttonTestIds.button);
+
+      expect(button).toHaveClass('btn--fit');
+    });
+  });
+
   describe('given an sm buttonSize prop', () => {
     it('renders an sm button', () => {
       render(<Button buttonSize="sm">Sign in</Button>);

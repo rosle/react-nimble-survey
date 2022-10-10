@@ -8,7 +8,7 @@ export const buttonTestIds = {
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   buttonStyle?: 'primary' | 'secondary' | 'link';
-  buttonSize?: 'sm' | 'md';
+  buttonSize?: 'fit' | 'sm' | 'md';
   fullWidth?: boolean;
   round?: boolean;
 }
