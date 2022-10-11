@@ -31,6 +31,11 @@ const mockSurveyIntro: SurveyQuestion = {
   coverImageOpacity: 0.26,
 };
 
+export const surveyScreenTestIds = {
+  backNavigation: 'survey__back-navigation',
+  surveyIntro: 'survey__survey-intro',
+};
+
 const SurveyScreen = () => {
   /* istanbul ignore next: Will be handled after implement survey questions on #44 */
   const handleSurveyStart = () => {
@@ -44,7 +49,7 @@ const SurveyScreen = () => {
       </Helmet>
       <FullScreenLayout
         topNavigation={
-          <Link to="/">
+          <Link to="/" data-test-id={surveyScreenTestIds.backNavigation}>
             <Button buttonStyle="link" buttonSize="fit">
               <CaretLeftIcon />
             </Button>
@@ -53,7 +58,12 @@ const SurveyScreen = () => {
       >
         <BackgroundImage imageUrl={mockSurveyIntro.coverImageUrl} />
         <div className="survey__survey-intro">
-          <SurveyIntro survey={mockSurvey} surveyIntro={mockSurveyIntro} onStart={handleSurveyStart} />
+          <SurveyIntro
+            survey={mockSurvey}
+            surveyIntro={mockSurveyIntro}
+            onStart={handleSurveyStart}
+            data-test-id={surveyScreenTestIds.surveyIntro}
+          />
         </div>
       </FullScreenLayout>
     </HelmetProvider>
