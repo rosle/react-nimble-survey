@@ -76,19 +76,13 @@ describe('Carousel', () => {
       cy.findAllByTestId(carouselTestIds.carouselIndicator).as('carouselIndicators');
       cy.findAllByTestId(carouselTestIds.carouselItem).as('carouselItems');
 
-      cy.get('@carouselIndicators')
-        .eq(1)
-        .click()
-        .then(() => {
-          cy.get('@onItemChanged').should('have.been.calledOnceWith', 1);
-        });
+      cy.get('@carouselIndicators').eq(1).click();
 
-      cy.get('@carouselIndicators')
-        .eq(2)
-        .click()
-        .then(() => {
-          cy.get('@onItemChanged').should('have.been.calledWith', 2);
-        });
+      cy.get('@onItemChanged').should('have.been.calledOnceWith', 1);
+
+      cy.get('@carouselIndicators').eq(2).click();
+
+      cy.get('@onItemChanged').should('have.been.calledWith', 2);
     });
   });
 });

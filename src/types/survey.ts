@@ -7,16 +7,16 @@ export type Survey = {
   createdAt: string;
 };
 
-export type DisplayType = 'intro';
-export type Pick = 'none' | 'one' | 'any';
+export type QuestionDisplayType = 'intro';
+export type QuestionPick = 'none' | 'one' | 'any';
 
 export type SurveyQuestion = {
   id: string;
   text: string;
   shortText: string;
-  pick: Pick;
+  pick: QuestionPick;
   displayOrder: number;
-  displayType: DisplayType;
+  displayType: QuestionDisplayType;
   isMandatory: boolean;
   imageUrl: string;
   coverImageUrl: string;
