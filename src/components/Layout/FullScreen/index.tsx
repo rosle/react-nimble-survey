@@ -13,8 +13,10 @@ const FullScreenLayout = ({ onHelmetStateChange, children, topNavigation }: Full
       <Helmet onChangeClientState={onHelmetStateChange}>
         <html className="layout-fullscreen"></html>
       </Helmet>
-      {topNavigation && <header>{topNavigation}</header>}
-      <main>{children}</main>
+      <main>
+        {topNavigation && <header className="app-header">{topNavigation}</header>}
+        <div className="app-content">{children}</div>
+      </main>
     </HelmetProvider>
   );
 };

@@ -6,8 +6,22 @@
     overflow: hidden;
   }
 
-  header,
   main {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .app-header {
     padding: rem(32px);
+  }
+
+  .app-content {
+    display: flex;
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+
+    padding: rem(0 32px);
   }
 }
