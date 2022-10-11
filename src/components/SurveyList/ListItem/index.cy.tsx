@@ -1,17 +1,20 @@
 import React from 'react';
 
 import { caretRightTestId } from 'components/Icon/CaretRight';
+import { getHiResImageUrl } from 'helpers/image';
 import { buildSurvey } from 'tests/factories/survey';
 
 import ListItem, { listItemTestIds } from '.';
 
 describe('ListItem', () => {
-  it('displays the survey cover image', () => {
+  it('displays the high resolution survey cover image', () => {
     const survey = buildSurvey();
 
     cy.mountWithRouter(<ListItem survey={survey} />);
 
-    cy.findByTestId(listItemTestIds.cover).should('be.visible').should('have.attr', 'src', survey.coverImageUrl);
+    cy.findByTestId(listItemTestIds.cover)
+      .should('be.visible')
+      .should('have.attr', 'src', getHiResImageUrl(survey.coverImageUrl));
   });
 
   it('displays the survey title', () => {

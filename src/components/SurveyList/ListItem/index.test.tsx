@@ -3,13 +3,14 @@ import React from 'react';
 import { screen, within } from '@testing-library/react';
 
 import { caretRightTestId } from 'components/Icon/CaretRight';
+import { getHiResImageUrl } from 'helpers/image';
 import { buildSurvey } from 'tests/factories/survey';
 import { renderWithRouter } from 'tests/renderWithRouter';
 
 import ListItem, { listItemTestIds } from '.';
 
 describe('ListItem', () => {
-  it('displays the survey cover image', () => {
+  it('displays the high resolution survey cover image', () => {
     const survey = buildSurvey();
 
     renderWithRouter(<ListItem survey={survey} />);
@@ -17,7 +18,7 @@ describe('ListItem', () => {
     const surveyCoverImage = screen.getByTestId(listItemTestIds.cover);
 
     expect(surveyCoverImage).toBeVisible();
-    expect(surveyCoverImage).toHaveAttribute('src', survey.coverImageUrl);
+    expect(surveyCoverImage).toHaveAttribute('src', getHiResImageUrl(survey.coverImageUrl));
   });
 
   it('displays the survey title', () => {

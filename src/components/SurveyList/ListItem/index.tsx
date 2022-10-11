@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 import Button from 'components/Button';
 import CaretRightIcon from 'components/Icon/CaretRight';
+import { getHiResImageUrl } from 'helpers/image';
 import { Survey } from 'types/survey';
 
 export const listItemTestIds = {
@@ -22,7 +23,7 @@ const ListItem = ({ survey }: ListItemProps) => {
     <div className="list-survey-item" data-test-id={listItemTestIds.listItem}>
       <img
         className="list-survey-item__cover"
-        src={survey.coverImageUrl}
+        src={getHiResImageUrl(survey.coverImageUrl)}
         alt="survey cover"
         data-test-id={listItemTestIds.cover}
       />
