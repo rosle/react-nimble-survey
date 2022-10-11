@@ -3,13 +3,13 @@ import React from 'react';
 import FullScreenLayout from '.';
 
 describe('FullScreenLayout', () => {
-  it('adds the html class', async () => {
+  it('adds the html class', () => {
     cy.mount(<FullScreenLayout />);
 
     cy.get('html').should('have.class', 'layout-fullscreen');
   });
 
-  it('renders the children', async () => {
+  it('renders the children', () => {
     const childrenContent = 'This is component children';
 
     cy.mount(
@@ -22,7 +22,7 @@ describe('FullScreenLayout', () => {
   });
 
   describe('given the top navigation props', () => {
-    it('renders the given top navigation element', async () => {
+    it('renders the given top navigation element', () => {
       const topNavigationContent = 'Title';
 
       cy.mount(<FullScreenLayout topNavigation={<h1>{topNavigationContent}</h1>} />);
