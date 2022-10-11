@@ -47,8 +47,8 @@ describe('Button', () => {
     });
   });
 
-  describe('given an fit buttonSize prop', () => {
-    it('renders an fit button', () => {
+  describe('given a fit buttonSize prop', () => {
+    it('renders a fit button', () => {
       render(<Button buttonSize="fit">Sign in</Button>);
 
       const button = screen.getByTestId(buttonTestIds.button);
