@@ -1,0 +1,22 @@
+.survey-intro {
+  &__cover {
+    width: 100%;
+    height: rem(302px);
+
+    margin-bottom: rem(32px);
+
+    object-fit: cover;
+
+    border-radius: rem(12px);
+  }
+
+  &__title {
+    margin-bottom: rem(8px);
+  }
+
+  &__description {
+    margin-bottom: rem(32px);
+
+    opacity: 0.6;
+  }
+}

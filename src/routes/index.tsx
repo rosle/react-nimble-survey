@@ -3,6 +3,7 @@ import { RouteObject } from 'react-router-dom';
 
 import HomeScreen from 'screens/Home';
 import LoginScreen from 'screens/Login';
+import SurveyScreen from 'screens/Survey';
 
 import AuthRoute from './AuthRoute';
 import ProtectedRoute from './ProtectedRoute';
@@ -25,6 +26,14 @@ const protectedRoutes: RouteObject[] = [
     element: (
       <ProtectedRoute>
         <HomeScreen />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: '/surveys/:surveyId',
+    element: (
+      <ProtectedRoute>
+        <SurveyScreen />
       </ProtectedRoute>
     ),
   },
