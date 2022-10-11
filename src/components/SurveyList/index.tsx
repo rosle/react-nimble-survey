@@ -32,11 +32,6 @@ const SurveyList = ({ className, isLoading, surveys, ...props }: SurveyListProps
     [surveys]
   );
 
-  /* istanbul ignore next: Will be handled after connected to the API on #21 */
-  const handleSurveySelected = (survey: Survey) => {
-    console.info(`Selected Survey ID ${survey.id}`);
-  };
-
   useEffect(() => {
     if (!isLoading && surveys) {
       setCurrentSurvey(surveys[0]);
@@ -64,7 +59,7 @@ const SurveyList = ({ className, isLoading, surveys, ...props }: SurveyListProps
               id="surveyListCarousel"
               className="list-survey__carousel"
               items={surveys.map((survey) => (
-                <ListItem key={survey.id} survey={survey} onSelected={handleSurveySelected} />
+                <ListItem key={survey.id} survey={survey} />
               ))}
               onItemChanged={handleSurveyChanged}
               data-test-id={surveyListTestIds.carousel}

@@ -13,7 +13,7 @@ describe('SurveyList', () => {
     it('renders the survey list carousel', () => {
       const surveys = times(2, () => buildSurvey());
 
-      cy.mount(<SurveyList isLoading={false} surveys={surveys} />);
+      cy.mountWithRouter(<SurveyList isLoading={false} surveys={surveys} />);
 
       cy.findByTestId(surveyListTestIds.carousel).should('be.visible');
 
@@ -26,7 +26,7 @@ describe('SurveyList', () => {
     it('renders the background image based on the selected survey', () => {
       const surveys = times(2, () => buildSurvey());
 
-      cy.mount(<SurveyList isLoading={false} surveys={surveys} />);
+      cy.mountWithRouter(<SurveyList isLoading={false} surveys={surveys} />);
 
       cy.findByTestId(surveyListTestIds.backgroundImage).should('be.visible').findByRole('img').as('backgroundImage');
       cy.findAllByTestId(carouselTestIds.carouselIndicator).as('carouselIndicators');

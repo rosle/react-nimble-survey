@@ -5,6 +5,7 @@ import { times } from 'lodash';
 
 import { carouselTestIds } from 'components/Carousel';
 import { buildSurvey } from 'tests/factories/survey';
+import { renderWithRouter } from 'tests/renderWithRouter';
 
 import SurveyList, { surveyListTestIds } from '.';
 import { listItemTestIds } from './ListItem';
@@ -14,7 +15,7 @@ describe('SurveyList', () => {
     it('renders the survey list carousel', async () => {
       const surveys = times(2, () => buildSurvey());
 
-      render(<SurveyList isLoading={false} surveys={surveys} />);
+      renderWithRouter(<SurveyList isLoading={false} surveys={surveys} />);
 
       await waitFor(() => {
         const carousel = screen.getByTestId(surveyListTestIds.carousel);
@@ -33,7 +34,7 @@ describe('SurveyList', () => {
     it('renders the background image based on the selected survey', async () => {
       const surveys = times(2, () => buildSurvey());
 
-      render(<SurveyList isLoading={false} surveys={surveys} />);
+      renderWithRouter(<SurveyList isLoading={false} surveys={surveys} />);
 
       await waitFor(() => {
         const carousel = screen.getByTestId(surveyListTestIds.carousel);
