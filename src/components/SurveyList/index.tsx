@@ -3,11 +3,9 @@ import { useTranslation } from 'react-i18next';
 
 import classNames from 'classnames';
 
-import SurveyAdapter from 'adapters/Survey';
 import BackgroundImage from 'components/BackgroundImage';
 import BlankState from 'components/BlankState';
 import Carousel from 'components/Carousel';
-import JsonApiSerializer from 'lib/jsonApiSerializer';
 import { Survey } from 'types/survey';
 
 import ListItem from './ListItem';
@@ -18,12 +16,13 @@ export const surveyListTestIds = {
   backgroundImage: 'list-survey__background-image',
 };
 
-export type SurveyListProps = React.HTMLAttributes<HTMLDivElement>;
+export interface SurveyListProps extends React.HTMLAttributes<HTMLDivElement> {
+  isLoading: boolean;
+  surveys: Survey[];
+}
 
-const SurveyList = ({ className, ...props }: SurveyListProps) => {
+const SurveyList = ({ className, isLoading, surveys, ...props }: SurveyListProps) => {
   const { t } = useTranslation(['survey']);
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [surveys, setSurveys] = useState<Survey[]>([]);
   const [currentSurvey, setCurrentSurvey] = useState<Nullable<Survey>>(null);
 
   const handleSurveyChanged = useCallback(
@@ -38,20 +37,11 @@ const SurveyList = ({ className, ...props }: SurveyListProps) => {
     console.info(`Selected Survey ID ${survey.id}`);
   };
 
-  const fetchSurveyList = useCallback(async () => {
-    setIsLoading(true);
-
-    const data = await SurveyAdapter.list();
-    const surveysResponse: Survey[] = JsonApiSerializer.deserialize('survey', data);
-
-    setSurveys(surveysResponse);
-    setCurrentSurvey(surveysResponse[0]);
-    setIsLoading(false);
-  }, []);
-
   useEffect(() => {
-    fetchSurveyList();
-  }, [fetchSurveyList]);
+    if (!isLoading && surveys) {
+      setCurrentSurvey(surveys[0]);
+    }
+  }, [isLoading, surveys]);
 
   if (isLoading) {
     return <></>;
@@ -67,7 +57,9 @@ const SurveyList = ({ className, ...props }: SurveyListProps) => {
           />
         ) : (
           <>
-            <BackgroundImage imageUrl={currentSurvey!.coverImageUrl} data-test-id={surveyListTestIds.backgroundImage} />
+            {currentSurvey && (
+              <BackgroundImage imageUrl={currentSurvey.coverImageUrl} data-test-id={surveyListTestIds.backgroundImage} />
+            )}
             <Carousel
               id="surveyListCarousel"
               className="list-survey__carousel"
