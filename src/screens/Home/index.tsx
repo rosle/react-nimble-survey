@@ -41,7 +41,7 @@ const HomeScreen = () => {
           <TodayDate data-test-id={homeScreenTestIds.todayDate} />
         </section>
         <section className="home__list-survey">
-          <SurveyList data-test-id={homeScreenTestIds.surveyList} surveys={surveys} isLoading={isLoading} />
+          <SurveyList data-test-id={homeScreenTestIds.surveyList} isLoading={isLoading} surveys={surveys} />
         </section>
       </DefaultLayout>
     </HelmetProvider>
