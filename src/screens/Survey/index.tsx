@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import BackgroundImage from 'components/BackgroundImage';
 import Button from 'components/Button';
 import CaretLeftIcon from 'components/Icon/CaretLeft';
-import FullScreenLayout from 'components/Layout/FullScreenTest';
+import FullScreenLayout from 'components/Layout/FullScreen';
 import SurveyIntro from 'components/SurveyIntro';
 import { Survey, SurveyQuestion } from 'types/survey';
 
