@@ -18,7 +18,7 @@ const Carousel = <T extends React.ReactNode>({ id, className, items, ...props }:
   const carouselRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    new BootstrapCarousel(carouselRef.current!);
+    carouselRef.current && new BootstrapCarousel(carouselRef.current);
   }, []);
 
   const CarouselIndicator = ({ index }: { index: number }) => {
