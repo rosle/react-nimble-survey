@@ -35,8 +35,8 @@ const ListItem = ({ survey }: ListItemProps) => {
             {survey.description}
           </span>
         </div>
-        {/* TODO: Update the link to the survey page on #21 */}
-        <Link to="/" data-test-id={listItemTestIds.viewButton}>
+        {/* TODO: Update to use route path constant after rebased */}
+        <Link to={`/surveys/${survey.id}`} data-test-id={listItemTestIds.viewButton}>
           <Button className="list-survey-item__action list-survey-item__action--view" round>
             <CaretRightIcon />
           </Button>

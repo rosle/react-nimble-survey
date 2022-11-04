@@ -11,7 +11,7 @@ describe('SurveyIntro', () => {
     const survey = buildSurvey();
     const surveyIntro = buildSurveyQuestionIntro();
 
-    render(<SurveyIntro survey={survey} surveyIntro={surveyIntro} onStart={jest.fn()} />);
+    render(<SurveyIntro survey={survey} surveyIntro={surveyIntro} />);
 
     const introCoverImage = screen.getByTestId(surveyIntroTestIds.cover);
 
@@ -23,7 +23,7 @@ describe('SurveyIntro', () => {
     const survey = buildSurvey();
     const surveyIntro = buildSurveyQuestionIntro();
 
-    render(<SurveyIntro survey={survey} surveyIntro={surveyIntro} onStart={jest.fn()} />);
+    render(<SurveyIntro survey={survey} surveyIntro={surveyIntro} />);
 
     const introTitle = screen.getByTestId(surveyIntroTestIds.title);
 
@@ -35,7 +35,7 @@ describe('SurveyIntro', () => {
     const survey = buildSurvey();
     const surveyIntro = buildSurveyQuestionIntro();
 
-    render(<SurveyIntro survey={survey} surveyIntro={surveyIntro} onStart={jest.fn()} />);
+    render(<SurveyIntro survey={survey} surveyIntro={surveyIntro} />);
 
     const introDescription = screen.getByTestId(surveyIntroTestIds.description);
 
@@ -47,26 +47,10 @@ describe('SurveyIntro', () => {
     const survey = buildSurvey();
     const surveyIntro = buildSurveyQuestionIntro();
 
-    render(<SurveyIntro survey={survey} surveyIntro={surveyIntro} onStart={jest.fn()} />);
+    render(<SurveyIntro survey={survey} surveyIntro={surveyIntro} />);
 
     const startSurveyButton = screen.getByTestId(surveyIntroTestIds.startButton);
 
     expect(startSurveyButton).toBeVisible();
-  });
-
-  describe('given the user clicks on the start survey button', () => {
-    it('triggers onStart function', () => {
-      const survey = buildSurvey();
-      const surveyIntro = buildSurveyQuestionIntro();
-      const mockOnStartFn = jest.fn();
-
-      render(<SurveyIntro survey={survey} surveyIntro={surveyIntro} onStart={mockOnStartFn} />);
-
-      const startSurveyButton = screen.getByTestId(surveyIntroTestIds.startButton);
-
-      startSurveyButton.click();
-
-      expect(mockOnStartFn).toHaveBeenCalledTimes(1);
-    });
   });
 });

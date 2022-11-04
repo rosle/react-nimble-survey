@@ -42,7 +42,7 @@ describe('ListItem', () => {
     expect(surveyDescription).toHaveTextContent(survey.description);
   });
 
-  it('displays the button link to the survey', () => {
+  it('displays the button link to view the survey', () => {
     const survey = buildSurvey();
 
     renderWithRouter(<ListItem survey={survey} />);
@@ -51,7 +51,7 @@ describe('ListItem', () => {
     const viewSurveyButtonIcon = within(viewSurveyButton).getByTestId(caretRightTestId);
 
     expect(viewSurveyButton).toBeVisible();
-    expect(viewSurveyButton).toHaveAttribute('href', '/');
+    expect(viewSurveyButton).toHaveAttribute('href', `/surveys/${survey.id}`);
     expect(viewSurveyButtonIcon).toBeVisible();
   });
 });

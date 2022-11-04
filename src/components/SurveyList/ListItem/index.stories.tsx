@@ -10,7 +10,6 @@ const survey = buildSurvey();
 
 export default {
   component: ListItem,
-  argTypes: { onSelected: { action: 'clicked' } },
 } as Meta;
 
 const Template = (args: ListItemProps) => <ListItem {...args} />;

@@ -16,10 +16,9 @@ export const surveyIntroTestIds = {
 export interface SurveyIntroProps extends React.HTMLAttributes<HTMLDivElement> {
   survey: Survey;
   surveyIntro: SurveyQuestion;
-  onStart: () => void;
 }
 
-const SurveyIntro = ({ survey, surveyIntro, onStart, className, ...props }: SurveyIntroProps) => {
+const SurveyIntro = ({ survey, surveyIntro, className, ...props }: SurveyIntroProps) => {
   const { t } = useTranslation(['survey']);
 
   return (
@@ -39,7 +38,6 @@ const SurveyIntro = ({ survey, surveyIntro, onStart, className, ...props }: Surv
       <Button
         className="survey-intro__action survey-intro__action--start"
         fullWidth
-        onClick={onStart}
         data-test-id={surveyIntroTestIds.startButton}
       >
         {t('survey:action.start')}

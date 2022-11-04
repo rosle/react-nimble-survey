@@ -9,7 +9,7 @@ describe('SurveyIntro', () => {
     const survey = buildSurvey();
     const surveyIntro = buildSurveyQuestionIntro();
 
-    cy.mount(<SurveyIntro survey={survey} surveyIntro={surveyIntro} onStart={cy.stub()} />);
+    cy.mount(<SurveyIntro survey={survey} surveyIntro={surveyIntro} />);
 
     cy.findByTestId(surveyIntroTestIds.cover).should('be.visible').should('have.attr', 'src', surveyIntro.coverImageUrl);
   });
@@ -18,7 +18,7 @@ describe('SurveyIntro', () => {
     const survey = buildSurvey();
     const surveyIntro = buildSurveyQuestionIntro();
 
-    cy.mount(<SurveyIntro survey={survey} surveyIntro={surveyIntro} onStart={cy.stub()} />);
+    cy.mount(<SurveyIntro survey={survey} surveyIntro={surveyIntro} />);
 
     cy.findByTestId(surveyIntroTestIds.title).should('be.visible').should('have.text', survey.title);
   });
@@ -27,7 +27,7 @@ describe('SurveyIntro', () => {
     const survey = buildSurvey();
     const surveyIntro = buildSurveyQuestionIntro();
 
-    cy.mount(<SurveyIntro survey={survey} surveyIntro={surveyIntro} onStart={cy.stub()} />);
+    cy.mount(<SurveyIntro survey={survey} surveyIntro={surveyIntro} />);
 
     cy.findByTestId(surveyIntroTestIds.description).should('be.visible').should('have.text', surveyIntro.text);
   });
@@ -36,22 +36,8 @@ describe('SurveyIntro', () => {
     const survey = buildSurvey();
     const surveyIntro = buildSurveyQuestionIntro();
 
-    cy.mount(<SurveyIntro survey={survey} surveyIntro={surveyIntro} onStart={cy.stub()} />);
+    cy.mount(<SurveyIntro survey={survey} surveyIntro={surveyIntro} />);
 
     cy.findByTestId(surveyIntroTestIds.startButton).should('be.visible');
-  });
-
-  describe('given the user clicks on the start survey button', () => {
-    it('triggers onStart function', () => {
-      const survey = buildSurvey();
-      const surveyIntro = buildSurveyQuestionIntro();
-      const mockOnStartFn = cy.stub().as('onStart');
-
-      cy.mount(<SurveyIntro survey={survey} surveyIntro={surveyIntro} onStart={mockOnStartFn} />);
-
-      cy.findByTestId(surveyIntroTestIds.startButton).click();
-
-      cy.get('@onStart').should('have.been.calledOnce');
-    });
   });
 });

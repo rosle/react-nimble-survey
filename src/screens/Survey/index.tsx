@@ -15,6 +15,7 @@ const mockSurvey: Survey = {
   title: "Let's Chick",
   description: "We'd love to hear from you!",
   coverImageUrl: 'https://dhdbhh0jsld0o.cloudfront.net/m/6ea42840403875928db3_',
+  coverImageUrlLarge: 'https://dhdbhh0jsld0o.cloudfront.net/m/6ea42840403875928db3_l',
   createdAt: '2017-01-19T06:03:42.220Z',
 };
 
@@ -37,11 +38,6 @@ export const surveyScreenTestIds = {
 };
 
 const SurveyScreen = () => {
-  /* istanbul ignore next: Will be handled after implement survey questions on #44 */
-  const handleSurveyStart = () => {
-    console.info(`Start the survey`);
-  };
-
   return (
     <HelmetProvider>
       <Helmet>
@@ -58,12 +54,7 @@ const SurveyScreen = () => {
       >
         <BackgroundImage imageUrl={mockSurveyIntro.coverImageUrl} />
         <div className="survey__survey-intro">
-          <SurveyIntro
-            survey={mockSurvey}
-            surveyIntro={mockSurveyIntro}
-            onStart={handleSurveyStart}
-            data-test-id={surveyScreenTestIds.surveyIntro}
-          />
+          <SurveyIntro survey={mockSurvey} surveyIntro={mockSurveyIntro} data-test-id={surveyScreenTestIds.surveyIntro} />
         </div>
       </FullScreenLayout>
     </HelmetProvider>
