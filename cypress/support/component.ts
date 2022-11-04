@@ -8,3 +8,4 @@ import './component-selector';
 import '@testing-library/cypress/add-commands';
 import './commands/mount';
 import './commands/mountWithRouter';
+import './commands/login';

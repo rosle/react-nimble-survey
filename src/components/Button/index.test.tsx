@@ -35,6 +35,16 @@ describe('Button', () => {
     });
   });
 
+  describe('given a link buttonStyle prop', () => {
+    it('renders a link button', () => {
+      render(<Button buttonStyle="link">Sign in</Button>);
+
+      const button = screen.getByTestId(buttonTestIds.button);
+
+      expect(button).toHaveClass('btn--link');
+    });
+  });
+
   describe('given an sm buttonSize prop', () => {
     it('renders an sm button', () => {
       render(<Button buttonSize="sm">Sign in</Button>);

@@ -8,4 +8,20 @@
   body {
     background-color: $black;
   }
+
+  .root-container > header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: rem(32px);
+
+    .app-logo {
+      height: rem(32px);
+    }
+  }
+
+  main {
+    padding: rem(0 32px);
+  }
 }

@@ -1,9 +1,20 @@
+.btn {
+  &:focus,
+  &:active:focus {
+    box-shadow: none;
+  }
+}
+
 .btn--primary {
   @extend .btn-primary;
 }
 
 .btn--secondary {
   @extend .btn-secondary;
+}
+
+.btn--link {
+  @extend .btn-link;
 }
 
 .btn--sm {

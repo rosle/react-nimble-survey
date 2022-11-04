@@ -7,7 +7,7 @@ export const buttonTestIds = {
 };
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  buttonStyle?: 'primary' | 'secondary';
+  buttonStyle?: 'primary' | 'secondary' | 'link';
   buttonSize?: 'sm' | 'md';
   fullWidth?: boolean;
 }
@@ -17,9 +17,10 @@ const Button = ({
   buttonSize = 'md',
   children,
   fullWidth = false,
+  className,
   ...buttonAttributes
 }: ButtonProps) => {
-  const classes = classNames('btn', `btn--${buttonStyle}`, {
+  const classes = classNames(className, 'btn', `btn--${buttonStyle}`, {
     [`btn--${buttonSize}`]: buttonSize !== 'md',
     'btn--full-width': fullWidth,
   });
