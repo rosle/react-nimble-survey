@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -8,6 +8,7 @@ import Button from 'components/Button';
 import Form from 'components/Form';
 import Input from 'components/Input';
 import AuthLayout from 'components/Layout/Auth';
+import { UserContext } from 'contexts/UserContext';
 import ApiError from 'lib/errors/ApiError';
 
 type LoginInput = {
@@ -26,8 +27,9 @@ const emailRegex = /^(([^<>()[\].,;:\s@"]+(.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<
 
 const LoginScreen = () => {
   const { t } = useTranslation(['auth', 'shared']);
-  const [formSubmissionErrors, setFormSubmissionErrors] = useState<string>('');
   const navigate = useNavigate();
+  const [formSubmissionErrors, setFormSubmissionErrors] = useState<string>('');
+  const { tokens, setTokens } = useContext(UserContext);
 
   const {
     formState: { isSubmitting, errors: formValidationErrors },
@@ -39,9 +41,10 @@ const LoginScreen = () => {
     setFormSubmissionErrors('');
 
     try {
-      await AuthAdapter.login({ email, password });
+      const response = await AuthAdapter.login({ email, password });
+      const tokensResponse = response.data.attributes;
 
-      navigate('/');
+      setTokens(tokensResponse);
     } catch (error) {
       if (error instanceof ApiError) {
         setFormSubmissionErrors(error.toString());
@@ -50,6 +53,12 @@ const LoginScreen = () => {
       }
     }
   };
+
+  useEffect(() => {
+    if (tokens) {
+      navigate('/');
+    }
+  }, [navigate, tokens]);
 
   return (
     <AuthLayout headerTitle={t('auth:heading.sign_in')}>

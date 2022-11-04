@@ -4,6 +4,7 @@
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom';
 import { configure } from '@testing-library/dom';
+import 'tests/globals';
 
 configure({
   testIdAttribute: 'data-test-id',
