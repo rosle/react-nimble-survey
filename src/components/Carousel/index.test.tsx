@@ -82,7 +82,7 @@ describe('Carousel', () => {
     });
     /* eslint-enable */
 
-    it('triggers the onItemChanged callback', async () => {
+    it('triggers the onItemChanged callback with the current slide index', async () => {
       const items = ['Slide 1', 'Slide 2', 'Slide 3'];
       const mockOnItemChangedFn = jest.fn();
 

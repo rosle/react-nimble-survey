@@ -19,10 +19,7 @@ const Carousel = <T extends React.ReactNode>({ id, className, items, onItemChang
   const carouselRef = useRef<HTMLDivElement>(null);
 
   const onCarouselSlid = useCallback(() => {
-    const carouselEl = carouselRef.current;
-
-    if (!carouselEl) return;
-
+    const carouselEl = carouselRef.current as HTMLDivElement;
     const activeItem = carouselEl.querySelector('.carousel-item.active') as HTMLElement;
     const activeItemIndex: number = parseInt(activeItem.dataset.index as string);
 
@@ -30,9 +27,7 @@ const Carousel = <T extends React.ReactNode>({ id, className, items, onItemChang
   }, [onItemChanged]);
 
   useEffect(() => {
-    const carouselEl = carouselRef.current;
-
-    if (!carouselEl) return;
+    const carouselEl = carouselRef.current as HTMLDivElement;
 
     new BootstrapCarousel(carouselEl);
 

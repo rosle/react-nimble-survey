@@ -67,7 +67,7 @@ describe('Carousel', () => {
       cy.get('@carouselItems').eq(2).should('have.class', 'active');
     });
 
-    it('triggers the onItemChanged callback', () => {
+    it('triggers the onItemChanged callback with the current slide index', () => {
       const items = ['Slide 1', 'Slide 2', 'Slide 3'];
       const mockOnItemChangedFn = cy.stub().as('onItemChanged');
 
