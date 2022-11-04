@@ -12,7 +12,7 @@ describe('Home', () => {
     cy.findByTestId(homeScreenTestIds.loginForm).should('be.visible');
   });
 
-  it('given the user has already logged in, renders the survey list page', () => {
+  it('given the user has already logged in, renders the survey list', () => {
     cy.login();
 
     cy.visit('/');
