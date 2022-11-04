@@ -1,4 +1,5 @@
 import { themes } from '@storybook/theming';
+import { withRouter } from 'storybook-addon-react-router-v6';
 
 import '../src/assets/stylesheets/application.scss';
 
@@ -17,3 +18,5 @@ export const parameters = {
     theme: themes.dark,
   },
 };
+
+export const decorators = [withRouter];

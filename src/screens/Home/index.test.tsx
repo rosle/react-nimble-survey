@@ -1,16 +1,18 @@
 import React from 'react';
 
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
+
+import { renderWithRouter } from 'tests/renderWithRouter';
 
 import HomeScreen from '.';
 
 describe('HomeScreen', () => {
   it('renders learn react link', () => {
-    render(<HomeScreen />);
+    renderWithRouter(<HomeScreen />);
 
-    const linkElement = screen.getByTestId('app-link');
+    // TODO: this will be update later when implementing the real home page
+    const homeContent = screen.queryByText('This is the home page content');
 
-    expect(linkElement).toBeInTheDocument();
-    expect(linkElement).toHaveTextContent('sample_page.learn_react');
+    expect(homeContent).toBeInTheDocument();
   });
 });

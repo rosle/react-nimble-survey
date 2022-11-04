@@ -12,8 +12,9 @@ interface SetUpPollyOptions extends PollyConfig {
   record?: boolean;
 }
 
-const SECRET_FIELDS = ['password', 'client_id', 'client_secret', 'access_token', 'refresh_token'];
-const EXCLUDED_HEADERS = ['user-agent'];
+const SECRET_FIELDS = ['password', 'client_id', 'client_secret', 'access_token', 'refresh_token', 'token'];
+const EXCLUDED_HEADERS = ['authorization', 'user-agent'];
+const REDACT_VAL = '[REDACTED]';
 
 const DEFAULT_CONFIG = {
   adapters: ['node-http'],
@@ -33,7 +34,7 @@ const DEFAULT_CONFIG = {
 
 const redactSecretFields = (jsonContent: string) => {
   const content = JSON.parse(jsonContent);
-  const redactedContent = redact(content, SECRET_FIELDS);
+  const redactedContent = redact(content, SECRET_FIELDS, REDACT_VAL);
 
   return JSON.stringify(redactedContent);
 };
@@ -51,8 +52,14 @@ const setupPolly = (cassetteName: string, options?: SetUpPollyOptions) => {
     decodeCassetteResponseBodies(recording.response);
 
     recording.request.headers = filterHeaders(recording.request.headers);
-    recording.request.postData.text = redactSecretFields(recording.request.postData.text);
-    recording.response.content.text = redactSecretFields(recording.response.content.text);
+
+    if (recording.request.bodySize !== 0) {
+      recording.request.postData.text = redactSecretFields(recording.request.postData.text);
+    }
+
+    if (recording.response.bodySize !== 0) {
+      recording.response.content.text = redactSecretFields(recording.response.content.text);
+    }
   });
 
   polly.server.any().on('beforeReplay', (_, recording) => {

@@ -1,4 +1,5 @@
 {
+  "app_name": "React Nimble Survey",
   "error": "Error",
   "form_error": {
     "required": "can't be blank",
@@ -8,5 +9,6 @@
   "sample_page": {
     "learn_react": "Learn React",
     "message": "Edit {{codeSample}} and save to reload"
-  }
+  },
+  "version": "v{{version}}"
 }

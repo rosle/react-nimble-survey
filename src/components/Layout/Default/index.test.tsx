@@ -1,14 +1,20 @@
 import React from 'react';
 
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor, within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
-import DefaultLayout from '.';
+import { LocalStorageKey } from 'hooks/useLocalStorage';
+import { mockUserLoggedIn } from 'tests/mockUserLoggedIn';
+import { renderWithRouter } from 'tests/renderWithRouter';
+import { setupPolly } from 'tests/setupPolly';
+
+import DefaultLayout, { defaultLayoutTestIds } from '.';
 
 describe('DefaultLayout', () => {
   it('adds the html class', async () => {
     const onHelmetStateChange = jest.fn();
 
-    render(<DefaultLayout onHelmetStateChange={onHelmetStateChange}></DefaultLayout>);
+    renderWithRouter(<DefaultLayout onHelmetStateChange={onHelmetStateChange}></DefaultLayout>);
 
     await waitFor(() => {
       expect(onHelmetStateChange).toHaveBeenCalledTimes(1);
@@ -19,10 +25,63 @@ describe('DefaultLayout', () => {
     expect(helmetState).toEqual(expect.objectContaining({ htmlAttributes: { class: 'layout-default' } }));
   });
 
+  it('renders the app logo link', () => {
+    renderWithRouter(<DefaultLayout />);
+
+    const appLogoLink = screen.getByTestId(defaultLayoutTestIds.logoLink);
+
+    expect(appLogoLink).toBeVisible();
+    expect(appLogoLink).toHaveAttribute('href', '/');
+  });
+
+  describe('given the user has logged in', () => {
+    mockUserLoggedIn();
+
+    it('renders the the user menu', () => {
+      renderWithRouter(<DefaultLayout />, { withContextProvider: true });
+
+      const userMenu = screen.getByTestId(defaultLayoutTestIds.userMenu);
+
+      expect(userMenu).toBeVisible();
+    });
+
+    describe('given the user clicks on the logout menu', () => {
+      it('logs the user out', async () => {
+        const polly = setupPolly('logout_success');
+
+        renderWithRouter(<DefaultLayout />, { withContextProvider: true });
+
+        const userMenu = screen.getByTestId(defaultLayoutTestIds.userMenu);
+        const logoutMenu = within(userMenu).getByText('auth:action.sign_out');
+
+        userEvent.click(userMenu);
+        userEvent.click(logoutMenu);
+
+        await waitFor(() => {
+          expect(localStorage.getItem(LocalStorageKey.tokens)).toBe(JSON.stringify(null));
+        });
+
+        expect(localStorage.getItem(LocalStorageKey.user)).toBe(JSON.stringify(null));
+
+        await polly.stop();
+      });
+    });
+  });
+
+  describe('given the user has NOT logged in', () => {
+    it('does NOT render the the user menu', () => {
+      renderWithRouter(<DefaultLayout />, { withContextProvider: true });
+
+      const userMenu = screen.queryByTestId(defaultLayoutTestIds.userMenu);
+
+      expect(userMenu).not.toBeInTheDocument();
+    });
+  });
+
   it('renders the children', () => {
     const childrenContent = 'This is component children';
 
-    render(
+    renderWithRouter(
       <DefaultLayout>
         <p>{childrenContent}</p>
       </DefaultLayout>

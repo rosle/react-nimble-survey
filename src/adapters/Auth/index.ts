@@ -5,6 +5,10 @@ type loginParams = {
   password: string;
 };
 
+type logoutParams = {
+  refreshToken: string;
+};
+
 const apiCredential = () => ({
   clientId: process.env.REACT_APP_API_CLIENT_ID,
   clientSecret: process.env.REACT_APP_API_CLIENT_SECRET,
@@ -22,7 +26,16 @@ const AuthAdapter = () => {
     return requestManager('post', '/api/v1/oauth/token', { data: data });
   };
 
-  return { login };
+  const logout = ({ refreshToken }: logoutParams) => {
+    const data = {
+      token: refreshToken,
+      ...apiCredential(),
+    };
+
+    return requestManager('post', '/api/v1/oauth/revoke', { data: data });
+  };
+
+  return { login, logout };
 };
 
 export default AuthAdapter();
