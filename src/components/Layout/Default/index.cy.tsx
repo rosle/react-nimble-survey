@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { LocalStorageKey } from 'hooks/useLocalStorage';
+
 import DefaultLayout, { defaultLayoutTestIds } from '.';
 
 describe('DefaultLayout', () => {
@@ -22,6 +24,20 @@ describe('DefaultLayout', () => {
       cy.mountWithRouter(<DefaultLayout />, { withContextProvider: true });
 
       cy.findByTestId(defaultLayoutTestIds.userMenu).should('be.visible');
+    });
+
+    describe('given the user clicks on the logout menu', () => {
+      it('logs the user out', () => {
+        cy.login();
+
+        cy.mountWithRouter(<DefaultLayout />, { withContextProvider: true });
+
+        cy.findByTestId(defaultLayoutTestIds.userMenu).click();
+        cy.findByText('auth:action.sign_out').click();
+
+        expect(localStorage.getItem(LocalStorageKey.tokens)).to.be.null;
+        expect(localStorage.getItem(LocalStorageKey.user)).to.be.null;
+      });
     });
   });
 

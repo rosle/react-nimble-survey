@@ -1,9 +1,12 @@
 import React from 'react';
 
-import { screen, waitFor } from '@testing-library/react';
+import { screen, waitFor, within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
+import { LocalStorageKey } from 'hooks/useLocalStorage';
 import { mockUserLoggedIn } from 'tests/mockUserLoggedIn';
 import { renderWithRouter } from 'tests/renderWithRouter';
+import { setupPolly } from 'tests/setupPolly';
 
 import DefaultLayout, { defaultLayoutTestIds } from '.';
 
@@ -40,6 +43,28 @@ describe('DefaultLayout', () => {
       const userMenu = screen.getByTestId(defaultLayoutTestIds.userMenu);
 
       expect(userMenu).toBeVisible();
+    });
+
+    describe('given the user clicks on the logout menu', () => {
+      it('logs the user out', async () => {
+        const polly = setupPolly('logout_success');
+
+        renderWithRouter(<DefaultLayout />, { withContextProvider: true });
+
+        const userMenu = screen.getByTestId(defaultLayoutTestIds.userMenu);
+        const logoutMenu = within(userMenu).getByText('auth:action.sign_out');
+
+        userEvent.click(userMenu);
+        userEvent.click(logoutMenu);
+
+        await waitFor(() => {
+          expect(localStorage.getItem(LocalStorageKey.tokens)).toBe(JSON.stringify(null));
+        });
+
+        expect(localStorage.getItem(LocalStorageKey.user)).toBe(JSON.stringify(null));
+
+        await polly.stop();
+      });
     });
   });
 

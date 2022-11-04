@@ -17,7 +17,7 @@ const openUserMenu = async () => {
 
 describe('UserMenu', () => {
   it('displays the user avatar', () => {
-    renderWithRouter(<UserMenu user={mockUser} />);
+    renderWithRouter(<UserMenu user={mockUser} onLogout={jest.fn()} />);
 
     const userAvatar = screen.getByTestId(userMenuTestIds.userMenuContentToggler);
     const userAvatarImage = within(userAvatar).getByRole('img');
@@ -28,7 +28,7 @@ describe('UserMenu', () => {
   });
 
   it('does NOT display the user menu collapsed content', () => {
-    renderWithRouter(<UserMenu user={mockUser} />);
+    renderWithRouter(<UserMenu user={mockUser} onLogout={jest.fn()} />);
 
     const userMenuCollapse = screen.getByTestId(userMenuTestIds.userMenuCollapse);
 
@@ -43,7 +43,7 @@ describe('UserMenu', () => {
     });
 
     it('opens the menu collapsed content', async () => {
-      renderWithRouter(<UserMenu user={mockUser} />);
+      renderWithRouter(<UserMenu user={mockUser} onLogout={jest.fn()} />);
 
       await openUserMenu();
 
@@ -53,7 +53,7 @@ describe('UserMenu', () => {
     });
 
     it('displays the user avatar', async () => {
-      renderWithRouter(<UserMenu user={mockUser} />);
+      renderWithRouter(<UserMenu user={mockUser} onLogout={jest.fn()} />);
 
       await openUserMenu();
 
@@ -65,7 +65,7 @@ describe('UserMenu', () => {
     });
 
     it('displays the user name', async () => {
-      renderWithRouter(<UserMenu user={mockUser} />);
+      renderWithRouter(<UserMenu user={mockUser} onLogout={jest.fn()} />);
 
       await openUserMenu();
 
@@ -76,7 +76,7 @@ describe('UserMenu', () => {
     });
 
     it('displays the logout menu', async () => {
-      renderWithRouter(<UserMenu user={mockUser} />);
+      renderWithRouter(<UserMenu user={mockUser} onLogout={jest.fn()} />);
 
       await openUserMenu();
 
@@ -87,7 +87,7 @@ describe('UserMenu', () => {
     });
 
     it('displays the app version', async () => {
-      renderWithRouter(<UserMenu user={mockUser} />);
+      renderWithRouter(<UserMenu user={mockUser} onLogout={jest.fn()} />);
 
       await openUserMenu();
 
@@ -97,9 +97,26 @@ describe('UserMenu', () => {
       expect(appVersion).toHaveTextContent(`shared:version|${mockAppVersion}`);
     });
 
+    describe('given the user clicks on the logout menu', () => {
+      it('calls the logout function', async () => {
+        const mockLogoutFn = jest.fn();
+
+        renderWithRouter(<UserMenu user={mockUser} onLogout={mockLogoutFn} />);
+
+        await openUserMenu();
+
+        const userMenuNav = screen.getByTestId(userMenuTestIds.nav);
+        const logoutMenu = within(userMenuNav).getByText('auth:action.sign_out');
+
+        await userEvent.click(logoutMenu);
+
+        expect(mockLogoutFn).toHaveBeenCalledTimes(1);
+      });
+    });
+
     describe('given the user clicks on the user avatar again', () => {
       it('closes the menu collapsed content', async () => {
-        renderWithRouter(<UserMenu user={mockUser} />);
+        renderWithRouter(<UserMenu user={mockUser} onLogout={jest.fn()} />);
 
         await openUserMenu();
 
@@ -115,7 +132,7 @@ describe('UserMenu', () => {
 
     describe('given the user clicks outside the user menu', () => {
       it('closes the menu content', async () => {
-        renderWithRouter(<UserMenu user={mockUser} />);
+        renderWithRouter(<UserMenu user={mockUser} onLogout={jest.fn()} />);
 
         await openUserMenu();
 
