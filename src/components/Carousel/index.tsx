@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 
 import { Carousel as BootstrapCarousel } from 'bootstrap';
 import classNames from 'classnames';
@@ -78,4 +78,4 @@ const Carousel = <T extends React.ReactNode>({ id, className, items, onItemChang
   );
 };
 
-export default memo(Carousel);
+export default Carousel;
