@@ -3,9 +3,10 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { chain } from 'lodash';
 
+import { LocalStorageKey, LocalStorageValue } from 'lib/localStorage';
 import { User } from 'types/user';
 
-import useLocalStorage, { LocalStorageKey, LocalStorageValue } from './useLocalStorage';
+import useLocalStorage from './useLocalStorage';
 
 const localStorageKey = LocalStorageKey.user;
 const localStorageValueListItemTestIds = 'local-storage-value-list-item';

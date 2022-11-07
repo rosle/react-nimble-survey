@@ -9,7 +9,7 @@ declare global {
       mount: typeof mount;
       mountWithRouter: typeof mount;
       login(): typeof Chainable;
-      login(user: User, tokens: Tokens): typeof Chainable;
+      login(user: Nullable<User>, tokens: Nullable<Tokens>): typeof Chainable;
     }
   }
 }

@@ -6,10 +6,11 @@ import LoginScreen from 'screens/Login';
 
 import AuthRoute from './AuthRoute';
 import ProtectedRoute from './ProtectedRoute';
+import routePath from './routePath';
 
 const authRoutes: RouteObject[] = [
   {
-    path: '/sign_in',
+    path: routePath.login,
     element: (
       <AuthRoute>
         <LoginScreen />
@@ -20,7 +21,7 @@ const authRoutes: RouteObject[] = [
 
 const protectedRoutes: RouteObject[] = [
   {
-    path: '/',
+    path: routePath.index,
     element: (
       <ProtectedRoute>
         <HomeScreen />

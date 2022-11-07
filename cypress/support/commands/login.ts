@@ -15,7 +15,7 @@ const mockUser: User = {
   avatarUrl: 'https://secure.gravatar.com/avatar/252876a66bc74a8d0a8ec1ebb3dd991c',
 };
 
-const login = (user: User = mockUser, tokens: Tokens = mockTokens) => {
+const login = (user: Nullable<User> = mockUser, tokens: Nullable<Tokens> = mockTokens) => {
   localStorage.setItem('user', JSON.stringify(user));
   localStorage.setItem('tokens', JSON.stringify(tokens));
 };

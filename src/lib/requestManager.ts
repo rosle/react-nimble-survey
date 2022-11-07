@@ -1,9 +1,10 @@
 import axios, { Method as HTTPMethod, AxiosRequestConfig, AxiosResponse, AxiosTransformer } from 'axios';
 import { camelizeKeys, decamelizeKeys } from 'humps';
 
-import { getLocalStorageValue, LocalStorageKey } from 'hooks/useLocalStorage';
+import { getLocalStorageValue, LocalStorageKey } from 'lib/localStorage';
 
 import ApiError from './errors/ApiError';
+import handleRequestError from './interceptors/handleRequestError';
 
 export const defaultOptions: AxiosRequestConfig = {
   baseURL: process.env.REACT_APP_API_BASE_URL,
@@ -11,6 +12,11 @@ export const defaultOptions: AxiosRequestConfig = {
   transformRequest: [(data) => decamelizeKeys(data), ...(axios.defaults.transformRequest as AxiosTransformer[])],
   transformResponse: [...(axios.defaults.transformResponse as AxiosTransformer[]), (data) => camelizeKeys(data)],
 };
+
+axios.interceptors.response.use(
+  (config) => config,
+  (error) => handleRequestError(error)
+);
 
 /**
  * The main API access function that comes preconfigured with useful defaults.

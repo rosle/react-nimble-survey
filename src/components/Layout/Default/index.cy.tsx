@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { LocalStorageKey } from 'hooks/useLocalStorage';
+import { LocalStorageKey } from 'lib/localStorage';
 
 import DefaultLayout, { defaultLayoutTestIds } from '.';
 

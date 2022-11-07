@@ -3,8 +3,9 @@ import { Route, Routes } from 'react-router-dom';
 
 import { screen, waitFor } from '@testing-library/react';
 
-import { LocalStorageKey } from 'hooks/useLocalStorage';
+import { LocalStorageKey } from 'lib/localStorage';
 import AuthRoute from 'routes/AuthRoute';
+import routePath from 'routes/routePath';
 import { mockTokensLoggedIn, mockUserLoggedIn } from 'tests/mockUserLoggedIn';
 import { renderWithMemoryRouter } from 'tests/renderWithRouter';
 import { setupPolly } from 'tests/setupPolly';
@@ -93,7 +94,7 @@ describe('ProtectedRoute', () => {
           renderRoutes(PROTECTED_ROUTE.path);
 
           await waitFor(() => {
-            expect(screen.queryByText(LOGIN_ROUTE.content)).toBeVisible();
+            expect(window.location.href).toBe(routePath.login);
           });
 
           expect(localStorage.getItem(LocalStorageKey.tokens)).toBe(JSON.stringify(null));
