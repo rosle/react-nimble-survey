@@ -11,11 +11,7 @@ const JsonApiSerializer = () => {
   registerToken(serializer);
   registerUser(serializer);
 
-  const deserialize = (type: string, data: Serializer.JSONAPIDocument) => {
-    return serializer.deserialize(type, data);
-  };
-
-  return { deserialize };
+  return serializer;
 };
 
 export default JsonApiSerializer();
