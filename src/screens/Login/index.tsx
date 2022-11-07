@@ -41,10 +41,9 @@ const LoginScreen = () => {
     setFormSubmissionErrors('');
 
     try {
-      const response = await AuthAdapter.login({ email, password });
-      const tokensResponse = response.data.attributes;
+      const tokensResponse = await AuthAdapter.login({ email, password });
 
-      setTokens(tokensResponse);
+      setTokens(tokensResponse.data);
     } catch (error) {
       if (error instanceof ApiError) {
         setFormSubmissionErrors(error.toString());

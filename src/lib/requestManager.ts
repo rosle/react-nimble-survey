@@ -1,10 +1,17 @@
 import axios, { Method as HTTPMethod, AxiosRequestConfig, AxiosResponse, AxiosTransformer } from 'axios';
 import { camelizeKeys, decamelizeKeys } from 'humps';
+import { JSONAPIDocument, Meta } from 'json-api-serializer';
 
 import { getLocalStorageValue, LocalStorageKey } from 'lib/localStorage';
+import JsonApiSerializer from 'lib/jsonApiSerializer';
 
 import ApiError from './errors/ApiError';
 import handleRequestError from './interceptors/handleRequestError';
+
+interface response<T = unknown> {
+  data: T;
+  meta?: Meta;
+}
 
 export const defaultOptions: AxiosRequestConfig = {
   baseURL: process.env.REACT_APP_API_BASE_URL,
@@ -41,7 +48,25 @@ const attachAuthorizationHeader = (requestOptions: AxiosRequestConfig) => {
   return requestOptions;
 };
 
-const requestManager = (method: HTTPMethod, endpoint: string, options: AxiosRequestConfig = {}): Promise<AxiosResponse> => {
+const getJsonResponseType = (apiResponse: JSONAPIDocument) => {
+  const responseData = apiResponse?.data;
+
+  if (responseData === undefined) return undefined;
+
+  if (Array.isArray(responseData) && responseData.length === 0) {
+    return undefined;
+  } else if (Array.isArray(responseData)) {
+    return responseData[0].type;
+  } else {
+    return responseData.type;
+  }
+};
+
+const requestManager = <T = unknown>(
+  method: HTTPMethod,
+  endpoint: string,
+  options: AxiosRequestConfig = {}
+): Promise<response<T>> => {
   let requestOptions: AxiosRequestConfig = {
     method,
     url: endpoint,
@@ -54,7 +79,15 @@ const requestManager = (method: HTTPMethod, endpoint: string, options: AxiosRequ
   return axios
     .request(requestOptions)
     .then((response: AxiosResponse) => {
-      return response.data;
+      const apiResponse = response.data;
+      const apiResponseType = getJsonResponseType(apiResponse);
+
+      if (apiResponseType === undefined) return apiResponse;
+
+      return {
+        ...apiResponse,
+        data: JsonApiSerializer.deserialize(apiResponseType, apiResponse) as T,
+      };
     })
     .catch((error) => {
       if (axios.isAxiosError(error) && error.response) {

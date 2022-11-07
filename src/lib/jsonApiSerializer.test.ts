@@ -53,6 +53,7 @@ describe('JsonApiSerializer', () => {
           thankEmailBelowThreshold: 'Thank you for taking the time to complete our guest feedback survey!',
           isActive: true,
           coverImageUrl: 'https://dhdbhh0jsld0o.cloudfront.net/m/1ea51560991bcb7d00d0_',
+          coverImageUrlLarge: 'https://dhdbhh0jsld0o.cloudfront.net/m/1ea51560991bcb7d00d0_l',
           createdAt: '2017-01-23T07:48:12.991Z',
           activeAt: '2015-10-08T07:04:00.000Z',
           inactiveAt: null,

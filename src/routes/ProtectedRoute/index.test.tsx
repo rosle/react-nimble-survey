@@ -71,6 +71,7 @@ describe('ProtectedRoute', () => {
         const polly = setupPolly('get_user_profile_success');
 
         const expectedUser = {
+          id: '41',
           email: 'rossukhon@nimblehq.co',
           name: 'Rossukhon',
           avatarUrl: 'https://secure.gravatar.com/avatar/252876a66bc74a8d0a8ec1ebb3dd991c',

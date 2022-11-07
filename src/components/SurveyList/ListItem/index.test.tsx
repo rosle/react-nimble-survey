@@ -3,7 +3,6 @@ import React from 'react';
 import { screen, within } from '@testing-library/react';
 
 import { caretRightTestId } from 'components/Icon/CaretRight';
-import { getHiResImageUrl } from 'helpers/image';
 import { buildSurvey } from 'tests/factories/survey';
 import { renderWithRouter } from 'tests/renderWithRouter';
 
@@ -18,7 +17,7 @@ describe('ListItem', () => {
     const surveyCoverImage = screen.getByTestId(listItemTestIds.cover);
 
     expect(surveyCoverImage).toBeVisible();
-    expect(surveyCoverImage).toHaveAttribute('src', getHiResImageUrl(survey.coverImageUrl));
+    expect(surveyCoverImage).toHaveAttribute('src', survey.coverImageUrlLarge);
   });
 
   it('displays the survey title', () => {

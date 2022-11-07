@@ -1,4 +1,5 @@
 import requestManager from 'lib/requestManager';
+import { Tokens } from 'types/tokens';
 
 type loginParams = {
   email: string;
@@ -23,7 +24,7 @@ const AuthAdapter = () => {
       ...apiCredential(),
     };
 
-    return requestManager('post', '/api/v1/oauth/token', { data: data });
+    return requestManager<Tokens>('post', '/api/v1/oauth/token', { data: data });
   };
 
   const logout = ({ refreshToken }: logoutParams) => {
