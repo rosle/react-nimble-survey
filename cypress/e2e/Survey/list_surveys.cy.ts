@@ -1,3 +1,5 @@
+import { generatePath } from 'react-router-dom';
+
 import routePath from 'routes/routePath';
 
 const listSurveysTestIds = {
@@ -60,6 +62,22 @@ describe('List Surveys', () => {
 
       cy.get('@backgroundImage').should('have.attr', 'src', 'https://dhdbhh0jsld0o.cloudfront.net/m/287db81c5e4242412cc0_');
       cy.get('@surveyListItems').eq(1).should('be.visible').should('contain.text', 'ibis Bangkok Riverside');
+    });
+
+    context('given the user clicks the view survey button', () => {
+      it('redirects to the survey page', () => {
+        cy.intercept('GET', '/api/v1/surveys', { statusCode: 200, fixture: 'list_survey_success' });
+
+        cy.login();
+        cy.visit(routePath.index);
+
+        cy.findAllByTestId(listSurveysTestIds.surveyListItem)
+          .eq(0)
+          .findByTestId(listSurveysTestIds.surveyListItemViewButton)
+          .click();
+
+        cy.location('pathname').should('eq', generatePath(routePath.survey, { id: 'd5de6a8f8f5f1cfe51bc' }));
+      });
     });
   });
 

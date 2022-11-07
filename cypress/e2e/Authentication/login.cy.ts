@@ -21,9 +21,7 @@ describe('Login', () => {
 
       cy.findByTestId(loginScreenTestIds.loginSubmit).click();
 
-      cy.location().should((location) => {
-        expect(location.pathname).to.eq('/');
-      });
+      cy.location('pathname').should('eq', routePath.index);
     });
   });
 });

@@ -33,9 +33,7 @@ describe('Home', () => {
       cy.login(null, tokens);
       cy.visit(routePath.index);
 
-      cy.location().should((location) => {
-        expect(location.pathname).to.eq(routePath.login);
-      });
+      cy.location('pathname').should('eq', routePath.login);
     });
   });
 });

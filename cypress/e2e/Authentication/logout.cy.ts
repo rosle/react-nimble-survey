@@ -16,8 +16,6 @@ describe('Logout', () => {
     cy.findByTestId(HomeScreenTestIds.userMenu).click();
     cy.findByText('Logout').click();
 
-    cy.location().should((location) => {
-      expect(location.pathname).to.eq('/sign_in');
-    });
+    cy.location('pathname').should('eq', routePath.login);
   });
 });

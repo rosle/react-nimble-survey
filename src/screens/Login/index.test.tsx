@@ -5,6 +5,7 @@ import { screen, waitFor } from '@testing-library/react';
 import AuthAdapter from 'adapters/Auth';
 import { formTestIds } from 'components/Form';
 import { authLayoutTestIds } from 'components/Layout/Auth';
+import routePath from 'routes/routePath';
 import { fillInput, submitForm } from 'tests/helpers';
 import { renderWithRouter } from 'tests/renderWithRouter';
 import { setupPolly } from 'tests/setupPolly';
@@ -46,7 +47,7 @@ describe('LoginScreen', () => {
       expect(formError).not.toBeInTheDocument();
 
       await waitFor(() => {
-        expect(mockUseNavigate).toHaveBeenCalledWith('/');
+        expect(mockUseNavigate).toHaveBeenCalledWith(routePath.index);
       });
 
       await polly.stop();
