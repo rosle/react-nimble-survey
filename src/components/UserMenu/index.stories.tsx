@@ -7,6 +7,7 @@ import { User } from 'types/user';
 import UserMenu, { UserMenuProps } from '.';
 
 const user: User = {
+  id: '1',
   email: 'dev@nimblehq.co',
   name: 'Developer',
   avatarUrl: 'https://avatars.dicebear.com/v2/female/56762df0114df9fa952b5ba46f97e651.svg',

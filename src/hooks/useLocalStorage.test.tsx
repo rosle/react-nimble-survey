@@ -54,6 +54,7 @@ describe('useLocalStorage', () => {
         localStorage.setItem(localStorageKey, JSON.stringify({ name: 'John' }));
 
         const defaultValue = {
+          id: '1',
           name: 'Jane',
           email: 'jane.doe@mail.com',
           avatarUrl: 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLH/avatar/315.jpg',
@@ -71,6 +72,7 @@ describe('useLocalStorage', () => {
     describe('given NO value in the local storage', () => {
       it('sets and returns the default value', () => {
         const defaultValue = {
+          id: '1',
           name: 'Jane',
           email: 'jane.doe@mail.com',
           avatarUrl: 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLH/avatar/315.jpg',
@@ -80,8 +82,8 @@ describe('useLocalStorage', () => {
 
         const localStorageValueListItems = screen.getAllByTestId(localStorageValueListItemTestIds);
 
-        expect(localStorageValueListItems).toHaveLength(3);
-        expect(localStorageValueListItems[0]).toHaveTextContent('name: Jane');
+        expect(localStorageValueListItems).toHaveLength(4);
+        expect(localStorageValueListItems[1]).toHaveTextContent('name: Jane');
       });
     });
   });
