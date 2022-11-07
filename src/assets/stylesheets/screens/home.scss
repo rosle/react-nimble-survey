@@ -2,15 +2,22 @@ body.home {
   main {
     display: flex;
     flex-direction: column;
+    padding: 4% 0 0;
+  }
+
+  .home__today-date {
+    margin: rem(0 32px);
   }
 
   .home__list-survey {
     $self: '.list-survey';
 
-    display: flex;
     flex: 1;
-    align-items: center;
-    justify-content: center;
+    margin-top: rem(32px);
+
+    #{ $self } {
+      height: 100%;
+    }
 
     #{ $self }__blank-state {
       padding-bottom: rem(160px);
