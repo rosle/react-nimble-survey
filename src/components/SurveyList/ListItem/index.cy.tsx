@@ -1,23 +1,26 @@
 import React from 'react';
 
 import { caretRightTestId } from 'components/Icon/CaretRight';
+import { getHiResImageUrl } from 'helpers/image';
 import { buildSurvey } from 'tests/factories/survey';
 
 import ListItem, { listItemTestIds } from '.';
 
 describe('ListItem', () => {
-  it('displays the survey cover image', () => {
+  it('displays the high resolution survey cover image', () => {
     const survey = buildSurvey();
 
-    cy.mount(<ListItem survey={survey} onSelected={cy.stub()} />);
+    cy.mountWithRouter(<ListItem survey={survey} />);
 
-    cy.findByTestId(listItemTestIds.cover).should('be.visible').should('have.attr', 'src', survey.coverImageUrl);
+    cy.findByTestId(listItemTestIds.cover)
+      .should('be.visible')
+      .should('have.attr', 'src', getHiResImageUrl(survey.coverImageUrl));
   });
 
   it('displays the survey title', () => {
     const survey = buildSurvey();
 
-    cy.mount(<ListItem survey={survey} onSelected={cy.stub()} />);
+    cy.mountWithRouter(<ListItem survey={survey} />);
 
     cy.findByTestId(listItemTestIds.title).should('be.visible').should('have.text', survey.title);
   });
@@ -25,31 +28,20 @@ describe('ListItem', () => {
   it('displays the survey description', () => {
     const survey = buildSurvey();
 
-    cy.mount(<ListItem survey={survey} onSelected={cy.stub()} />);
+    cy.mountWithRouter(<ListItem survey={survey} />);
 
     cy.findByTestId(listItemTestIds.description).should('be.visible').should('have.text', survey.description);
   });
 
-  it('displays the view survey button', () => {
+  it('displays the button link to the survey', () => {
     const survey = buildSurvey();
 
-    cy.mount(<ListItem survey={survey} onSelected={cy.stub()} />);
+    cy.mountWithRouter(<ListItem survey={survey} />);
 
-    cy.findByTestId(listItemTestIds.viewButton).should('be.visible').findByTestId(caretRightTestId).should('be.visible');
-  });
-
-  describe('given the user clicks on the view survey button', () => {
-    it('triggers onSelected function with the survey info', () => {
-      const survey = buildSurvey();
-      const mockOnSelectedFn = cy.stub().as('onSelected');
-
-      cy.mount(<ListItem survey={survey} onSelected={mockOnSelectedFn} />);
-
-      cy.findByTestId(listItemTestIds.viewButton)
-        .click()
-        .then(() => {
-          cy.get('@onSelected').should('have.been.calledOnceWith', survey);
-        });
-    });
+    cy.findByTestId(listItemTestIds.viewButton)
+      .should('be.visible')
+      .should('have.attr', 'href', '/')
+      .findByTestId(caretRightTestId)
+      .should('be.visible');
   });
 });

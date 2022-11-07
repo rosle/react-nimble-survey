@@ -4,6 +4,8 @@ const HomeScreenTestIds = {
 
 describe('Logout', () => {
   it('redirects to the Login page', () => {
+    cy.intercept('GET', '/api/v1/surveys', { statusCode: 200, fixture: 'list_survey_success' });
+
     cy.login();
     cy.visit('/');
 

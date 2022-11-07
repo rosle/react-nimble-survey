@@ -1,7 +1,9 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import Button from 'components/Button';
 import CaretRightIcon from 'components/Icon/CaretRight';
+import { getHiResImageUrl } from 'helpers/image';
 import { Survey } from 'types/survey';
 
 export const listItemTestIds = {
@@ -14,15 +16,14 @@ export const listItemTestIds = {
 
 export interface ListItemProps extends React.HTMLAttributes<HTMLDivElement> {
   survey: Survey;
-  onSelected: (survey: Survey) => void;
 }
 
-const ListItem = ({ survey, onSelected }: ListItemProps) => {
+const ListItem = ({ survey }: ListItemProps) => {
   return (
     <div className="list-survey-item" data-test-id={listItemTestIds.listItem}>
       <img
         className="list-survey-item__cover"
-        src={survey.coverImageUrl}
+        src={getHiResImageUrl(survey.coverImageUrl)}
         alt="survey cover"
         data-test-id={listItemTestIds.cover}
       />
@@ -35,14 +36,12 @@ const ListItem = ({ survey, onSelected }: ListItemProps) => {
             {survey.description}
           </div>
         </div>
-        <Button
-          className="list-survey-item__action list-survey-item__action--view"
-          round
-          onClick={() => onSelected(survey)}
-          data-test-id={listItemTestIds.viewButton}
-        >
-          <CaretRightIcon />
-        </Button>
+        {/* TODO: Update the link to the survey page on #21 */}
+        <Link to="/" data-test-id={listItemTestIds.viewButton}>
+          <Button className="list-survey-item__action list-survey-item__action--view" round>
+            <CaretRightIcon />
+          </Button>
+        </Link>
       </div>
     </div>
   );

@@ -13,8 +13,9 @@ describe('Home', () => {
   });
 
   it('given the user has already logged in, renders the survey list', () => {
-    cy.login();
+    cy.intercept('GET', '/api/v1/surveys', { statusCode: 200, fixture: 'list_survey_success' });
 
+    cy.login();
     cy.visit('/');
 
     cy.findByTestId(homeScreenTestIds.surveyList).should('be.visible');
