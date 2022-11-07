@@ -15,7 +15,7 @@ describe('requestManager', () => {
   it('fetches the provided endpoint', async () => {
     const requestOptions = { ...defaultOptions, method: 'POST', url: endPoint };
 
-    const axiosResponse = buildAxiosResponse({status: 200, data: {}})
+    const axiosResponse = buildAxiosResponse({ status: 200, data: {} });
     const requestSpy = jest.spyOn(axios, 'request').mockImplementation(() => Promise.resolve(axiosResponse));
 
     await requestManager('POST', endPoint);
@@ -31,7 +31,7 @@ describe('requestManager', () => {
     it('attaches the authorization header', async () => {
       const requestOptions = { ...defaultOptions, method: 'POST', url: endPoint };
 
-      const axiosResponse = buildAxiosResponse({status: 200, data: {}})
+      const axiosResponse = buildAxiosResponse({ status: 200, data: {} });
       const requestSpy = jest.spyOn(axios, 'request').mockImplementation(() => Promise.resolve(axiosResponse));
 
       await requestManager('POST', endPoint);
@@ -55,7 +55,7 @@ describe('requestManager', () => {
         },
       };
 
-      const axiosResponse = buildAxiosResponse({status: 200, data: apiResponse})
+      const axiosResponse = buildAxiosResponse({ status: 200, data: apiResponse });
       const requestSpy = jest.spyOn(axios, 'request').mockImplementation(() => Promise.resolve(axiosResponse));
 
       await expect(requestManager('POST', endPoint)).resolves.toEqual(apiResponse);
@@ -86,7 +86,7 @@ describe('requestManager', () => {
           } as User,
         };
 
-        const axiosResponse = buildAxiosResponse({status: 200, data: apiResponse})
+        const axiosResponse = buildAxiosResponse({ status: 200, data: apiResponse });
         const requestSpy = jest.spyOn(axios, 'request').mockImplementation(() => Promise.resolve(axiosResponse));
 
         await expect(requestManager<User>('POST', endPoint)).resolves.toEqual(expectedDeserializedResponse);

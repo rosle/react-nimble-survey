@@ -2,8 +2,8 @@ import axios, { Method as HTTPMethod, AxiosRequestConfig, AxiosResponse, AxiosTr
 import { camelizeKeys, decamelizeKeys } from 'humps';
 import { JSONAPIDocument, Meta } from 'json-api-serializer';
 
-import { getLocalStorageValue, LocalStorageKey } from 'lib/localStorage';
 import JsonApiSerializer from 'lib/jsonApiSerializer';
+import { getLocalStorageValue, LocalStorageKey } from 'lib/localStorage';
 
 import ApiError from './errors/ApiError';
 import handleRequestError from './interceptors/handleRequestError';
