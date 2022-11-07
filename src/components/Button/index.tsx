@@ -10,6 +10,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   buttonStyle?: 'primary' | 'secondary' | 'link';
   buttonSize?: 'sm' | 'md';
   fullWidth?: boolean;
+  round?: boolean;
 }
 
 const Button = ({
@@ -17,12 +18,14 @@ const Button = ({
   buttonSize = 'md',
   children,
   fullWidth = false,
+  round = false,
   className,
   ...buttonAttributes
 }: ButtonProps) => {
   const classes = classNames(className, 'btn', `btn--${buttonStyle}`, {
     [`btn--${buttonSize}`]: buttonSize !== 'md',
     'btn--full-width': fullWidth,
+    'btn--round': round,
   });
 
   return (

@@ -2,7 +2,7 @@ import { buildTokens } from 'tests/factories/token';
 
 const homeScreenTestIds = {
   loginForm: 'login__form',
-  surveyList: 'home__survey-list',
+  surveyList: 'home__list-survey',
 };
 
 describe('Home', () => {

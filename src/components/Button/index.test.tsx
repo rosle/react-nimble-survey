@@ -2,6 +2,8 @@ import React from 'react';
 
 import { render, screen } from '@testing-library/react';
 
+import CaretRightIcon from 'components/Icon/CaretRight';
+
 import Button, { buttonTestIds } from '.';
 
 describe('Button', () => {
@@ -62,6 +64,20 @@ describe('Button', () => {
       const button = screen.getByTestId(buttonTestIds.button);
 
       expect(button).toHaveClass('btn--full-width');
+    });
+  });
+
+  describe('given a round prop', () => {
+    it('renders a round button', () => {
+      render(
+        <Button round>
+          <CaretRightIcon />
+        </Button>
+      );
+
+      const button = screen.getByTestId(buttonTestIds.button);
+
+      expect(button).toHaveClass('btn--round');
     });
   });
 });
