@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { render, screen, within } from '@testing-library/react';
+import { render, screen, waitFor, within } from '@testing-library/react';
 import { times } from 'lodash';
 
 import { carouselTestIds } from 'components/Carousel';
@@ -29,7 +29,7 @@ describe('SurveyList', () => {
       expect(surveyListItem1).toHaveTextContent(surveys[1].title);
     });
 
-    it('renders the background image based on the selected survey', () => {
+    it('renders the background image based on the selected survey', async () => {
       const surveys = times(2, () => buildSurvey());
 
       renderWithRouter(<SurveyList isLoading={false} surveys={surveys} />);
@@ -43,7 +43,9 @@ describe('SurveyList', () => {
 
       carouselIndicators[1].click();
 
-      expect(backgroundImage).toHaveAttribute('src', surveys[1].coverImageUrl);
+      await waitFor(() => {
+        expect(backgroundImage).toHaveAttribute('src', surveys[1].coverImageUrl);
+      });
     });
   });
 
