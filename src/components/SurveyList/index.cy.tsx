@@ -10,9 +10,7 @@ import { listItemTestIds } from './ListItem';
 
 describe('SurveyList', () => {
   it('renders the loading state', () => {
-    cy.intercept('GET', '/api/v1/surveys', { statusCode: 200, fixture: 'list_survey_success' });
-
-    cy.mount(<SurveyList />);
+    cy.mount(<SurveyList isLoading={true} surveys={[]} />);
 
     cy.findByTestId(surveyListTestIds.loadingState).should('be.visible');
   });
