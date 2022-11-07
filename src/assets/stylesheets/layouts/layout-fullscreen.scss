@@ -14,7 +14,7 @@
   }
 
   .app-header {
-    padding: rem(32px);
+    padding: rem(32px 32px 0);
   }
 
   .app-content {
@@ -23,6 +23,6 @@
     align-items: center;
     justify-content: center;
 
-    padding: rem(0 32px);
+    padding: rem(0 32px 32px);
   }
 }
