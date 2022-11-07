@@ -30,7 +30,7 @@ const protectedRoutes: RouteObject[] = [
     ),
   },
   {
-    path: '/surveys/:surveyId',
+    path: routePath.survey,
     element: (
       <ProtectedRoute>
         <SurveyScreen />

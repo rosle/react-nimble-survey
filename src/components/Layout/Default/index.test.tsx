@@ -4,6 +4,7 @@ import { screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { LocalStorageKey } from 'lib/localStorage';
+import routePath from 'routes/routePath';
 import { mockUserLoggedIn } from 'tests/mockUserLoggedIn';
 import { renderWithRouter } from 'tests/renderWithRouter';
 import { setupPolly } from 'tests/setupPolly';
@@ -31,7 +32,7 @@ describe('DefaultLayout', () => {
     const appLogoLink = screen.getByTestId(defaultLayoutTestIds.logoLink);
 
     expect(appLogoLink).toBeVisible();
-    expect(appLogoLink).toHaveAttribute('href', '/');
+    expect(appLogoLink).toHaveAttribute('href', routePath.index);
   });
 
   describe('given the user has logged in', () => {

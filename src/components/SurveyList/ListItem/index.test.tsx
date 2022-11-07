@@ -1,8 +1,10 @@
 import React from 'react';
+import { generatePath } from 'react-router-dom';
 
 import { screen, within } from '@testing-library/react';
 
 import { caretRightTestId } from 'components/Icon/CaretRight';
+import routePath from 'routes/routePath';
 import { buildSurvey } from 'tests/factories/survey';
 import { renderWithRouter } from 'tests/renderWithRouter';
 
@@ -51,7 +53,7 @@ describe('ListItem', () => {
     const viewSurveyButtonIcon = within(viewSurveyButton).getByTestId(caretRightTestId);
 
     expect(viewSurveyButton).toBeVisible();
-    expect(viewSurveyButton).toHaveAttribute('href', `/surveys/${survey.id}`);
+    expect(viewSurveyButton).toHaveAttribute('href', generatePath(routePath.survey, { id: survey.id }));
     expect(viewSurveyButtonIcon).toBeVisible();
   });
 });

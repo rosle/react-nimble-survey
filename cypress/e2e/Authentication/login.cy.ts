@@ -1,3 +1,5 @@
+import routePath from 'routes/routePath';
+
 const loginScreenTestIds = {
   loginForm: 'login__form',
   loginEmail: 'login__form-input-email',
@@ -8,7 +10,7 @@ const loginScreenTestIds = {
 describe('Login', () => {
   context('given a valid credential', () => {
     it('redirects to the Home page', () => {
-      cy.visit('sign_in');
+      cy.visit(routePath.login);
 
       cy.findByTestId(loginScreenTestIds.loginEmail).type('rossukhon@nimblehq.co');
       cy.findByTestId(loginScreenTestIds.loginPassWord).type('secret22');

@@ -1,3 +1,7 @@
+import { generatePath } from 'react-router-dom';
+
+import routePath from 'routes/routePath';
+
 const listSurveysTestIds = {
   todayDate: 'home__today-date',
   surveyList: 'home__list-survey',
@@ -5,6 +9,7 @@ const listSurveysTestIds = {
   surveyListCarousel: 'list-survey__carousel',
   surveyListCarouselIndicator: 'carousel-indicator',
   surveyListItem: 'list-survey-item',
+  surveyListItemViewButton: 'list-survey-item__action--view',
   surveyListBlankState: 'list-survey__blank-state',
   surveyListLoadingState: 'list-survey__loading-state',
 };
@@ -17,7 +22,7 @@ describe('List Surveys', () => {
     cy.intercept('GET', '/api/v1/surveys', { statusCode: 200, fixture: 'list_survey_success' });
 
     cy.login();
-    cy.visit('/');
+    cy.visit(routePath.index);
 
     cy.findByTestId(listSurveysTestIds.todayDate)
       .should('be.visible')
@@ -30,7 +35,7 @@ describe('List Surveys', () => {
       cy.intercept('GET', '/api/v1/surveys', { statusCode: 200, fixture: 'list_survey_success' }).as('listSurveys');
 
       cy.login();
-      cy.visit('/');
+      cy.visit(routePath.index);
 
       cy.findByTestId(listSurveysTestIds.surveyListLoadingState).should('be.visible');
 
@@ -44,7 +49,7 @@ describe('List Surveys', () => {
       cy.intercept('GET', '/api/v1/surveys', { statusCode: 200, fixture: 'list_survey_success' });
 
       cy.login();
-      cy.visit('/');
+      cy.visit(routePath.index);
 
       cy.findByTestId(listSurveysTestIds.surveyListBackgroundImage).should('be.visible').findByRole('img').as('backgroundImage');
       cy.findAllByTestId(listSurveysTestIds.surveyListItem).should('be.visible').as('surveyListItems');
@@ -65,7 +70,7 @@ describe('List Surveys', () => {
       cy.intercept('GET', '/api/v1/surveys', { statusCode: 200, fixture: 'list_survey_success_empty' }).as('listSurveys');
 
       cy.login();
-      cy.visit('/');
+      cy.visit(routePath.index);
 
       cy.findByTestId(listSurveysTestIds.surveyListLoadingState).should('be.visible');
 

@@ -2,6 +2,7 @@ import React from 'react';
 
 import { screen } from '@testing-library/react';
 
+import routePath from 'routes/routePath';
 import { renderWithRouter } from 'tests/renderWithRouter';
 
 import SurveyScreen, { surveyScreenTestIds } from '.';
@@ -13,7 +14,7 @@ describe('SurveyScreen', () => {
     const backNavigation = screen.getByTestId(surveyScreenTestIds.backNavigation);
 
     expect(backNavigation).toBeVisible();
-    expect(backNavigation).toHaveAttribute('href', '/');
+    expect(backNavigation).toHaveAttribute('href', routePath.index);
   });
 
   it('displays the survey intro', () => {
