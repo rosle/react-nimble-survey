@@ -47,7 +47,7 @@ describe('requestManager', () => {
     });
   });
 
-  describe('given the API responds with success status', () => {
+  describe('given the API responds with successful status', () => {
     it('returns the API response', async () => {
       const apiResponse = {
         meta: {
@@ -63,8 +63,8 @@ describe('requestManager', () => {
       requestSpy.mockRestore();
     });
 
-    describe('given a specific typed response', () => {
-      it('returns the deserialized API response in the given type', async () => {
+    describe('given a call with specific type', () => {
+      it('returns the deserialized API response data in the given type', async () => {
         const apiResponse = {
           data: {
             id: '1',
@@ -77,19 +77,17 @@ describe('requestManager', () => {
           },
         };
 
-        const expectedDeserializedResponse = {
-          data: {
-            id: '1',
-            email: 'dev@nimblehq.co',
-            name: 'Team Nimble',
-            avatarUrl: 'https://secure.gravatar.com/avatar/6733d09432e89459dba795de8312ac2d',
-          } as User,
+        const expectedUser: User = {
+          id: '1',
+          email: 'dev@nimblehq.co',
+          name: 'Team Nimble',
+          avatarUrl: 'https://secure.gravatar.com/avatar/6733d09432e89459dba795de8312ac2d',
         };
 
         const axiosResponse = buildAxiosResponse({ status: 200, data: apiResponse });
         const requestSpy = jest.spyOn(axios, 'request').mockImplementation(() => Promise.resolve(axiosResponse));
 
-        await expect(requestManager<User>('POST', endPoint)).resolves.toEqual(expectedDeserializedResponse);
+        await expect(requestManager<User>('POST', endPoint)).resolves.toEqual({ data: expectedUser });
 
         requestSpy.mockRestore();
       });
