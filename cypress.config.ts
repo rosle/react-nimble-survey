@@ -13,6 +13,7 @@ export default defineConfig({
       root: '#root',
     },
   },
+  fixturesFolder: 'src/tests/fixtures',
   component: {
     setupNodeEvents: setupNodeEvents,
     devServer: {
