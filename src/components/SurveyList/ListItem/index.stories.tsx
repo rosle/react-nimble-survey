@@ -2,17 +2,11 @@ import React from 'react';
 
 import { Meta, Story } from '@storybook/react';
 
-import { Survey } from 'types/survey';
+import { buildSurvey } from 'tests/factories/survey';
 
 import ListItem, { ListItemProps } from '.';
 
-const survey: Survey = {
-  id: 'd5de6a8f8f5f1cfe51bc',
-  title: 'Scarlett Bangkok',
-  description: "We'd love ot hear from you!",
-  coverImageUrl: 'https://dhdbhh0jsld0o.cloudfront.net/m/1ea51560991bcb7d00d0_',
-  createdAt: '2017-01-23T07:48:12.991Z',
-};
+const survey = buildSurvey();
 
 export default {
   component: ListItem,

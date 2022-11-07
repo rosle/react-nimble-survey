@@ -1,8 +1,9 @@
 import requestManager from 'lib/requestManager';
+import { Survey } from 'types/survey';
 
 const SurveyAdapter = () => {
   const list = () => {
-    return requestManager('get', '/api/v1/surveys');
+    return requestManager<Survey[]>('get', '/api/v1/surveys');
   };
 
   return { list };

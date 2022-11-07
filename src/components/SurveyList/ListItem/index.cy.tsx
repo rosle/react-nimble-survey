@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { caretRightTestId } from 'components/Icon/CaretRight';
-import { getHiResImageUrl } from 'helpers/image';
 import { buildSurvey } from 'tests/factories/survey';
 
 import ListItem, { listItemTestIds } from '.';
@@ -12,9 +11,7 @@ describe('ListItem', () => {
 
     cy.mountWithRouter(<ListItem survey={survey} />);
 
-    cy.findByTestId(listItemTestIds.cover)
-      .should('be.visible')
-      .should('have.attr', 'src', getHiResImageUrl(survey.coverImageUrl));
+    cy.findByTestId(listItemTestIds.cover).should('be.visible').should('have.attr', 'src', survey.coverImageUrlLarge);
   });
 
   it('displays the survey title', () => {

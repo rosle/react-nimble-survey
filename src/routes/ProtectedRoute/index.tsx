@@ -18,10 +18,9 @@ const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
 
   const fetchUserProfile = useCallback(async () => {
     try {
-      const response = await UserAdapter.me();
-      const userResponse = response.data.attributes;
+      const userResponse = await UserAdapter.me();
 
-      setUser(userResponse);
+      setUser(userResponse.data);
     } catch (_error) {
       // 401 should be raised and handle by request interceptor
     }

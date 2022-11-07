@@ -5,7 +5,6 @@ import SurveyAdapter from 'adapters/Survey';
 import DefaultLayout from 'components/Layout/Default';
 import SurveyList from 'components/SurveyList';
 import TodayDate from 'components/TodayDate';
-import JsonApiSerializer from 'lib/jsonApiSerializer';
 import { Survey } from 'types/survey';
 
 export const homeScreenTestIds = {
@@ -20,10 +19,9 @@ const HomeScreen = () => {
   const fetchSurveyList = useCallback(async () => {
     setIsLoading(true);
 
-    const data = await SurveyAdapter.list();
-    const surveysResponse: Survey[] = JsonApiSerializer.deserialize('survey', data);
+    const surveysResponse = await SurveyAdapter.list();
 
-    setSurveys(surveysResponse);
+    setSurveys(surveysResponse.data);
     setIsLoading(false);
   }, []);
 

@@ -1,4 +1,4 @@
-import { buildTokens } from 'tests/factories/token';
+import { buildTokens } from 'tests/factories/tokens';
 
 const homeScreenTestIds = {
   loginForm: 'login__form',

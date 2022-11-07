@@ -4,6 +4,7 @@ import { render, screen } from '@testing-library/react';
 import { chain } from 'lodash';
 
 import { LocalStorageKey, LocalStorageValue } from 'lib/localStorage';
+import { buildUser } from 'tests/factories/user';
 import { User } from 'types/user';
 
 import useLocalStorage from './useLocalStorage';
@@ -51,37 +52,30 @@ describe('useLocalStorage', () => {
   describe('given a default value', () => {
     describe('given a value in the local storage', () => {
       it('returns the current local storage value', () => {
-        localStorage.setItem(localStorageKey, JSON.stringify({ name: 'John' }));
+        const localStorageValue = buildUser();
+        const defaultValue = buildUser();
 
-        const defaultValue = {
-          name: 'Jane',
-          email: 'jane.doe@mail.com',
-          avatarUrl: 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLH/avatar/315.jpg',
-        };
+        localStorage.setItem(localStorageKey, JSON.stringify(localStorageValue));
 
         render(<UseLocalStorageComponent defaultValue={defaultValue} />);
 
         const localStorageValueListItems = screen.getAllByTestId(localStorageValueListItemTestIds);
 
-        expect(localStorageValueListItems).toHaveLength(1);
-        expect(localStorageValueListItems[0]).toHaveTextContent('name: John');
+        expect(localStorageValueListItems).toHaveLength(4);
+        expect(localStorageValueListItems[2]).toHaveTextContent(`name: ${localStorageValue.name}`);
       });
     });
 
     describe('given NO value in the local storage', () => {
       it('sets and returns the default value', () => {
-        const defaultValue = {
-          name: 'Jane',
-          email: 'jane.doe@mail.com',
-          avatarUrl: 'https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLH/avatar/315.jpg',
-        };
+        const defaultValue = buildUser();
 
         render(<UseLocalStorageComponent defaultValue={defaultValue} />);
 
         const localStorageValueListItems = screen.getAllByTestId(localStorageValueListItemTestIds);
 
-        expect(localStorageValueListItems).toHaveLength(3);
-        expect(localStorageValueListItems[0]).toHaveTextContent('name: Jane');
+        expect(localStorageValueListItems).toHaveLength(4);
+        expect(localStorageValueListItems[2]).toHaveTextContent(`name: ${defaultValue.name}`);
       });
     });
   });

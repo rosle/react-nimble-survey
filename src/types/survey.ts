@@ -3,5 +3,6 @@ export type Survey = {
   title: string;
   description: string;
   coverImageUrl: string;
+  coverImageUrlLarge: string;
   createdAt: string;
 };

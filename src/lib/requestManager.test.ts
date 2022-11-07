@@ -2,6 +2,7 @@ import axios, { AxiosTransformer } from 'axios';
 
 import { buildAxiosError, buildAxiosResponse } from 'tests/factories/axios';
 import { mockTokensLoggedIn } from 'tests/mockUserLoggedIn';
+import { User } from 'types/user';
 
 import ApiError from './errors/ApiError';
 import requestManager, { defaultOptions } from './requestManager';
@@ -11,25 +12,11 @@ jest.mock('axios');
 describe('requestManager', () => {
   const endPoint = 'https://sample-endpoint.com/api/';
 
-  it('fetches successfully data from an API', async () => {
-    const responseData = {
-      data: [
-        { id: 1, value: 'first object' },
-        { id: 2, value: 'second object' },
-      ],
-    };
-
-    const requestSpy = jest.spyOn(axios, 'request').mockImplementation(() => Promise.resolve(responseData));
-
-    await expect(requestManager('POST', endPoint)).resolves.toEqual(responseData.data);
-
-    requestSpy.mockRestore();
-  });
-
   it('fetches the provided endpoint', async () => {
     const requestOptions = { ...defaultOptions, method: 'POST', url: endPoint };
 
-    const requestSpy = jest.spyOn(axios, 'request').mockImplementation(() => Promise.resolve({}));
+    const axiosResponse = buildAxiosResponse({ status: 200, data: {} });
+    const requestSpy = jest.spyOn(axios, 'request').mockImplementation(() => Promise.resolve(axiosResponse));
 
     await requestManager('POST', endPoint);
 
@@ -44,7 +31,8 @@ describe('requestManager', () => {
     it('attaches the authorization header', async () => {
       const requestOptions = { ...defaultOptions, method: 'POST', url: endPoint };
 
-      const requestSpy = jest.spyOn(axios, 'request').mockImplementation(() => Promise.resolve({}));
+      const axiosResponse = buildAxiosResponse({ status: 200, data: {} });
+      const requestSpy = jest.spyOn(axios, 'request').mockImplementation(() => Promise.resolve(axiosResponse));
 
       await requestManager('POST', endPoint);
 
@@ -56,6 +44,53 @@ describe('requestManager', () => {
       });
 
       requestSpy.mockRestore();
+    });
+  });
+
+  describe('given the API responds with successful status', () => {
+    it('returns the API response', async () => {
+      const apiResponse = {
+        meta: {
+          message: 'You will receive a password recovery link at your email address in a few minutes.',
+        },
+      };
+
+      const axiosResponse = buildAxiosResponse({ status: 200, data: apiResponse });
+      const requestSpy = jest.spyOn(axios, 'request').mockImplementation(() => Promise.resolve(axiosResponse));
+
+      await expect(requestManager('POST', endPoint)).resolves.toEqual(apiResponse);
+
+      requestSpy.mockRestore();
+    });
+
+    describe('given a call with specific type', () => {
+      it('returns the deserialized API response data in the given type', async () => {
+        const apiResponse = {
+          data: {
+            id: '1',
+            type: 'user',
+            attributes: {
+              email: 'dev@nimblehq.co',
+              name: 'Team Nimble',
+              avatarUrl: 'https://secure.gravatar.com/avatar/6733d09432e89459dba795de8312ac2d',
+            },
+          },
+        };
+
+        const expectedUser: User = {
+          id: '1',
+          email: 'dev@nimblehq.co',
+          name: 'Team Nimble',
+          avatarUrl: 'https://secure.gravatar.com/avatar/6733d09432e89459dba795de8312ac2d',
+        };
+
+        const axiosResponse = buildAxiosResponse({ status: 200, data: apiResponse });
+        const requestSpy = jest.spyOn(axios, 'request').mockImplementation(() => Promise.resolve(axiosResponse));
+
+        await expect(requestManager<User>('POST', endPoint)).resolves.toEqual({ data: expectedUser });
+
+        requestSpy.mockRestore();
+      });
     });
   });
 

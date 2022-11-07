@@ -4,8 +4,9 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { getLocalStorageValue, LocalStorageKey } from 'lib/localStorage';
+import { buildTokens } from 'tests/factories/tokens';
+import { buildUser } from 'tests/factories/user';
 import { mockUserLoggedIn } from 'tests/mockUserLoggedIn';
-import { TokenType } from 'types/tokens';
 
 import { UserContext, UserContextProvider } from './UserContext';
 
@@ -16,19 +17,8 @@ const userContextConsumerTestIds = {
   setUserButton: 'set-user',
 };
 
-const newTokens = {
-  tokenType: TokenType.Bearer,
-  accessToken: 'new_access_token_12345',
-  refreshToken: 'new_refresh_token_12345',
-  createdAt: 1661852403,
-  expiresIn: 7200,
-};
-
-const newUser = {
-  email: 'new_user@nimblehq.co',
-  name: 'Newcomer',
-  avatarUrl: 'https://secure.gravatar.com/avatar/252876a66bc74a8d0a8ec1ebb3dd991c',
-};
+const newTokens = buildTokens();
+const newUser = buildUser();
 
 const UserContextConsumer = () => {
   const { tokens, setTokens, user, setUser } = useContext(UserContext);
