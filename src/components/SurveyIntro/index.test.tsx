@@ -16,7 +16,7 @@ describe('SurveyIntro', () => {
     const introCoverImage = screen.getByTestId(surveyIntroTestIds.cover);
 
     expect(introCoverImage).toBeVisible();
-    expect(introCoverImage).toHaveAttribute('src', surveyIntro.coverImageUrl);
+    expect(introCoverImage).toHaveAttribute('src', surveyIntro.coverImageUrlLarge);
   });
 
   it('displays the survey title', () => {

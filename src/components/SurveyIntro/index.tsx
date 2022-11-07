@@ -25,7 +25,7 @@ const SurveyIntro = ({ survey, surveyIntro, className, ...props }: SurveyIntroPr
     <div className={classNames('survey-intro', className)} {...props}>
       <img
         className="survey-intro__cover"
-        src={surveyIntro.coverImageUrl}
+        src={surveyIntro.coverImageUrlLarge}
         alt="survey cover"
         data-test-id={surveyIntroTestIds.cover}
       />

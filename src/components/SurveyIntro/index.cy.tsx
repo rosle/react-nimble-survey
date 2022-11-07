@@ -11,7 +11,7 @@ describe('SurveyIntro', () => {
 
     cy.mount(<SurveyIntro survey={survey} surveyIntro={surveyIntro} />);
 
-    cy.findByTestId(surveyIntroTestIds.cover).should('be.visible').should('have.attr', 'src', surveyIntro.coverImageUrl);
+    cy.findByTestId(surveyIntroTestIds.cover).should('be.visible').should('have.attr', 'src', surveyIntro.coverImageUrlLarge);
   });
 
   it('displays the survey title', () => {

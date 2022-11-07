@@ -29,6 +29,7 @@ const mockSurveyIntro: SurveyQuestion = {
   isMandatory: false,
   imageUrl: 'https://dhdbhh0jsld0o.cloudfront.net/m/2306dda4221c0d23c716_',
   coverImageUrl: 'https://dhdbhh0jsld0o.cloudfront.net/m/6ea42840403875928db3_',
+  coverImageUrlLarge: 'https://dhdbhh0jsld0o.cloudfront.net/m/6ea42840403875928db3_l',
   coverImageOpacity: 0.26,
 };
 

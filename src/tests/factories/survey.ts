@@ -22,6 +22,8 @@ const buildSurveyQuestionIntro = (attrs?: Partial<SurveyQuestion>): SurveyQuesti
 };
 
 const buildSurveyQuestion = (attrs?: Partial<SurveyQuestion>): SurveyQuestion => {
+  const coverImageUrl = faker.image.imageUrl(320, 240, undefined, true);
+
   return {
     id: faker.datatype.uuid(),
     text: faker.lorem.paragraph(),
@@ -31,7 +33,8 @@ const buildSurveyQuestion = (attrs?: Partial<SurveyQuestion>): SurveyQuestion =>
     displayType: 'intro',
     isMandatory: false,
     imageUrl: faker.image.imageUrl(),
-    coverImageUrl: faker.image.imageUrl(),
+    coverImageUrl: coverImageUrl,
+    coverImageUrlLarge: `${coverImageUrl}l`,
     coverImageOpacity: 0.5,
     ...attrs,
   };

@@ -20,5 +20,6 @@ export type SurveyQuestion = {
   isMandatory: boolean;
   imageUrl: string;
   coverImageUrl: string;
+  coverImageUrlLarge: string;
   coverImageOpacity: number;
 };

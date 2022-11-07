@@ -1,5 +1,3 @@
-import { generatePath } from 'react-router-dom';
-
 import routePath from 'routes/routePath';
 
 const listSurveysTestIds = {
