@@ -1,3 +1,5 @@
+import { faker } from '@faker-js/faker';
+
 import requestManager from 'lib/requestManager';
 
 import SurveyAdapter from '.';
@@ -11,6 +13,20 @@ describe('SurveyAdapter', () => {
       const expectedEndpoint = '/api/v1/surveys';
 
       SurveyAdapter.list();
+
+      expect(requestManager).toHaveBeenCalledTimes(1);
+      expect(requestManager).toHaveBeenCalledWith(expectedMethod, expectedEndpoint);
+    });
+  });
+
+  describe('.get()', () => {
+    it('fires get request to the endpoint with the correct data', () => {
+      const surveyId = faker.datatype.uuid();
+
+      const expectedMethod = 'get';
+      const expectedEndpoint = `/api/v1/surveys/${surveyId}`;
+
+      SurveyAdapter.get(surveyId);
 
       expect(requestManager).toHaveBeenCalledTimes(1);
       expect(requestManager).toHaveBeenCalledWith(expectedMethod, expectedEndpoint);
