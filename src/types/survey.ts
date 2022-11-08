@@ -15,7 +15,8 @@ export type SurveyStep = {
   outro: SurveyQuestion;
 };
 
-export type QuestionDisplayType = 'intro' | 'outro';
+export type QuestionRatingDisplayType = 'star';
+export type QuestionDisplayType = 'intro' | 'outro' | QuestionRatingDisplayType;
 export type QuestionPick = 'none' | 'one' | 'any';
 
 export type SurveyQuestion = {
@@ -26,7 +27,6 @@ export type SurveyQuestion = {
   displayOrder: number;
   displayType: QuestionDisplayType;
   isMandatory: boolean;
-  imageUrl: string;
   coverImageUrl: string;
   coverImageUrlLarge: string;
   coverImageOpacity: number;
@@ -37,7 +37,6 @@ export type SurveyQuestion = {
 export type SurveyAnswer = {
   id: string;
   text: string;
-  shortText: string;
   displayOrder: number;
   isMandatory: boolean;
 };

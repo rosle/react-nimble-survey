@@ -16,7 +16,7 @@ describe('AuthLayout', () => {
 
     const helmetState = onHelmetStateChange.mock.calls[0][0];
 
-    expect(helmetState).toEqual(expect.objectContaining({ htmlAttributes: { class: 'layout-auth' } }));
+    expect(helmetState).toBeObjectContaining({ htmlAttributes: { class: 'layout-auth' } });
   });
 
   it('renders the app logo', () => {

@@ -32,7 +32,6 @@ const buildSurveyQuestion = (attrs?: Partial<SurveyQuestion>): SurveyQuestion =>
     displayOrder: 0,
     displayType: 'intro',
     isMandatory: false,
-    imageUrl: faker.image.imageUrl(),
     coverImageUrl: coverImageUrl,
     coverImageUrlLarge: `${coverImageUrl}l`,
     coverImageOpacity: 0.5,

@@ -29,7 +29,7 @@ describe('JsonApiSerializer', () => {
         createdAt: 1661852403,
       };
 
-      expect(JsonApiSerializer.deserialize('token', tokenResponse)).toEqual(expect.objectContaining(expectedToken));
+      expect(JsonApiSerializer.deserialize('token', tokenResponse)).toBeObjectContaining(expectedToken);
     });
   });
 });

@@ -15,7 +15,7 @@ describe('JsonApiSerializer', () => {
         avatarUrl: 'https://secure.gravatar.com/avatar/252876a66bc74a8d0a8ec1ebb3dd991c',
       };
 
-      expect(JsonApiSerializer.deserialize('user', userResponse)).toEqual(expect.objectContaining(expectedUser));
+      expect(JsonApiSerializer.deserialize('user', userResponse)).toBeObjectContaining(expectedUser);
     });
   });
 });
