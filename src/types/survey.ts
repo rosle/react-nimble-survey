@@ -5,9 +5,17 @@ export type Survey = {
   coverImageUrl: string;
   coverImageUrlLarge: string;
   createdAt: string;
+
+  questions?: SurveyQuestion[];
 };
 
-export type QuestionDisplayType = 'intro';
+export type SurveyStep = {
+  intro: SurveyQuestion;
+  questions: SurveyQuestion[];
+  outro: SurveyQuestion;
+};
+
+export type QuestionDisplayType = 'intro' | 'outro';
 export type QuestionPick = 'none' | 'one' | 'any';
 
 export type SurveyQuestion = {
@@ -22,4 +30,14 @@ export type SurveyQuestion = {
   coverImageUrl: string;
   coverImageUrlLarge: string;
   coverImageOpacity: number;
+
+  answers?: SurveyAnswer[];
+};
+
+export type SurveyAnswer = {
+  id: string;
+  text: string;
+  shortText: string;
+  displayOrder: number;
+  isMandatory: boolean;
 };

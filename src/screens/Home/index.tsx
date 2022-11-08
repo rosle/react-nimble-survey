@@ -13,7 +13,9 @@ export const homeScreenTestIds = {
 };
 
 const HomeScreen = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  // TODO: Set Default to false after implement survey list caching on #58.
+  // Right now default to true to avoid blank state flashing on page load.
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [surveys, setSurveys] = useState<Survey[]>([]);
 
   const fetchSurveyList = useCallback(async () => {

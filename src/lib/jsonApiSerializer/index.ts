@@ -1,15 +1,36 @@
 import Serializer from 'json-api-serializer';
 
-import registerSurvey from './survey';
-import registerToken from './token';
-import registerUser from './user';
+import { getHiResImageUrl } from 'helpers/image';
+import { Survey, SurveyQuestion } from 'types/survey';
 
 const JsonApiSerializer = () => {
   const serializer = new Serializer();
 
-  registerSurvey(serializer);
-  registerToken(serializer);
-  registerUser(serializer);
+  serializer.register('answer');
+  serializer.register('token');
+  serializer.register('user');
+
+  serializer.register('survey', {
+    afterDeserialize: (data) => {
+      const survey = data as Survey;
+
+      return {
+        ...survey,
+        coverImageUrlLarge: getHiResImageUrl(survey.coverImageUrl),
+      };
+    },
+  });
+
+  serializer.register('question', {
+    afterDeserialize: (data) => {
+      const surveyQuestion = data as SurveyQuestion;
+
+      return {
+        ...surveyQuestion,
+        coverImageUrlLarge: getHiResImageUrl(surveyQuestion.coverImageUrl),
+      };
+    },
+  });
 
   return serializer;
 };
