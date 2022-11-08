@@ -9,7 +9,21 @@ import SurveyList, { surveyListTestIds } from '.';
 import { listItemTestIds } from './ListItem';
 
 describe('SurveyList', () => {
+  it('renders the loading state', () => {
+    cy.mount(<SurveyList isLoading={true} surveys={[]} />);
+
+    cy.findByTestId(surveyListTestIds.loadingState).should('be.visible');
+  });
+
   describe('given there are surveys', () => {
+    it('does not render the loading state', async () => {
+      const surveys = [buildSurvey()];
+
+      cy.mountWithRouter(<SurveyList isLoading={false} surveys={surveys} />);
+
+      cy.findByTestId(surveyListTestIds.loadingState).should('not.exist');
+    });
+
     it('renders the survey list carousel', () => {
       const surveys = times(2, () => buildSurvey());
 
@@ -40,6 +54,14 @@ describe('SurveyList', () => {
   });
 
   describe('given there is NO survey', () => {
+    it('does not render the loading state', async () => {
+      const surveys = [buildSurvey()];
+
+      cy.mountWithRouter(<SurveyList isLoading={false} surveys={surveys} />);
+
+      cy.findByTestId(surveyListTestIds.loadingState).should('not.exist');
+    });
+
     it('renders the blank state', () => {
       cy.mount(<SurveyList isLoading={false} surveys={[]} />);
 

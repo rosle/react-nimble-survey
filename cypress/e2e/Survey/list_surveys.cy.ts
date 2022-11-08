@@ -6,6 +6,7 @@ const listSurveysTestIds = {
   surveyListCarouselIndicator: 'carousel-indicator',
   surveyListItem: 'list-survey-item',
   surveyListBlankState: 'list-survey__blank-state',
+  surveyListLoadingState: 'list-survey__loading-state',
 };
 
 describe('List Surveys', () => {
@@ -26,10 +27,14 @@ describe('List Surveys', () => {
 
   context('given there are surveys', () => {
     it('displays the survey list', () => {
-      cy.intercept('GET', '/api/v1/surveys', { statusCode: 200, fixture: 'list_survey_success' });
+      cy.intercept('GET', '/api/v1/surveys', { statusCode: 200, fixture: 'list_survey_success' }).as('listSurveys');
 
       cy.login();
       cy.visit('/');
+
+      cy.findByTestId(listSurveysTestIds.surveyListLoadingState).should('be.visible');
+
+      cy.wait('@listSurveys');
 
       cy.findByTestId(listSurveysTestIds.surveyList).should('be.visible');
       cy.findByTestId(listSurveysTestIds.surveyListCarousel).should('be.visible');
@@ -57,10 +62,14 @@ describe('List Surveys', () => {
 
   context('given there is NO survey', () => {
     it('displays the survey list blank state', () => {
-      cy.intercept('GET', '/api/v1/surveys', { statusCode: 200, fixture: 'list_survey_success_empty' });
+      cy.intercept('GET', '/api/v1/surveys', { statusCode: 200, fixture: 'list_survey_success_empty' }).as('listSurveys');
 
       cy.login();
       cy.visit('/');
+
+      cy.findByTestId(listSurveysTestIds.surveyListLoadingState).should('be.visible');
+
+      cy.wait('@listSurveys');
 
       cy.findByTestId(listSurveysTestIds.surveyList).should('be.visible');
 

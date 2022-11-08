@@ -11,17 +11,36 @@ import SurveyList, { surveyListTestIds } from '.';
 import { listItemTestIds } from './ListItem';
 
 describe('SurveyList', () => {
+  it('renders the loading state', async () => {
+    render(<SurveyList isLoading={true} surveys={[]} />);
+
+    const loadingState = screen.getByTestId(surveyListTestIds.loadingState);
+
+    expect(loadingState).toBeVisible();
+  });
+
   describe('given there are surveys', () => {
+    it('does not render the loading state', async () => {
+      const surveys = [buildSurvey()];
+
+      renderWithRouter(<SurveyList isLoading={false} surveys={surveys} />);
+
+      const loadingState = screen.queryByTestId(surveyListTestIds.loadingState);
+
+      expect(loadingState).not.toBeInTheDocument();
+    });
+
     it('renders the survey list carousel', () => {
       const surveys = times(2, () => buildSurvey());
 
       renderWithRouter(<SurveyList isLoading={false} surveys={surveys} />);
 
       const carousel = screen.getByTestId(surveyListTestIds.carousel);
+      const carouselItems = screen.getAllByTestId(carouselTestIds.carouselItem);
 
       expect(carousel).toBeVisible();
+      expect(carouselItems).toHaveLength(2);
 
-      const carouselItems = screen.getAllByTestId(carouselTestIds.carouselItem);
       const surveyListItem0 = within(carouselItems[0]).getByTestId(listItemTestIds.listItem);
       const surveyListItem1 = within(carouselItems[1]).getByTestId(listItemTestIds.listItem);
 
@@ -50,6 +69,14 @@ describe('SurveyList', () => {
   });
 
   describe('given there is NO survey', () => {
+    it('does not render the loading state', async () => {
+      render(<SurveyList isLoading={false} surveys={[]} />);
+
+      const loadingState = screen.queryByTestId(surveyListTestIds.loadingState);
+
+      expect(loadingState).not.toBeInTheDocument();
+    });
+
     it('renders the blank state', () => {
       render(<SurveyList isLoading={false} surveys={[]} />);
 
