@@ -16,12 +16,19 @@ describe('SurveyList', () => {
   });
 
   describe('given there are surveys', () => {
+    it('does not render the loading state', async () => {
+      const surveys = [buildSurvey()];
+
+      cy.mountWithRouter(<SurveyList isLoading={false} surveys={surveys} />);
+
+      cy.findByTestId(surveyListTestIds.loadingState).should('not.exist');
+    });
+
     it('renders the survey list carousel', () => {
       const surveys = times(2, () => buildSurvey());
 
       cy.mountWithRouter(<SurveyList isLoading={false} surveys={surveys} />);
 
-      cy.findByTestId(surveyListTestIds.loadingState).should('not.exist');
       cy.findByTestId(surveyListTestIds.carousel).should('be.visible');
 
       cy.findAllByTestId(carouselTestIds.carouselItem).should('have.length', 2).as('carouselItems');
@@ -35,7 +42,6 @@ describe('SurveyList', () => {
 
       cy.mountWithRouter(<SurveyList isLoading={false} surveys={surveys} />);
 
-      cy.findByTestId(surveyListTestIds.loadingState).should('not.exist');
       cy.findByTestId(surveyListTestIds.backgroundImage).should('be.visible').findByRole('img').as('backgroundImage');
       cy.findAllByTestId(carouselTestIds.carouselIndicator).as('carouselIndicators');
 
@@ -48,10 +54,16 @@ describe('SurveyList', () => {
   });
 
   describe('given there is NO survey', () => {
-    it('renders the blank state', () => {
-      cy.mount(<SurveyList isLoading={false} surveys={[]} />);
+    it('does not render the loading state', async () => {
+      const surveys = [buildSurvey()];
+
+      cy.mountWithRouter(<SurveyList isLoading={false} surveys={surveys} />);
 
       cy.findByTestId(surveyListTestIds.loadingState).should('not.exist');
+    });
+
+    it('renders the blank state', () => {
+      cy.mount(<SurveyList isLoading={false} surveys={[]} />);
 
       cy.findByTestId(surveyListTestIds.blankState)
         .should('be.visible')

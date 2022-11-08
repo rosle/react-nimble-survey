@@ -20,6 +20,16 @@ describe('SurveyList', () => {
   });
 
   describe('given there are surveys', () => {
+    it('does not render the loading state', async () => {
+      const surveys = [buildSurvey()];
+
+      renderWithRouter(<SurveyList isLoading={false} surveys={surveys} />);
+
+      const loadingState = screen.queryByTestId(surveyListTestIds.loadingState);
+
+      expect(loadingState).not.toBeInTheDocument();
+    });
+
     it('renders the survey list carousel', () => {
       const surveys = times(2, () => buildSurvey());
 
@@ -59,6 +69,14 @@ describe('SurveyList', () => {
   });
 
   describe('given there is NO survey', () => {
+    it('does not render the loading state', async () => {
+      render(<SurveyList isLoading={false} surveys={[]} />);
+
+      const loadingState = screen.queryByTestId(surveyListTestIds.loadingState);
+
+      expect(loadingState).not.toBeInTheDocument();
+    });
+
     it('renders the blank state', () => {
       render(<SurveyList isLoading={false} surveys={[]} />);
 
