@@ -17,11 +17,11 @@
   @extend .btn-link;
 }
 
-.btn--sm {
-  @extend .btn-sm;
+.btn--fit {
+  padding: 0;
 }
 
-.btn--md {
+.btn--sm {
   @extend .btn-sm;
 }
 

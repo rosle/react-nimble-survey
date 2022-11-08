@@ -10,6 +10,7 @@ import Input from 'components/Input';
 import AuthLayout from 'components/Layout/Auth';
 import { UserContext } from 'contexts/UserContext';
 import ApiError from 'lib/errors/ApiError';
+import routePath from 'routes/routePath';
 
 type LoginInput = {
   email: string;
@@ -55,7 +56,7 @@ const LoginScreen = () => {
 
   useEffect(() => {
     if (tokens) {
-      navigate('/');
+      navigate(routePath.index);
     }
   }, [navigate, tokens]);
 

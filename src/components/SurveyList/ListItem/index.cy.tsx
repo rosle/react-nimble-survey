@@ -1,6 +1,8 @@
 import React from 'react';
+import { generatePath } from 'react-router-dom';
 
 import { caretRightTestId } from 'components/Icon/CaretRight';
+import routePath from 'routes/routePath';
 import { buildSurvey } from 'tests/factories/survey';
 
 import ListItem, { listItemTestIds } from '.';
@@ -30,14 +32,14 @@ describe('ListItem', () => {
     cy.findByTestId(listItemTestIds.description).should('be.visible').should('have.text', survey.description);
   });
 
-  it('displays the button link to the survey', () => {
+  it('displays the button link to view the survey', () => {
     const survey = buildSurvey();
 
     cy.mountWithRouter(<ListItem survey={survey} />);
 
     cy.findByTestId(listItemTestIds.viewButton)
       .should('be.visible')
-      .should('have.attr', 'href', '/')
+      .should('have.attr', 'href', generatePath(routePath.survey, { id: survey.id }))
       .findByTestId(caretRightTestId)
       .should('be.visible');
   });

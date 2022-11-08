@@ -1,3 +1,7 @@
+import { generatePath } from 'react-router-dom';
+
+import routePath from 'routes/routePath';
+
 const listSurveysTestIds = {
   todayDate: 'home__today-date',
   surveyList: 'home__list-survey',
@@ -5,6 +9,7 @@ const listSurveysTestIds = {
   surveyListCarousel: 'list-survey__carousel',
   surveyListCarouselIndicator: 'carousel-indicator',
   surveyListItem: 'list-survey-item',
+  surveyListItemViewButton: 'list-survey-item__action--view',
   surveyListBlankState: 'list-survey__blank-state',
   surveyListLoadingState: 'list-survey__loading-state',
 };
@@ -17,7 +22,7 @@ describe('List Surveys', () => {
     cy.intercept('GET', '/api/v1/surveys', { statusCode: 200, fixture: 'list_survey_success' });
 
     cy.login();
-    cy.visit('/');
+    cy.visit(routePath.index);
 
     cy.findByTestId(listSurveysTestIds.todayDate)
       .should('be.visible')
@@ -30,7 +35,7 @@ describe('List Surveys', () => {
       cy.intercept('GET', '/api/v1/surveys', { statusCode: 200, fixture: 'list_survey_success' }).as('listSurveys');
 
       cy.login();
-      cy.visit('/');
+      cy.visit(routePath.index);
 
       cy.findByTestId(listSurveysTestIds.surveyListLoadingState).should('be.visible');
 
@@ -44,7 +49,7 @@ describe('List Surveys', () => {
       cy.intercept('GET', '/api/v1/surveys', { statusCode: 200, fixture: 'list_survey_success' });
 
       cy.login();
-      cy.visit('/');
+      cy.visit(routePath.index);
 
       cy.findByTestId(listSurveysTestIds.surveyListBackgroundImage).should('be.visible').findByRole('img').as('backgroundImage');
       cy.findAllByTestId(listSurveysTestIds.surveyListItem).should('be.visible').as('surveyListItems');
@@ -58,6 +63,22 @@ describe('List Surveys', () => {
       cy.get('@backgroundImage').should('have.attr', 'src', 'https://dhdbhh0jsld0o.cloudfront.net/m/287db81c5e4242412cc0_');
       cy.get('@surveyListItems').eq(1).should('be.visible').should('contain.text', 'ibis Bangkok Riverside');
     });
+
+    context('given the user clicks the view survey button', () => {
+      it('redirects to the survey page', () => {
+        cy.intercept('GET', '/api/v1/surveys', { statusCode: 200, fixture: 'list_survey_success' });
+
+        cy.login();
+        cy.visit(routePath.index);
+
+        cy.findAllByTestId(listSurveysTestIds.surveyListItem)
+          .eq(0)
+          .findByTestId(listSurveysTestIds.surveyListItemViewButton)
+          .click();
+
+        cy.location('pathname').should('eq', generatePath(routePath.survey, { id: 'd5de6a8f8f5f1cfe51bc' }));
+      });
+    });
   });
 
   context('given there is NO survey', () => {
@@ -65,7 +86,7 @@ describe('List Surveys', () => {
       cy.intercept('GET', '/api/v1/surveys', { statusCode: 200, fixture: 'list_survey_success_empty' }).as('listSurveys');
 
       cy.login();
-      cy.visit('/');
+      cy.visit(routePath.index);
 
       cy.findByTestId(listSurveysTestIds.surveyListLoadingState).should('be.visible');
 

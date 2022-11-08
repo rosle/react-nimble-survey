@@ -1,3 +1,4 @@
+import routePath from 'routes/routePath';
 import { buildTokens } from 'tests/factories/tokens';
 
 const homeScreenTestIds = {
@@ -7,7 +8,7 @@ const homeScreenTestIds = {
 
 describe('Home', () => {
   it('given the user has not logged in, renders the login page', () => {
-    cy.visit('/');
+    cy.visit(routePath.index);
 
     cy.findByTestId(homeScreenTestIds.loginForm).should('be.visible');
   });
@@ -16,7 +17,7 @@ describe('Home', () => {
     cy.intercept('GET', '/api/v1/surveys', { statusCode: 200, fixture: 'list_survey_success' });
 
     cy.login();
-    cy.visit('/');
+    cy.visit(routePath.index);
 
     cy.findByTestId(homeScreenTestIds.surveyList).should('be.visible');
   });
@@ -30,11 +31,9 @@ describe('Home', () => {
       // On the first render of the page, there is NO user.
       // The API will try fetching the user profile.
       cy.login(null, tokens);
-      cy.visit('/');
+      cy.visit(routePath.index);
 
-      cy.location().should((location) => {
-        expect(location.pathname).to.eq('/sign_in');
-      });
+      cy.location('pathname').should('eq', routePath.login);
     });
   });
 });

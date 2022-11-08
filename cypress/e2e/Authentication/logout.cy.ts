@@ -1,3 +1,5 @@
+import routePath from 'routes/routePath';
+
 const HomeScreenTestIds = {
   userMenu: 'user-menu',
 };
@@ -7,15 +9,13 @@ describe('Logout', () => {
     cy.intercept('GET', '/api/v1/surveys', { statusCode: 200, fixture: 'list_survey_success' });
 
     cy.login();
-    cy.visit('/');
+    cy.visit(routePath.index);
 
     cy.intercept('POST', '/api/v1/oauth/revoke', { statusCode: 200 });
 
     cy.findByTestId(HomeScreenTestIds.userMenu).click();
     cy.findByText('Logout').click();
 
-    cy.location().should((location) => {
-      expect(location.pathname).to.eq('/sign_in');
-    });
+    cy.location('pathname').should('eq', routePath.login);
   });
 });

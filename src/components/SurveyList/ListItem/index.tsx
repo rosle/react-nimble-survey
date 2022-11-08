@@ -1,8 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { generatePath, Link } from 'react-router-dom';
 
 import Button from 'components/Button';
 import CaretRightIcon from 'components/Icon/CaretRight';
+import routePath from 'routes/routePath';
 import { Survey } from 'types/survey';
 
 export const listItemTestIds = {
@@ -35,8 +36,7 @@ const ListItem = ({ survey }: ListItemProps) => {
             {survey.description}
           </span>
         </div>
-        {/* TODO: Update the link to the survey page on #21 */}
-        <Link to="/" data-test-id={listItemTestIds.viewButton}>
+        <Link to={generatePath(routePath.survey, { id: survey.id })} data-test-id={listItemTestIds.viewButton}>
           <Button className="list-survey-item__action list-survey-item__action--view" round>
             <CaretRightIcon />
           </Button>

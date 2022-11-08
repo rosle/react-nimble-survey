@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { LocalStorageKey } from 'lib/localStorage';
+import routePath from 'routes/routePath';
 
 import DefaultLayout, { defaultLayoutTestIds } from '.';
 
@@ -14,7 +15,7 @@ describe('DefaultLayout', () => {
   it('renders the app logo link', () => {
     cy.mountWithRouter(<DefaultLayout />);
 
-    cy.findByTestId(defaultLayoutTestIds.logoLink).should('be.visible').should('have.attr', 'href', '/');
+    cy.findByTestId(defaultLayoutTestIds.logoLink).should('be.visible').should('have.attr', 'href', routePath.index);
   });
 
   describe('given the user has logged in', () => {
