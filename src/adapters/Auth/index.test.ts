@@ -54,4 +54,24 @@ describe('AuthAdapter', () => {
       expect(requestManager).toHaveBeenCalledWith(expectedMethod, expectedEndpoint, { data: expectedData });
     });
   });
+
+  describe('.refreshToken()', () => {
+    it('fires post request to the endpoint with the correct data', () => {
+      const refreshToken = 'refresh_token_12345';
+
+      const expectedMethod = 'post';
+      const expectedEndpoint = '/api/v1/oauth/token';
+      const expectedData = {
+        grantType: 'refresh_token',
+        refreshToken,
+        clientId: mockClientId,
+        clientSecret: mockClientSecret,
+      };
+
+      AuthAdapter.refreshToken({ refreshToken });
+
+      expect(requestManager).toHaveBeenCalledTimes(1);
+      expect(requestManager).toHaveBeenCalledWith(expectedMethod, expectedEndpoint, { data: expectedData });
+    });
+  });
 });
