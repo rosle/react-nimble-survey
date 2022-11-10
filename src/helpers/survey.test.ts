@@ -5,7 +5,7 @@ import { buildSurvey, buildSurveyQuestion, buildSurveyQuestionIntro, buildSurvey
 import { parseSurveyDetail } from './survey';
 
 describe('parseSurveyDetail', () => {
-  test('extracts survey attributes, intro, questions and outro', () => {
+  test('extracts the survey attributes, intro, questions and outro', () => {
     const intro = buildSurveyQuestionIntro();
     const outro = buildSurveyQuestionOutro();
     const questions = times(2, () => buildSurveyQuestion());
@@ -19,7 +19,7 @@ describe('parseSurveyDetail', () => {
     expect(surveyDetail.questions).toEqual(questions);
   });
 
-  describe('given survey without questions', () => {
+  describe('given a survey without questions', () => {
     test('throws an exception', () => {
       const surveywithoutQuestions = buildSurvey();
 
