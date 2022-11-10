@@ -8,7 +8,7 @@ const viewSurveysTestIds = {
 
 describe('View Survey', () => {
   it('displays the survey intro', () => {
-    const surveyId = 'd5de6a8f8f5f1cfe51bc'
+    const surveyId = 'd5de6a8f8f5f1cfe51bc';
 
     cy.intercept('GET', `/api/v1/surveys/${surveyId}`, { statusCode: 200, fixture: 'get_survey_success' });
 
