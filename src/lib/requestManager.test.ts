@@ -1,7 +1,6 @@
 import axios, { AxiosTransformer } from 'axios';
 
 import { buildAxiosError, buildAxiosResponse } from 'tests/factories/axios';
-import { mockTokensLoggedIn } from 'tests/mockUserLoggedIn';
 import { User } from 'types/user';
 
 import ApiError from './errors/ApiError';
@@ -23,28 +22,6 @@ describe('requestManager', () => {
     expect(axios.request).toHaveBeenCalledWith(requestOptions);
 
     requestSpy.mockRestore();
-  });
-
-  describe('given the tokens exists', () => {
-    const { tokens } = mockTokensLoggedIn();
-
-    it('attaches the authorization header', async () => {
-      const requestOptions = { ...defaultOptions, method: 'POST', url: endPoint };
-
-      const axiosResponse = buildAxiosResponse({ status: 200, data: {} });
-      const requestSpy = jest.spyOn(axios, 'request').mockImplementation(() => Promise.resolve(axiosResponse));
-
-      await requestManager('POST', endPoint);
-
-      expect(axios.request).toHaveBeenCalledWith({
-        ...requestOptions,
-        headers: {
-          authorization: `Bearer ${tokens.accessToken}`,
-        },
-      });
-
-      requestSpy.mockRestore();
-    });
   });
 
   describe('given the API responds with successful status', () => {

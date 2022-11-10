@@ -3,10 +3,10 @@ import { camelizeKeys, decamelizeKeys } from 'humps';
 import { JSONAPIDocument, Meta } from 'json-api-serializer';
 
 import JsonApiSerializer from 'lib/jsonApiSerializer';
-import { getLocalStorageValue, LocalStorageKey } from 'lib/localStorage';
 
 import ApiError from './errors/ApiError';
-import handleRequestError from './interceptors/handleRequestError';
+import handleErrorResponse from './interceptors/handleErrorResponse';
+import initiateRequest from './interceptors/initiateRequest';
 
 interface response<T = unknown> {
   data: T;
@@ -20,9 +20,14 @@ export const defaultOptions: AxiosRequestConfig = {
   transformResponse: [...(axios.defaults.transformResponse as AxiosTransformer[]), (data) => camelizeKeys(data)],
 };
 
+axios.interceptors.request.use(
+  (config) => initiateRequest(config),
+  (error) => Promise.reject(error)
+);
+
 axios.interceptors.response.use(
   (config) => config,
-  (error) => handleRequestError(error)
+  (error) => handleErrorResponse(error)
 );
 
 /**
@@ -34,19 +39,6 @@ axios.interceptors.response.use(
  * @return {Promise} a Promise that will resolve into an object or reject with
  *                   an error object for its reason
  */
-
-const attachAuthorizationHeader = (requestOptions: AxiosRequestConfig) => {
-  const tokens = getLocalStorageValue(LocalStorageKey.tokens);
-
-  if (tokens) {
-    requestOptions.headers = {
-      ...requestOptions.headers,
-      authorization: `Bearer ${tokens.accessToken}`,
-    };
-  }
-
-  return requestOptions;
-};
 
 const getJsonResponseType = (apiResponse: JSONAPIDocument) => {
   const responseData = apiResponse?.data;
@@ -67,14 +59,12 @@ const requestManager = <T = unknown>(
   endpoint: string,
   options: AxiosRequestConfig = {}
 ): Promise<response<T>> => {
-  let requestOptions: AxiosRequestConfig = {
+  const requestOptions: AxiosRequestConfig = {
     method,
     url: endpoint,
     ...defaultOptions,
     ...options,
   };
-
-  requestOptions = attachAuthorizationHeader(requestOptions);
 
   return axios
     .request(requestOptions)

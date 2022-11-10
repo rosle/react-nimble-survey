@@ -40,14 +40,14 @@ const AuthAdapter = () => {
     return requestManager('post', '/api/v1/oauth/revoke', { data: data });
   };
 
-  const refreshToken = ({ refreshToken }: refreshTokenParams) => {
+  const refreshToken = ({ refreshToken: userRefreshToken }: refreshTokenParams) => {
     const data = {
       grantType: 'refresh_token',
-      refreshToken,
+      refreshToken: userRefreshToken,
       ...apiCredential(),
     };
 
-    return requestManager('post', '/api/v1/oauth/token', { data: data });
+    return requestManager<Tokens>('post', '/api/v1/oauth/token', { data: data });
   };
 
   return { login, logout, refreshToken };
