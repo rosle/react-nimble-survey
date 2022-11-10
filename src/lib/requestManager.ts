@@ -20,10 +20,7 @@ export const defaultOptions: AxiosRequestConfig = {
   transformResponse: [...(axios.defaults.transformResponse as AxiosTransformer[]), (data) => camelizeKeys(data)],
 };
 
-axios.interceptors.request.use(
-  (config) => initiateRequest(config),
-  (error) => Promise.reject(error)
-);
+axios.interceptors.request.use((config) => initiateRequest(config));
 
 axios.interceptors.response.use(
   (config) => config,
