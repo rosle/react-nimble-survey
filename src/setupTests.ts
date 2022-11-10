@@ -5,6 +5,7 @@
 import '@testing-library/jest-dom';
 import { configure } from '@testing-library/dom';
 import 'tests/globals';
+import 'tests/matchers';
 
 configure({
   testIdAttribute: 'data-test-id',

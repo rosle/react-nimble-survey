@@ -6,7 +6,11 @@ const SurveyAdapter = () => {
     return requestManager<Survey[]>('get', '/api/v1/surveys');
   };
 
-  return { list };
+  const get = (id: string) => {
+    return requestManager<Survey>('get', `/api/v1/surveys/${id}`);
+  };
+
+  return { list, get };
 };
 
 export default SurveyAdapter();

@@ -5,9 +5,20 @@ export type Survey = {
   coverImageUrl: string;
   coverImageUrlLarge: string;
   createdAt: string;
+
+  // Relationships
+  questions?: SurveyQuestion[];
 };
 
-export type QuestionDisplayType = 'intro';
+export type SurveyDetail = {
+  survey: Survey;
+  intro: SurveyQuestion;
+  questions: SurveyQuestion[];
+  outro: SurveyQuestion;
+};
+
+export type QuestionRatingDisplayType = 'star';
+export type QuestionDisplayType = 'intro' | 'outro' | QuestionRatingDisplayType;
 export type QuestionPick = 'none' | 'one' | 'any';
 
 export type SurveyQuestion = {
@@ -18,8 +29,17 @@ export type SurveyQuestion = {
   displayOrder: number;
   displayType: QuestionDisplayType;
   isMandatory: boolean;
-  imageUrl: string;
   coverImageUrl: string;
   coverImageUrlLarge: string;
   coverImageOpacity: number;
+
+  // Relationships
+  answers?: SurveyAnswer[];
+};
+
+export type SurveyAnswer = {
+  id: string;
+  text: string;
+  displayOrder: number;
+  isMandatory: boolean;
 };

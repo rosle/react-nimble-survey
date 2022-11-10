@@ -23,7 +23,7 @@ describe('DefaultLayout', () => {
 
     const helmetState = onHelmetStateChange.mock.calls[0][0];
 
-    expect(helmetState).toEqual(expect.objectContaining({ htmlAttributes: { class: 'layout-default' } }));
+    expect(helmetState).toBeObjectContaining({ htmlAttributes: { class: 'layout-default' } });
   });
 
   it('renders the app logo link', () => {

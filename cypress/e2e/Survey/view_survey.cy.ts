@@ -8,16 +8,18 @@ const viewSurveysTestIds = {
 
 describe('View Survey', () => {
   it('displays the survey intro', () => {
-    cy.intercept('GET', '/api/v1/surveys', { statusCode: 200, fixture: 'list_survey_success' });
+    const surveyId = 'd5de6a8f8f5f1cfe51bc';
+
+    cy.intercept('GET', `/api/v1/surveys/${surveyId}`, { statusCode: 200, fixture: 'get_survey_success' });
 
     cy.login();
-    cy.visit(generatePath(routePath.survey, { id: '1' }));
+    cy.visit(generatePath(routePath.survey, { id: surveyId }));
 
     cy.findByTestId(viewSurveysTestIds.surveyIntro)
       .should('be.visible')
-      .should('contain.text', "Let's Chick")
-      .should('contain.text', 'Thank you for visiting us!')
+      .should('contain.text', 'Scarlett Bangkok')
+      .should('contain.text', '\nThank you for visiting Scarlett!\n Please take a moment to share your feedback.')
       .findByRole('img')
-      .should('have.attr', 'src', 'https://dhdbhh0jsld0o.cloudfront.net/m/6ea42840403875928db3_l');
+      .should('have.attr', 'src', 'https://dhdbhh0jsld0o.cloudfront.net/m/1ea51560991bcb7d00d0_l');
   });
 });

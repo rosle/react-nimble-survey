@@ -2,52 +2,48 @@ import React from 'react';
 
 import { render, screen } from '@testing-library/react';
 
-import { buildSurvey, buildSurveyQuestionIntro } from 'tests/factories/survey';
+import { buildSurveyDetail } from 'tests/factories/survey';
 
 import SurveyIntro, { surveyIntroTestIds } from '.';
 
 describe('SurveyIntro', () => {
   it('displays the survey intro cover image', () => {
-    const survey = buildSurvey();
-    const surveyIntro = buildSurveyQuestionIntro();
+    const surveyDetail = buildSurveyDetail();
 
-    render(<SurveyIntro survey={survey} surveyIntro={surveyIntro} />);
+    render(<SurveyIntro surveyDetail={surveyDetail} />);
 
     const introCoverImage = screen.getByTestId(surveyIntroTestIds.cover);
 
     expect(introCoverImage).toBeVisible();
-    expect(introCoverImage).toHaveAttribute('src', surveyIntro.coverImageUrlLarge);
+    expect(introCoverImage).toHaveAttribute('src', surveyDetail.intro.coverImageUrlLarge);
   });
 
   it('displays the survey title', () => {
-    const survey = buildSurvey();
-    const surveyIntro = buildSurveyQuestionIntro();
+    const surveyDetail = buildSurveyDetail();
 
-    render(<SurveyIntro survey={survey} surveyIntro={surveyIntro} />);
+    render(<SurveyIntro surveyDetail={surveyDetail} />);
 
     const introTitle = screen.getByTestId(surveyIntroTestIds.title);
 
     expect(introTitle).toBeVisible();
-    expect(introTitle).toHaveTextContent(survey.title);
+    expect(introTitle).toHaveTextContent(surveyDetail.survey.title);
   });
 
   it('displays the survey intro description', () => {
-    const survey = buildSurvey();
-    const surveyIntro = buildSurveyQuestionIntro();
+    const surveyDetail = buildSurveyDetail();
 
-    render(<SurveyIntro survey={survey} surveyIntro={surveyIntro} />);
+    render(<SurveyIntro surveyDetail={surveyDetail} />);
 
     const introDescription = screen.getByTestId(surveyIntroTestIds.description);
 
     expect(introDescription).toBeVisible();
-    expect(introDescription).toHaveTextContent(surveyIntro.text);
+    expect(introDescription).toHaveTextContent(surveyDetail.intro.text);
   });
 
   it('displays the start survey button', () => {
-    const survey = buildSurvey();
-    const surveyIntro = buildSurveyQuestionIntro();
+    const surveyDetail = buildSurveyDetail();
 
-    render(<SurveyIntro survey={survey} surveyIntro={surveyIntro} />);
+    render(<SurveyIntro surveyDetail={surveyDetail} />);
 
     const startSurveyButton = screen.getByTestId(surveyIntroTestIds.startButton);
 

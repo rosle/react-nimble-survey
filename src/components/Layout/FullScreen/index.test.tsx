@@ -16,7 +16,7 @@ describe('FullScreenLayout', () => {
 
     const helmetState = onHelmetStateChange.mock.calls[0][0];
 
-    expect(helmetState).toEqual(expect.objectContaining({ htmlAttributes: { class: 'layout-fullscreen' } }));
+    expect(helmetState).toBeObjectContaining({ htmlAttributes: { class: 'layout-fullscreen' } });
   });
 
   it('renders the children', async () => {

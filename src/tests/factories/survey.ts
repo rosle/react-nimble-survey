@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker';
 import { sample } from 'lodash';
 
-import { QuestionPick, Survey, SurveyQuestion } from 'types/survey';
+import { QuestionPick, Survey, SurveyDetail, SurveyQuestion } from 'types/survey';
 
 const buildSurvey = (attrs?: Partial<Survey>): Survey => {
   const coverImageUrl = faker.image.imageUrl(320, 240, undefined, true);
@@ -17,8 +17,22 @@ const buildSurvey = (attrs?: Partial<Survey>): Survey => {
   };
 };
 
+const buildSurveyDetail = (attrs?: Partial<SurveyDetail>): SurveyDetail => {
+  return {
+    survey: buildSurvey(),
+    intro: buildSurveyQuestionIntro(),
+    questions: [buildSurveyQuestion()],
+    outro: buildSurveyQuestionOutro(),
+    ...attrs,
+  };
+};
+
 const buildSurveyQuestionIntro = (attrs?: Partial<SurveyQuestion>): SurveyQuestion => {
   return buildSurveyQuestion({ pick: 'none', displayType: 'intro', ...attrs });
+};
+
+const buildSurveyQuestionOutro = (attrs?: Partial<SurveyQuestion>): SurveyQuestion => {
+  return buildSurveyQuestion({ pick: 'none', displayType: 'outro', ...attrs });
 };
 
 const buildSurveyQuestion = (attrs?: Partial<SurveyQuestion>): SurveyQuestion => {
@@ -30,9 +44,8 @@ const buildSurveyQuestion = (attrs?: Partial<SurveyQuestion>): SurveyQuestion =>
     shortText: faker.lorem.sentence(),
     pick: sample(['none', 'one', 'any']) as QuestionPick,
     displayOrder: 0,
-    displayType: 'intro',
+    displayType: 'star',
     isMandatory: false,
-    imageUrl: faker.image.imageUrl(),
     coverImageUrl: coverImageUrl,
     coverImageUrlLarge: `${coverImageUrl}l`,
     coverImageOpacity: 0.5,
@@ -40,4 +53,4 @@ const buildSurveyQuestion = (attrs?: Partial<SurveyQuestion>): SurveyQuestion =>
   };
 };
 
-export { buildSurvey, buildSurveyQuestion, buildSurveyQuestionIntro };
+export { buildSurvey, buildSurveyDetail, buildSurveyQuestion, buildSurveyQuestionIntro, buildSurveyQuestionOutro };
