@@ -8,8 +8,8 @@ import Button from 'components/Button';
 import CaretLeftIcon from 'components/Icon/CaretLeft';
 import FullScreenLayout from 'components/Layout/FullScreen';
 import SurveyIntro from 'components/SurveyIntro';
-import { parseSurveyStep } from 'helpers/survey';
-import { Survey, SurveyStep } from 'types/survey';
+import { parseSurveyDetail } from 'helpers/survey';
+import { SurveyDetail } from 'types/survey';
 
 export const surveyScreenTestIds = {
   backNavigation: 'survey__back-navigation',
@@ -18,22 +18,18 @@ export const surveyScreenTestIds = {
 
 const SurveyScreen = () => {
   const { id: surveyId } = useParams();
-  const [survey, setSurvey] = useState<Nullable<Survey>>(null);
-  const [surveyStep, setSurveyStep] = useState<Nullable<SurveyStep>>(null);
+  const [surveyDetail, setSurveyDetail] = useState<Nullable<SurveyDetail>>(null);
 
   const fetchSurveyDetail = useCallback(async (id: string) => {
     const surveyResponse = await SurveyAdapter.get(id);
-    const parsedSurveyStep = parseSurveyStep(surveyResponse.data);
+    const parsedSurveyDetail = parseSurveyDetail(surveyResponse.data);
 
-    setSurvey(surveyResponse.data);
-    setSurveyStep(parsedSurveyStep);
+    setSurveyDetail(parsedSurveyDetail);
   }, []);
 
   useEffect(() => {
     fetchSurveyDetail(`${surveyId}`);
   }, [fetchSurveyDetail, surveyId]);
-
-  const surveyIntro = surveyStep && surveyStep.intro;
 
   return (
     <HelmetProvider>
@@ -49,11 +45,11 @@ const SurveyScreen = () => {
           </Link>
         }
       >
-        {survey && surveyIntro && (
+        {surveyDetail && (
           <>
-            <BackgroundImage imageUrl={surveyIntro.coverImageUrl} />
+            <BackgroundImage imageUrl={surveyDetail.intro.coverImageUrl} />
             <div className="survey__survey-intro">
-              <SurveyIntro survey={survey} surveyIntro={surveyIntro} data-test-id={surveyScreenTestIds.surveyIntro} />
+              <SurveyIntro surveyDetail={surveyDetail} data-test-id={surveyScreenTestIds.surveyIntro} />
             </div>
           </>
         )}

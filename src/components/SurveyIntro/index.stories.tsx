@@ -2,12 +2,11 @@ import React from 'react';
 
 import { Meta, Story } from '@storybook/react';
 
-import { buildSurvey, buildSurveyQuestionIntro } from 'tests/factories/survey';
+import { buildSurveyDetail } from 'tests/factories/survey';
 
 import SurveyIntro, { SurveyIntroProps } from '.';
 
-const survey = buildSurvey();
-const surveyIntro = buildSurveyQuestionIntro();
+const surveyDetail = buildSurveyDetail();
 
 export default {
   component: SurveyIntro,
@@ -17,4 +16,4 @@ const Template = (args: SurveyIntroProps) => <SurveyIntro {...args} />;
 
 export const Default: Story<SurveyIntroProps> = Template.bind({});
 Default.storyName = SurveyIntro.name;
-Default.args = { survey, surveyIntro };
+Default.args = { surveyDetail };

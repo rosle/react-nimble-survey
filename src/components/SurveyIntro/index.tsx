@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import classNames from 'classnames';
 
 import Button from 'components/Button';
-import { Survey, SurveyQuestion } from 'types/survey';
+import { SurveyDetail } from 'types/survey';
 
 export const surveyIntroTestIds = {
   cover: 'survey-intro__cover',
@@ -14,18 +14,19 @@ export const surveyIntroTestIds = {
 };
 
 export interface SurveyIntroProps extends React.HTMLAttributes<HTMLDivElement> {
-  survey: Survey;
-  surveyIntro: SurveyQuestion;
+  surveyDetail: SurveyDetail;
 }
 
-const SurveyIntro = ({ survey, surveyIntro, className, ...props }: SurveyIntroProps) => {
+const SurveyIntro = ({ surveyDetail, className, ...props }: SurveyIntroProps) => {
   const { t } = useTranslation(['survey']);
+
+  const { survey, intro } = surveyDetail;
 
   return (
     <div className={classNames('survey-intro', className)} {...props}>
       <img
         className="survey-intro__cover"
-        src={surveyIntro.coverImageUrlLarge}
+        src={intro.coverImageUrlLarge}
         alt="survey cover"
         data-test-id={surveyIntroTestIds.cover}
       />
@@ -33,7 +34,7 @@ const SurveyIntro = ({ survey, surveyIntro, className, ...props }: SurveyIntroPr
         {survey.title}
       </h1>
       <div className="survey-intro__description" data-test-id={surveyIntroTestIds.description}>
-        {surveyIntro.text}
+        {intro.text}
       </div>
       <Button
         className="survey-intro__action survey-intro__action--start"

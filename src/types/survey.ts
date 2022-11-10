@@ -9,7 +9,8 @@ export type Survey = {
   questions?: SurveyQuestion[];
 };
 
-export type SurveyStep = {
+export type SurveyDetail = {
+  survey: Survey;
   intro: SurveyQuestion;
   questions: SurveyQuestion[];
   outro: SurveyQuestion;
