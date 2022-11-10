@@ -18,4 +18,12 @@ describe('parseSurveyDetail', () => {
     expect(surveyDetail.outro).toEqual(outro);
     expect(surveyDetail.questions).toEqual(questions);
   });
+
+  describe('given survey without questions', () => {
+    test('throws an exception', () => {
+      const surveywithoutQuestions = buildSurvey();
+
+      expect(() => parseSurveyDetail(surveywithoutQuestions)).toThrow('The survey has no questions');
+    });
+  });
 });
