@@ -9,7 +9,6 @@ describe('parseSurveyDetail', () => {
     const intro = buildSurveyQuestionIntro();
     const outro = buildSurveyQuestionOutro();
     const questions = times(2, () => buildSurveyQuestion());
-
     const survey = buildSurvey({ questions: [...questions, intro, outro] });
 
     const surveyDetail = parseSurveyDetail(survey);

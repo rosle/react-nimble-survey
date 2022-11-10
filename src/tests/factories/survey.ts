@@ -21,7 +21,7 @@ const buildSurveyDetail = (attrs?: Partial<SurveyDetail>): SurveyDetail => {
   return {
     survey: buildSurvey(),
     intro: buildSurveyQuestionIntro(),
-    questions: [],
+    questions: [buildSurveyQuestion()],
     outro: buildSurveyQuestionOutro(),
     ...attrs,
   };

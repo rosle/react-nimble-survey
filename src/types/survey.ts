@@ -6,6 +6,7 @@ export type Survey = {
   coverImageUrlLarge: string;
   createdAt: string;
 
+  // Relationships
   questions?: SurveyQuestion[];
 };
 
@@ -32,6 +33,7 @@ export type SurveyQuestion = {
   coverImageUrlLarge: string;
   coverImageOpacity: number;
 
+  // Relationships
   answers?: SurveyAnswer[];
 };
 

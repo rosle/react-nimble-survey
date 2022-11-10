@@ -17,6 +17,7 @@ jest.mock('react-router-dom', () => ({
 describe('SurveyScreen', () => {
   it('displays the back navigation to the Home page', () => {
     const surveyId = 'd5de6a8f8f5f1cfe51bc';
+
     jest.spyOn(Router, 'useParams').mockReturnValue({ id: surveyId });
 
     renderWithRouter(<SurveyScreen />);
@@ -31,6 +32,7 @@ describe('SurveyScreen', () => {
     const polly = setupPolly('get_survey_success');
 
     const surveyId = 'd5de6a8f8f5f1cfe51bc';
+
     jest.spyOn(Router, 'useParams').mockReturnValue({ id: surveyId });
 
     renderWithRouter(<SurveyScreen />);

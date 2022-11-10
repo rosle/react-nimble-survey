@@ -23,7 +23,6 @@ describe('JsonApiSerializer', () => {
 
     it('deserializes the survey response', () => {
       const surveyResponse = readApiResponseFromFixtures('get_survey_success.json');
-
       const survey = JsonApiSerializer.deserialize('survey', surveyResponse);
 
       const expectedSurvey: Survey = {

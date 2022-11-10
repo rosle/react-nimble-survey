@@ -2,7 +2,7 @@ import React from 'react';
 
 import { render, screen } from '@testing-library/react';
 
-import { buildSurvey, buildSurveyDetail, buildSurveyQuestionIntro } from 'tests/factories/survey';
+import { buildSurveyDetail } from 'tests/factories/survey';
 
 import SurveyIntro, { surveyIntroTestIds } from '.';
 
