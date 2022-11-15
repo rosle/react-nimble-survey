@@ -1,6 +1,9 @@
 module.exports = {
   extends: ['react-app', '@nimblehq/eslint-config-nimble-react', 'plugin:storybook/recommended'],
   ignorePatterns: ['!.storybook'],
+  rules: {
+    'react/prop-types': 'off',
+  },
   overrides: [
     {
       // Layout components using Helmet to modify html class.

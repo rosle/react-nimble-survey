@@ -1,11 +1,23 @@
 import { buildTokens } from 'tests/factories/token';
 
+const homeScreenTestIds = {
+  loginForm: 'login__form',
+  surveyList: 'home__survey-list',
+};
+
 describe('Home', () => {
-  it('visits the app', () => {
-    cy.login();
+  it('given the user has not logged in, renders the login page', () => {
     cy.visit('/');
 
-    cy.findByText('This is the home page content').should('be.visible');
+    cy.findByTestId(homeScreenTestIds.loginForm).should('be.visible');
+  });
+
+  it('given the user has already logged in, renders the survey list', () => {
+    cy.login();
+
+    cy.visit('/');
+
+    cy.findByTestId(homeScreenTestIds.surveyList).should('be.visible');
   });
 
   context('given the token has already expired', () => {

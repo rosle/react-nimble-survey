@@ -17,10 +17,10 @@ type LoginInput = {
 };
 
 export const loginScreenTestIds = {
-  loginForm: 'login-form',
-  loginEmail: 'login-form__input-email',
-  loginPassWord: 'login-form__input-password',
-  loginSubmit: 'login-form__button-submit',
+  loginForm: 'login__form',
+  loginEmail: 'login__form-input-email',
+  loginPassWord: 'login__form-input-password',
+  loginSubmit: 'login__form-button-submit',
 };
 
 const emailRegex = /^(([^<>()[\].,;:\s@"]+(.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+.)+[^<>()[\].,;:\s@"]{2,})$/i;
