@@ -5,15 +5,13 @@ body.home {
   }
 
   .home__survey-list {
-    $self: '.survey-list';
-
     display: flex;
     flex: 1;
     align-items: center;
     justify-content: center;
+  }
 
-    #{ $self }__blank-state {
-      padding-bottom: rem(160px);
-    }
+  .home__survey-list .survey-list__blank-state {
+    padding-bottom: rem(160px);
   }
 }

@@ -3,7 +3,7 @@
     font-size: map-get($font-sizes, xs);
     font-weight: $font-weight-bold;
 
-    letter-spacing: rem(-0.08px);
+    letter-spacing: -0.08px;
     line-height: rem(18px);
     text-transform: uppercase;
   }
@@ -12,7 +12,7 @@
     font-size: map-get($font-sizes, xxl);
     font-weight: $font-weight-bold;
 
-    letter-spacing: rem(-1px);
+    letter-spacing: -1px;
     line-height: rem(41px);
   }
 }
